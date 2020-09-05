@@ -17,13 +17,19 @@ const routes = [{
         path: '/authentication',
         name: 'Authentication',
         component: () =>
-            import ('@/views/Authentication/Login.vue')
+            import ('@/views/Authentication/Login.vue'),
+        meta: {
+            redirect: true
+        }
     },
     {
         path: '/authentication/register',
         name: 'Register',
         component: () =>
-            import ('@/views/Authentication/Register.vue')
+            import ('@/views/Authentication/Register.vue'),
+        meta: {
+            redirect: true
+        }
     }
 ]
 
@@ -41,9 +47,9 @@ router.beforeEach((to, from, next) => {
         })
     } else {
         // Prevent navigation to authentication again
-        if (to.path == 'authentication') {
+        if (to.matched.some(record => record.meta.redirect)) {
             next({
-                path: '/'
+                path: '/dashboard'
             })
         }
 

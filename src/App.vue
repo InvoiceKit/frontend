@@ -1,7 +1,13 @@
 <template>
   <div>
     <template v-if="isLogged">
-      <h1>Logged</h1>
+      <template v-if="$route.path == '/'">
+        <router-view />
+      </template>
+
+      <template v-else>
+        <h1>Dashboard</h1>
+      </template>
     </template>
 
     <template v-else>
@@ -17,6 +23,9 @@ export default {
   name: "App",
   computed: {
     ...mapState("auth", ["isLogged"]),
+  },
+  mounted() {
+    console.log(this.$route)
   }
 };
 </script>
