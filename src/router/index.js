@@ -10,6 +10,7 @@ const routes = [{
         name: 'Home',
         component: Home,
         meta: {
+            name: 'Accueil',
             auth: true
         }
     },
@@ -19,6 +20,7 @@ const routes = [{
         component: () =>
             import ('@/views/Authentication/Login.vue'),
         meta: {
+            name: 'Connexion',
             redirect: true
         }
     },
@@ -28,6 +30,7 @@ const routes = [{
         component: () =>
             import ('@/views/Authentication/Register.vue'),
         meta: {
+            name: 'Inscription',
             redirect: true
         }
     }
@@ -40,14 +43,18 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.auth) && localStorage.getItem('token') === null) {
+    // Set page title
+    document.title = `${to.meta.name} - InvoiceKit`
+
+    // Authentication redirection
+    if (to.meta.auth && localStorage.getItem('token') === null) {
         // Redirect to authentication page
         next({
             path: '/authentication'
         })
     } else {
         // Prevent navigation to authentication again
-        if (to.matched.some(record => record.meta.redirect)) {
+        if (to.meta.redirect) {
             next({
                 path: '/dashboard'
             })
