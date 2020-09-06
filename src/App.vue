@@ -6,7 +6,7 @@
       </template>
 
       <template v-else>
-        <h1>Dashboard</h1>
+        <Main />
       </template>
     </template>
 
@@ -18,14 +18,15 @@
 
 <script>
 import { mapState } from "vuex";
+import Main from '@/views/Layout/Main.vue'
 
 export default {
   name: "App",
+  components: {
+    Main
+  },
   computed: {
     ...mapState("auth", ["isLogged"]),
-  },
-  mounted() {
-    console.log(this.$route)
   }
 };
 </script>

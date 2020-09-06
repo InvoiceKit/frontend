@@ -11,7 +11,7 @@ const routes = [{
         component: Home,
         meta: {
             name: 'Accueil',
-            auth: true
+            auth: false
         }
     },
     {
@@ -33,6 +33,26 @@ const routes = [{
             name: 'Inscription',
             redirect: true
         }
+    },
+    {
+        path: '/settings',
+        name: 'Settings',
+        component: () =>
+            import ('@/views/Settings/Settings.vue'),
+        meta: {
+            name: 'Paramètres',
+            auth: true
+        }
+    },
+    {
+        path: '/customers',
+        name: 'Customers',
+        component: () =>
+            import ('@/views/Customers/List.vue'),
+        meta: {
+            name: 'Clients',
+            auth: true
+        }
     }
 ]
 
@@ -53,15 +73,15 @@ router.beforeEach((to, from, next) => {
             path: '/authentication'
         })
     } else {
+        // Set common token
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+
         // Prevent navigation to authentication again
         if (to.meta.redirect) {
             next({
                 path: '/dashboard'
             })
         }
-
-        // Set common token
-        Axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
 
         // Continue
         next()
