@@ -1,10 +1,8 @@
 <template>
-  <v-card class="mt-4 mx-auto">
+  <v-card>
     <v-sheet
-      class="v-sheet--offset mx-auto pa-6"
+      class="mx-auto pa-6"
       rounded
-      elevation="12"
-      max-width="97%"
       color="success"
     >
       <v-row align="center">
@@ -18,7 +16,7 @@
       </v-row>
     </v-sheet>
 
-    <v-card-text class="pt-0">
+    <v-card-text>
       <v-row>
         <v-col>
           <v-text-field

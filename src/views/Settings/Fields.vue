@@ -1,10 +1,8 @@
 <template>
-  <v-card class="mt-4 mx-auto">
+  <v-card>
     <v-sheet
-      class="v-sheet--offset mx-auto pa-6"
+      class="mx-auto pa-6"
       rounded
-      elevation="12"
-      max-width="95%"
       color="success"
     >
       <v-row align="center">
@@ -13,12 +11,12 @@
         </v-col>
         <v-col cols="10">
           <h1 class="display-1">Champs</h1>
-          <h2 class="subtitle-1">Champs d'informations pour vos factures</h2>
+          <h2 class="subtitle-1">Informations affichées sur les factures</h2>
         </v-col>
       </v-row>
     </v-sheet>
 
-    <v-card-text class="pt-0">
+    <v-card-text>
       <v-simple-table>
         <thead>
           <tr>

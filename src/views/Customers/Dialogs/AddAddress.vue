@@ -1,7 +1,7 @@
 <template>
-	<v-dialog v-model="display" max-width="550px" @click:outside="close">
+	<v-dialog v-model="display" max-width="450px">
 		<v-card>
-			<v-card-title>Ajouter un client</v-card-title>
+			<v-card-title>Ajouter une adresse</v-card-title>
 
 			<v-alert
 				dense
@@ -10,37 +10,28 @@
 				transition="slide-y-transition"
 				v-model="error"
 			>
-				Impossible d'ajouter le client.
+				Impossible d'ajouter l'adresse.
 			</v-alert>
 
 			<v-card-text>
+				<v-text-field
+					label="Adresse"
+					prepend-inner-icon="mdi-map-marker"
+					v-model.trim="payload.line"
+				/>
+
 				<v-row>
 					<v-col>
 						<v-text-field
-							label="Prénom"
-							v-model.trim="payload.firstName"
-						/>
-
-						<v-text-field
-							label="Société"
-							v-model.trim="payload.company"
-						/>
-
-						<v-text-field
-							label="Email"
-							v-model.trim="payload.email"
+							label="Ville"
+							prepend-inner-icon="mdi-city-variant"
+							v-model.trim="payload.city"
 						/>
 					</v-col>
-
 					<v-col>
 						<v-text-field
-							label="Nom"
-							v-model.trim="payload.lastName"
-						/>
-
-						<v-text-field
-							label="Téléphone"
-							v-model.trim="payload.phone"
+							label="Code postal"
+							v-model.trim="payload.zip"
 						/>
 					</v-col>
 				</v-row>
@@ -59,17 +50,16 @@
 
 <script>
 export default {
-	name: "AddDialog",
+	name: "AddAddress",
 	props: {
 		display: Boolean,
+		id: String,
 	},
 	data: () => ({
 		payload: {
-			firstName: "",
-			lastName: "",
-			company: "",
-			email: "",
-			phone: "",
+			line: "",
+			zip: "",
+			city: "",
 		},
 		error: false,
 	}),
@@ -80,14 +70,21 @@ export default {
 
 		async save() {
 			try {
-				await this.$store.dispatch("customers/add", {
+				await this.$store.dispatch("customers/addAddress", {
+					params: {
+						id: this.id,
+					},
 					data: this.payload,
 				});
 
 				this.close();
 
 				this.$nextTick(async () => {
-					await this.$store.dispatch("customers/fetch");
+					await this.$store.dispatch("customers/get", {
+						params: {
+							id: this.id,
+						},
+					});
 				});
 			} catch {
 				this.error = true;

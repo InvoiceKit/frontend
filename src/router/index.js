@@ -53,6 +53,16 @@ const routes = [{
             name: 'Clients',
             auth: true
         }
+    },
+    {
+        path: '/customers/:id',
+        name: 'Customers Detail',
+        component: () =>
+            import ('@/views/Customers/Detail/Detail.vue'),
+        meta: {
+            name: 'Fiche client',
+            auth: true
+        }
     }
 ]
 

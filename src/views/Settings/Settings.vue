@@ -1,9 +1,9 @@
 <template>
   <v-row>
-    <v-col cols="7">
+    <v-col sm="12" md="6" lg="8">
       <Profile></Profile>
     </v-col>
-    <v-col cols="5">
+    <v-col sm="12" md="6" lg="4">
       <Fields></Fields>
     </v-col>
   </v-row>
@@ -21,10 +21,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.v-sheet--offset {
-  top: -24px;
-  position: relative;
-}
-</style>

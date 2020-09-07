@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app permanent>
+  <v-navigation-drawer v-model="drawer" app>
     <template v-slot:prepend>
       <v-list-item two-line>
         <v-list-item-content>
@@ -27,8 +27,12 @@
 
 <script>
 import { mapState } from "vuex";
+
 export default {
   name: "Sidebar",
+  props: {
+    drawer: Boolean
+  },
   data: () => ({
     items: [
       {
@@ -40,11 +44,6 @@ export default {
         link: "/customers",
         icon: "account-details",
         name: "Clients"
-      },
-      {
-        link: "/settings",
-        icon: "cog",
-        name: "Paramètres"
       }
     ],
   }),
