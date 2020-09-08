@@ -1,17 +1,24 @@
 <template>
 	<v-row>
 		<v-col cols="12" sm="12" md="6" lg="7">
-			<Profile></Profile>
+			<Profile />
 		</v-col>
 		<v-col cols="12" sm="12" md="6" lg="5">
-			<Fields></Fields>
+			<Fields />
+			<br />
+			<Detail />
 		</v-col>
+
+		<v-footer absolute>
+			En cas de problème technique, contactez un administrateur avec votre identifiant unique.
+		</v-footer>
 	</v-row>
 </template>
 
 <script lang="ts">
 import Profile from "./Profile.vue";
 import Fields from "./Fields.vue";
+import Detail from './Detail.vue'
 
 import { Component, Vue } from "vue-property-decorator";
 
@@ -19,6 +26,7 @@ import { Component, Vue } from "vue-property-decorator";
 	components: {
 		Profile,
 		Fields,
+		Detail
 	},
 })
 export default class Settings extends Vue {}
