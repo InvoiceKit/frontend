@@ -33,19 +33,19 @@
 			</v-data-table>
 		</v-card>
 
-		<AddDialog :display.sync="addDialog" />
+		<AddCustomer :display.sync="addDialog" />
 	</div>
 </template>
 
 <script lang="ts">
-import AddDialog from "./Dialogs/Add.vue";
+import AddCustomer from "./Dialogs/AddCustomer.vue";
 
 import { mapState } from "vuex";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({
 	components: {
-		AddDialog,
+		AddCustomer,
 	},
 	computed: {
 		...mapState("customers", ["customers"]),

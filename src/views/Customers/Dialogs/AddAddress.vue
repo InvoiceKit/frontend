@@ -1,7 +1,7 @@
 <template>
 	<v-dialog v-model="show" @click:outside="show = !show" max-width="450px">
 		<v-card>
-			<v-card-title>Ajouter une adresse</v-card-title>
+			<v-card-title> Ajouter une adresse </v-card-title>
 
 			<v-alert
 				dense
@@ -16,22 +16,23 @@
 			<v-card-text>
 				<v-text-field
 					label="Adresse"
-					prepend-inner-icon="mdi-map-marker"
+					prepend-icon="mdi-map-marker"
 					v-model.trim="payload.line"
 				/>
 
 				<v-row>
 					<v-col>
 						<v-text-field
-							label="Ville"
-							prepend-inner-icon="mdi-city-variant"
-							v-model.trim="payload.city"
+							label="Code postal"
+							prepend-icon="mdi-city-variant"
+							v-model.trim="payload.zip"
 						/>
 					</v-col>
+
 					<v-col>
 						<v-text-field
-							label="Code postal"
-							v-model.trim="payload.zip"
+							label="Ville"
+							v-model.trim="payload.city"
 						/>
 					</v-col>
 				</v-row>
@@ -49,37 +50,52 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, PropSync } from "vue-property-decorator";
+import "reflect-metadata";
+import { Component, Vue, Prop, PropSync, Watch } from "vue-property-decorator";
 import { Address } from "@/types";
+
+const defaultPayload: Address = {
+	line: "",
+	zip: "",
+	city: "",
+};
 
 @Component
 export default class AddAddress extends Vue {
 	@PropSync("display", { type: Boolean }) show!: boolean;
-	@Prop(String) readonly id!: string;
 
-	payload: Address = {
-		line: "",
-		zip: "",
-		city: "",
-	};
+	payload: Address = defaultPayload;
 
 	error = false;
 
+	@Watch("display")
+	reset() {
+		// Reset payload
+		this.payload = Object.assign({}, defaultPayload);
+		this.error = false;
+	}
+
+	/**
+	 * Add an address
+	 */
 	async save() {
 		try {
+			// Push address
 			await this.$store.dispatch("customers/addAddress", {
 				params: {
-					id: this.id,
+					id: this.$route.params.id,
 				},
 				data: this.payload,
 			});
 
+			// Close
 			this.show = false;
 
 			this.$nextTick(async () => {
+				// Get customer details
 				await this.$store.dispatch("customers/get", {
 					params: {
-						id: this.id,
+						id: this.$route.params.id,
 					},
 				});
 			});

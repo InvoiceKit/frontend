@@ -24,6 +24,12 @@ export default new Vapi({
 }).delete({
     action: 'deleteAddress',
     path: ({ id, address}: any) => `/customers/${id}/addresses/${address}`
+}).patch({
+    action: 'update',
+    path: ({ id }: any) => `/customers/${id}`
+}).delete({
+    action: 'delete',
+    path: ({ id }: any) => `/customers/${id}` 
 }).getStore({
     namespaced: true
 })

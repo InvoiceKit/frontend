@@ -18,16 +18,19 @@
 					<v-col>
 						<v-text-field
 							label="Prénom"
+							prepend-icon="mdi-account"
 							v-model.trim="payload.firstName"
 						/>
 
 						<v-text-field
 							label="Société"
+							prepend-icon="mdi-domain"
 							v-model.trim="payload.company"
 						/>
 
 						<v-text-field
 							label="Email"
+							prepend-icon="mdi-email"
 							v-model.trim="payload.email"
 						/>
 					</v-col>
@@ -40,6 +43,7 @@
 
 						<v-text-field
 							label="Téléphone"
+							prepend-icon="mdi-phone"
 							v-model.trim="payload.phone"
 						/>
 					</v-col>
@@ -51,7 +55,7 @@
 
 				<v-btn text color="red" @click="show = !show">Annuler</v-btn>
 
-				<v-btn text color="green" @click="save">Ajouter</v-btn>
+				<v-btn text color="green" @click="save">{{ this.editedItem ? "Mettre à jour " : "Ajouter" }}</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>
@@ -59,26 +63,53 @@
 
 <script lang="ts">
 import { Customer } from "@/types";
-import { Component, PropSync, Vue } from "vue-property-decorator";
+import { Component, PropSync, Prop, Vue, Watch } from "vue-property-decorator";
+
+const defaultPayload: Customer = {
+	firstName: "",
+	lastName: "",
+	company: "",
+	email: "",
+	phone: "",
+};
 
 @Component
-export default class AddDialog extends Vue {
+export default class AddCustomer extends Vue {
 	@PropSync("display", { type: Boolean }) show!: boolean;
+	@Prop(Object) readonly editedItem: Customer | undefined
 
-	payload: Customer = {
-		firstName: "",
-		lastName: "",
-		company: "",
-		email: "",
-		phone: "",
-	};
+	payload: Customer = defaultPayload
+
 	error = false;
+
+	@Watch('editedItem')
+	change() {
+		if (this.editedItem) {
+			this.payload = this.editedItem
+		}
+	}
+
+	@Watch('display')
+	reset() {
+		if (!this.editedItem) {
+			this.payload = Object.assign({}, defaultPayload)
+		}
+	}
 
 	async save() {
 		try {
-			await this.$store.dispatch("customers/add", {
-				data: this.payload,
-			});
+			if (this.editedItem) {
+				await this.$store.dispatch('customers/update', {
+					params: {
+						id: this.editedItem.id
+					},
+					data: this.payload
+				})
+			} else {
+				await this.$store.dispatch("customers/add", {
+					data: this.payload,
+				});
+			}
 
 			this.show = false;
 
