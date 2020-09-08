@@ -1,18 +1,12 @@
 <template>
-	<v-card>
-		<v-sheet class="pa-4" rounded color="blue-grey">
-			<v-row align="center">
-				<v-col cols="2" align="center">
-					<v-icon x-large>mdi-map-marker</v-icon>
-				</v-col>
-				<v-col cols="10">
-					<h1 class="display-1">Adresses</h1>
-				</v-col>
-			</v-row>
-		</v-sheet>
+	<v-card class="mt-5">
+		<v-card-title>
+            <CardIcon color="amber" icon="map" />
+
+            Adresses
+		</v-card-title>
 
 		<v-data-table
-			class="mt-4"
 			:items="customer.addresses"
 			:headers="headers"
 		>
@@ -22,30 +16,15 @@
 				</v-btn>
 			</template>
 		</v-data-table>
-
-		<v-card-actions>
-			<v-spacer />
-
-			<v-btn text color="orange" @click="dialog = true">
-				Ajouter une adresse
-			</v-btn>
-		</v-card-actions>
-
-		<AddAddress :display="dialog" :id="customer.id" />
 	</v-card>
 </template>
 
 <script lang="ts">
-import AddAddress from "../Dialogs/AddAddress.vue";
-
 import { mapState } from "vuex";
 import { Component, Vue } from "vue-property-decorator";
 import { Address, Customer } from "@/types";
 
 @Component({
-	components: {
-		AddAddress,
-	},
 	computed: {
 		...mapState("customers", ["customer"]),
 	},
@@ -70,7 +49,6 @@ export default class Addresses extends Vue {
 		},
     ];
     customer!: Customer
-	dialog = false;
 
 	async deleteAddress(item: Address) {
 		try {

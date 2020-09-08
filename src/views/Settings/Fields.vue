@@ -1,18 +1,10 @@
 <template>
-	<v-card>
-		<v-sheet class="mx-auto pa-6" rounded color="success">
-			<v-row align="center">
-				<v-col cols="2" align="center">
-					<v-icon x-large>mdi-table</v-icon>
-				</v-col>
-				<v-col cols="10">
-					<h1 class="display-1">Champs</h1>
-					<h2 class="subtitle-1">
-						Informations affichées sur les factures
-					</h2>
-				</v-col>
-			</v-row>
-		</v-sheet>
+	<v-card class="mt-5">
+		<v-card-title>
+			<CardIcon color="red" icon="domain" />
+
+			Champs pour les factures
+		</v-card-title>
 
 		<v-simple-table>
 			<thead>

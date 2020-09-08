@@ -1,6 +1,6 @@
 <template>
-	<v-card>
-		<v-card-title>
+	<div>
+		<v-app-bar app>
 			Clients
 
 			<v-spacer />
@@ -18,21 +18,23 @@
 			<v-btn icon @click="addDialog = true" large>
 				<v-icon>mdi-plus</v-icon>
 			</v-btn>
-		</v-card-title>
+		</v-app-bar>
 
-		<v-data-table
-			:search="search"
-			:headers="headers"
-			:items="customers.items"
-			@click:row="open"
-		>
-			<template v-slot:item.name="{ item }">
-				{{ item.firstName }} <b>{{ item.lastName }}</b>
-			</template>
-		</v-data-table>
+		<v-card>
+			<v-data-table
+				:search="search"
+				:headers="headers"
+				:items="customers.items"
+				@click:row="open"
+			>
+				<template v-slot:item.name="{ item }">
+					{{ item.firstName }} <b>{{ item.lastName }}</b>
+				</template>
+			</v-data-table>
+		</v-card>
 
 		<AddDialog :display.sync="addDialog" />
-	</v-card>
+	</div>
 </template>
 
 <script lang="ts">

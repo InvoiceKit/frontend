@@ -1,5 +1,5 @@
 <template>
-	<v-navigation-drawer v-model="syncedDrawer" app>
+	<v-navigation-drawer app permanent>
 		<template v-slot:prepend>
 			<v-list-item two-line>
 				<v-list-item-content>
@@ -48,8 +48,6 @@ import { Component, Vue, PropSync } from "vue-property-decorator";
 	},
 })
 export default class Sidebar extends Vue {
-	@PropSync("drawer", { type: Boolean }) syncedDrawer!: boolean;
-
 	items = [
 		{
 			link: "/dashboard",
@@ -61,6 +59,11 @@ export default class Sidebar extends Vue {
 			icon: "account-details",
 			name: "Clients",
 		},
+		{
+			link: "/settings",
+			icon: "cog",
+			name: "Paramètres"
+		}
 	];
 }
 </script>

@@ -1,18 +1,10 @@
 <template>
-	<v-card>
-		<v-sheet class="mx-auto pa-6" rounded color="success">
-			<v-row align="center">
-				<v-col cols="1" align="center">
-					<v-icon x-large>mdi-cog</v-icon>
-				</v-col>
-				<v-col cols="11">
-					<h1 class="display-1">Paramètres</h1>
-					<h2 class="subtitle-1">
-						Complètez votre profil et l'apparence des factures
-					</h2>
-				</v-col>
-			</v-row>
-		</v-sheet>
+	<v-card class="mt-5">
+		<v-card-title>
+			<CardIcon color="orange" icon="cog" />
+
+			Paramètres
+		</v-card-title>
 
 		<v-card-text>
 			<v-row>
