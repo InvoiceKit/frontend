@@ -55,6 +55,11 @@ export default class Sidebar extends Vue {
 			name: "Tableau de bord",
 		},
 		{
+			link: '/invoices',
+			icon: 'receipt',
+			name: 'Factures'
+		},
+		{
 			link: "/customers",
 			icon: "account-details",
 			name: "Clients",

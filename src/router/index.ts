@@ -63,6 +63,15 @@ const routes = [{
             name: 'Fiche client',
             auth: true
         }
+    },
+    {
+        path: '/invoices',
+        name: 'Invoices',
+        component: () => import('@/views/Invoices/List.vue'),
+        meta: {
+            name: 'Factures',
+            auth: true
+        }
     }
 ]
 
