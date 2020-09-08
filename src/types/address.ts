@@ -1,6 +1,6 @@
 export interface Address {
-    id?: String,
-    line: String,
-    zip: String,
-    city: String
+    id?: string,
+    line: string,
+    zip: string,
+    city: string
 }

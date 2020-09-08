@@ -56,7 +56,7 @@ const routes = [{
     },
     {
         path: '/customers/:id',
-        name: 'Customers Detail',
+        name: 'Customer Detail',
         component: () =>
             import ('@/views/Customers/Detail/Detail.vue'),
         meta: {
@@ -70,6 +70,15 @@ const routes = [{
         component: () => import('@/views/Invoices/List.vue'),
         meta: {
             name: 'Factures',
+            auth: true
+        }
+    },
+    {
+        path: '/invoices/:id',
+        name: 'Invoice Detail',
+        component: () => import('@/views/Invoices/Detail/Detail.vue'),
+        meta: {
+            name: 'Facture',
             auth: true
         }
     }
