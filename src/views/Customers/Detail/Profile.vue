@@ -39,6 +39,13 @@
 						{{ customer.phone || "N/A" }}
 					</td>
 				</tr>
+
+				<tr>
+					<td>Identifiant</td>
+					<td>
+						{{ customer.id || "Erreur" }}
+					</td>
+				</tr>
 			</tbody>
 		</v-simple-table>
 	</v-card>
