@@ -57,12 +57,14 @@
 	</v-card>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import { mapState } from "vuex";
-export default {
-	name: "Detail",
+
+@Component({
 	computed: {
 		...mapState("customers", ["customer"]),
 	},
-};
+})
+export default class Detail extends Vue {}
 </script>

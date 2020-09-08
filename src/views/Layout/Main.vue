@@ -1,8 +1,8 @@
 <template>
     <v-app>
-        <Sidebar :drawer.sync="drawer" />
+        <Sidebar :drawer="drawer" />
 
-        <AppBar :drawer.sync="drawer" />
+        <AppBar :drawer="drawer" />
 
         <v-main>
             <v-container fluid>
@@ -12,18 +12,18 @@
     </v-app>
 </template>
 
-<script>
+<script lang="ts">
 import Sidebar from '@/views/Layout/Sidebar.vue'
 import AppBar from '@/views/Layout/AppBar.vue'
 
-export default {
-    name: "Main",
-    data: () => ({
-        drawer: true
-    }),
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({
     components: {
         Sidebar,
         AppBar
     }
+}) export default class Main extends Vue {
+    drawer = true
 }
 </script>

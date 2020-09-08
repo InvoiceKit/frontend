@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="display" max-width="450px">
+	<v-dialog v-model="show" @click:outside="show = !show" max-width="450px">
 		<v-card>
 			<v-card-title>Ajouter une adresse</v-card-title>
 
@@ -40,7 +40,7 @@
 			<v-card-actions>
 				<v-spacer />
 
-				<v-btn text color="red" @click="close">Annuler</v-btn>
+				<v-btn text color="red" @click="show = !show">Annuler</v-btn>
 
 				<v-btn text color="green" @click="save">Ajouter</v-btn>
 			</v-card-actions>
@@ -48,48 +48,44 @@
 	</v-dialog>
 </template>
 
-<script>
-export default {
-	name: "AddAddress",
-	props: {
-		display: Boolean,
-		id: String,
-	},
-	data: () => ({
-		payload: {
-			line: "",
-			zip: "",
-			city: "",
-		},
-		error: false,
-	}),
-	methods: {
-		close() {
-			this.$emit("update:display", false);
-		},
+<script lang="ts">
+import { Component, Vue, Prop, PropSync } from "vue-property-decorator";
+import { Address } from "@/types";
 
-		async save() {
-			try {
-				await this.$store.dispatch("customers/addAddress", {
+@Component
+export default class AddAddress extends Vue {
+	@PropSync("display", { type: Boolean }) show!: boolean;
+	@Prop(String) readonly id!: string;
+
+	payload: Address = {
+		line: "",
+		zip: "",
+		city: "",
+	};
+
+	error = false;
+
+	async save() {
+		try {
+			await this.$store.dispatch("customers/addAddress", {
+				params: {
+					id: this.id,
+				},
+				data: this.payload,
+			});
+
+			this.show = false;
+
+			this.$nextTick(async () => {
+				await this.$store.dispatch("customers/get", {
 					params: {
 						id: this.id,
 					},
-					data: this.payload,
 				});
-
-				this.close();
-
-				this.$nextTick(async () => {
-					await this.$store.dispatch("customers/get", {
-						params: {
-							id: this.id,
-						},
-					});
-				});
-			} catch {
-				this.error = true;
-			}
-		},
-	},
-};
+			});
+		} catch {
+			this.error = true;
+		}
+	}
+}
 </script>

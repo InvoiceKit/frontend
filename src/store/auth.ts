@@ -15,10 +15,10 @@ export default new Vapi({
     action: 'login',
     property: 'team',
     path: '/teams/login',
-    headers: ({ username, password }) => ({
+    headers: ({ username, password }: any) => ({
         'Authorization': 'Basic ' + btoa(`${username}:${password}`)
     }),
-    onSuccess: (state, payload) => {
+    onSuccess: (state: any, payload: any) => {
         // Store the token
         localStorage.setItem('token', payload.data.token.value)
     }

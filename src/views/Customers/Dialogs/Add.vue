@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="display" max-width="550px" @click:outside="close">
+	<v-dialog v-model="show" max-width="550px" @click:outside="show = !show">
 		<v-card>
 			<v-card-title>Ajouter un client</v-card-title>
 
@@ -49,7 +49,7 @@
 			<v-card-actions>
 				<v-spacer />
 
-				<v-btn text color="red" @click="close">Annuler</v-btn>
+				<v-btn text color="red" @click="show = !show">Annuler</v-btn>
 
 				<v-btn text color="green" @click="save">Ajouter</v-btn>
 			</v-card-actions>
@@ -57,42 +57,37 @@
 	</v-dialog>
 </template>
 
-<script>
-export default {
-	name: "AddDialog",
-	props: {
-		display: Boolean,
-	},
-	data: () => ({
-		payload: {
-			firstName: "",
-			lastName: "",
-			company: "",
-			email: "",
-			phone: "",
-		},
-		error: false,
-	}),
-	methods: {
-		close() {
-			this.$emit("update:display", false);
-		},
+<script lang="ts">
+import { Customer } from "@/types";
+import { Component, PropSync, Vue } from "vue-property-decorator";
 
-		async save() {
-			try {
-				await this.$store.dispatch("customers/add", {
-					data: this.payload,
-				});
+@Component
+export default class AddDialog extends Vue {
+	@PropSync("display", { type: Boolean }) show!: boolean;
 
-				this.close();
+	payload: Customer = {
+		firstName: "",
+		lastName: "",
+		company: "",
+		email: "",
+		phone: "",
+	};
+	error = false;
 
-				this.$nextTick(async () => {
-					await this.$store.dispatch("customers/fetch");
-				});
-			} catch {
-				this.error = true;
-			}
-		},
-	},
-};
+	async save() {
+		try {
+			await this.$store.dispatch("customers/add", {
+				data: this.payload,
+			});
+
+			this.show = false;
+
+			this.$nextTick(async () => {
+				await this.$store.dispatch("customers/fetch");
+			});
+		} catch {
+			this.error = true;
+		}
+	}
+}
 </script>

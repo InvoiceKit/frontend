@@ -7,8 +7,8 @@ import customers from './customers'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    modules: {
-        'auth': auth,
-        'customers': customers
+    modules: <any>{
+        auth,
+        customers
     }
 })

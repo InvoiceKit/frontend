@@ -17,13 +17,13 @@ export default new Vapi({
 }).get({
     action: 'get',
     property: 'customer',
-    path: ({ id }) => `/customers/${id}`
+    path: ({ id }: any) => `/customers/${id}`
 }).put({
     action: 'addAddress',
-    path: ({ id }) => `/customers/${id}/addresses`
+    path: ({ id }: any) => `/customers/${id}/addresses`
 }).delete({
     action: 'deleteAddress',
-    path: ({ id, address }) => `/customers/${id}/addresses/${address}`
+    path: ({ id, address}: any) => `/customers/${id}/addresses/${address}`
 }).getStore({
     namespaced: true
 })
