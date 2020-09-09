@@ -39,7 +39,7 @@ import { Component, Vue, PropSync } from "vue-property-decorator";
 		...mapState("auth", ["team"]),
 	},
 
-	async mounted() {
+	async created() {
 		try {
 			await this.$store.dispatch("auth/get");
 		} catch {

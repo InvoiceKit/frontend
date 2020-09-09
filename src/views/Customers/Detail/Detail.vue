@@ -58,7 +58,7 @@ import { mapState } from 'vuex';
         ])
     },
 
-	async mounted() {
+	async created() {
 		try {
 			await this.$store.dispatch("customers/get", {
 				params: {
