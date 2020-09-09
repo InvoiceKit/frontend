@@ -21,6 +21,7 @@
         "vuex-rest-api": "^2.13.0"
     },
     "devDependencies": {
+        "@babel/plugin-proposal-optional-chaining": "^7.11.0",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
         "@vue/cli-plugin-babel": "~4.5.0",

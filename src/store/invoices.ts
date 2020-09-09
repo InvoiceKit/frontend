@@ -1,10 +1,11 @@
 import Vapi from 'vuex-rest-api'
+import { Invoice, InvoiceOutput } from '@/types'
 
 export default new Vapi({
     baseURL: 'http://localhost:8080',
     state: {
-        invoices: [],
-        invoice: {}
+        invoices: [] as Array<Invoice>,
+        invoice: {} as InvoiceOutput
     }
 }).get({
     action: 'fetch',
@@ -21,6 +22,9 @@ export default new Vapi({
 }).put({
     action: 'addField',
     path: ({ id }: any) => `/invoices/${id}/fields`
+}).patch({
+    action: 'updateField',
+    path: ({ id, field }: any) => `/invoices/${id}/fields/${field}`
 }).delete({
     action: 'deleteField',
     path: ({ id, field }: any) => `/invoices/${id}/fields/${field}`
