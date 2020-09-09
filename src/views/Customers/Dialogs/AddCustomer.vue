@@ -1,7 +1,7 @@
 <template>
 	<v-dialog v-model="show" max-width="550px" @click:outside="show = !show">
 		<v-card>
-			<v-card-title>Ajouter un client</v-card-title>
+			<v-card-title>{{ this.editedItem ? "Mettre à jour" : "Ajouter" }} un client</v-card-title>
 
 			<v-alert
 				dense
