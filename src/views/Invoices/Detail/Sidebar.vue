@@ -27,7 +27,7 @@
 				</v-list-item-title>
 			</v-list-item>
 
-			<v-list-item @click="false">
+			<v-list-item @click="promotionDialog = true">
 				<v-list-item-icon>
 					<v-icon>mdi-sale</v-icon>
 				</v-list-item-icon>
@@ -49,30 +49,12 @@
 		<v-divider />
 
 		<v-list nav>
-			<v-list-item to="/">
+			<v-list-item>
 				<v-list-item-icon>
 					<v-icon>mdi-file-cog</v-icon>
 				</v-list-item-icon>
 				<v-list-item-title>
 					Modifier le fichier
-				</v-list-item-title>
-			</v-list-item>
-
-			<v-list-item to="/">
-				<v-list-item-icon>
-					<v-icon>mdi-content-duplicate</v-icon>
-				</v-list-item-icon>
-				<v-list-item-title>
-					Dupliquer le fichier
-				</v-list-item-title>
-			</v-list-item>
-
-			<v-list-item to="/">
-				<v-list-item-icon>
-					<v-icon>mdi-delete</v-icon>
-				</v-list-item-icon>
-				<v-list-item-title>
-					Supprimer le fichier
 				</v-list-item-title>
 			</v-list-item>
 
@@ -127,18 +109,21 @@
 		</template>
 
 		<AddField :display.sync="addField" :id="invoice.invoice.id" />
+		<PromotionDialog :display.sync="promotionDialog" :id="invoice.invoice.id" :promotion="invoice.invoice.promotion" />
 	</v-navigation-drawer>
 </template>
 
 <script lang="ts">
 import AddField from './Dialogs/FieldDialog.vue'
+import PromotionDialog from './Dialogs/PromotionDialog.vue'
 import { InvoiceOutput } from "@/types";
 import { mapState } from "vuex";
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({
 	components: {
-		AddField
+		AddField,
+		PromotionDialog
 	},
 	computed: {
 		...mapState("invoices", ["invoice"]),
@@ -146,5 +131,6 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 })
 export default class Sidebar extends Vue {
 	addField = false
+	promotionDialog = false
 }
 </script>
