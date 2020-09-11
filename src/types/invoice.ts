@@ -15,9 +15,9 @@ export interface Invoice {
     addressID?: string
     type: InvoiceType
     status: InvoiceStatus
-    number?: string
-    deposit?: number
-    promotion?: number
+    number: string
+    deposit: number
+    promotion: number
 }
 
 export interface Prices {
@@ -29,6 +29,6 @@ export interface Prices {
 }
 
 export interface InvoiceOutput {
-    invoice: Invoice
-    prices: Prices
+    invoice?: Invoice
+    prices?: Prices
 }

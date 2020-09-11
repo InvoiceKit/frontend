@@ -35,6 +35,7 @@
 import InformationCard from '../Components/InformationCard.vue';
 import CustomerCard from '../Components/CustomersCard.vue';
 import AddressesCard from '../Components/AddressesCard.vue';
+
 import { InvoiceType, InvoiceStatus, Invoice } from "@/types";
 import { Component, PropSync, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapState } from 'vuex';
@@ -44,6 +45,9 @@ const defaultPayload: Invoice = {
 	addressID: '',
 	type: InvoiceType.invoice,
 	status: InvoiceStatus.waiting,
+	number: "",
+	deposit: 0,
+	promotion: 0
 };
 
 @Component({
@@ -53,7 +57,7 @@ const defaultPayload: Invoice = {
 		AddressesCard
 	}
 })
-export default class AddCustomer extends Vue {
+export default class AddInvoice extends Vue {
 	@PropSync("display", { type: Boolean }) show!: boolean;
 
 	payload: Invoice = defaultPayload;

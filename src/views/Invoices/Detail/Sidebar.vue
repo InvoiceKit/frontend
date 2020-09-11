@@ -4,13 +4,15 @@
 			<v-list-item-content>
 				<v-list-item-title>
 					{{
-						invoice.invoice.type == "invoice" ? "Facture" : "Devis"
+						payload.invoice.type == "invoice" ? "Facture" : "Devis"
 					}}
-					{{ invoice.invoice.number || "non numérotée" }}
+					{{ payload.invoice.number || "non numérotée" }}
 				</v-list-item-title>
 				<v-list-item-subtitle>
 					Dernière modification le
-					{{ new Date(invoice.invoice.updatedAt).toLocaleDateString() }}
+					{{
+						new Date(payload.invoice.updatedAt).toLocaleDateString()
+					}}
 				</v-list-item-subtitle>
 			</v-list-item-content>
 		</v-list-item>
@@ -22,115 +24,138 @@
 				<v-list-item-icon>
 					<v-icon>mdi-plus</v-icon>
 				</v-list-item-icon>
-				<v-list-item-title>
-					Ajouter un objet
-				</v-list-item-title>
-			</v-list-item>
-
-			<v-list-item @click="promotionDialog = true">
-				<v-list-item-icon>
-					<v-icon>mdi-sale</v-icon>
-				</v-list-item-icon>
-				<v-list-item-title>
-					Ajouter une remise commerciale
-				</v-list-item-title>
-			</v-list-item>
-
-			<v-list-item @click="false">
-				<v-list-item-icon>
-					<v-icon>mdi-bank-transfer</v-icon>
-				</v-list-item-icon>
-				<v-list-item-title>
-					Ajouter un acompte
-				</v-list-item-title>
+				<v-list-item-title> Ajouter un objet </v-list-item-title>
 			</v-list-item>
 		</v-list>
 
 		<v-divider />
 
 		<v-list nav>
-			<v-list-item>
+			<v-list-item @click="editionDialog = true">
 				<v-list-item-icon>
 					<v-icon>mdi-file-cog</v-icon>
 				</v-list-item-icon>
-				<v-list-item-title>
-					Modifier le fichier
-				</v-list-item-title>
+				<v-list-item-title> Modifier le fichier </v-list-item-title>
+			</v-list-item>
+
+			<v-list-item @click="remove">
+				<v-list-item-icon>
+					<v-icon>mdi-delete</v-icon>
+				</v-list-item-icon>
+				<v-list-item-title> Supprimer le fichier </v-list-item-title>
 			</v-list-item>
 
 			<v-list-item to="/invoices" exact>
 				<v-list-item-icon>
 					<v-icon>mdi-arrow-left</v-icon>
 				</v-list-item-icon>
-				<v-list-item-title>
-					Quitter
-				</v-list-item-title>
+				<v-list-item-title> Quitter </v-list-item-title>
 			</v-list-item>
 		</v-list>
 
 		<v-divider />
 
 		<v-list nav>
-			<v-list-item :href="'//localhost:8080/invoices/' + invoice.invoice.id + '/render'">
+			<v-list-item
+				:href="
+					'//localhost:8080/invoices/' +
+					payload.invoice.id +
+					'/render'
+				"
+			>
 				<v-list-item-icon>
 					<v-icon>mdi-printer</v-icon>
 				</v-list-item-icon>
-				<v-list-item-title>
-					Imprimer
-				</v-list-item-title>
+				<v-list-item-title> Imprimer </v-list-item-title>
 			</v-list-item>
 		</v-list>
 
-		<template v-slot:append>
+		<template #append>
 			<v-simple-table>
 				<tbody>
 					<tr>
 						<td>Total H.T.</td>
-						<td>{{ invoice.prices.totalWV }} €</td>
+						<td>{{ payload.prices.totalWV }} €</td>
 					</tr>
 					<tr>
 						<td>T.V.A.</td>
-						<td>{{ invoice.prices.VAT }} €</td>
+						<td>{{ payload.prices.VAT }} €</td>
 					</tr>
-					<tr v-if="invoice.prices.promotion && invoice.prices.promotion != 0">
+					<tr
+						v-if="
+							payload.prices.promotion &&
+							payload.prices.promotion != 0
+						"
+					>
 						<td>Remise commerciale</td>
-						<td>- {{ invoice.prices.promotion }} €</td>
+						<td>- {{ payload.prices.promotion }} €</td>
 					</tr>
-					<tr v-if="invoice.invoice.deposit && invoice.invoice.deposit != 0">
+					<tr
+						v-if="
+							payload.invoice.deposit &&
+							payload.invoice.deposit != 0
+						"
+					>
 						<td>Acompte</td>
-						<td>- {{ invoice.invoice.deposit }} €</td>
+						<td>- {{ payload.invoice.deposit }} €</td>
 					</tr>
 					<tr>
 						<td>Total T.T.C.</td>
-						<td>{{ invoice.prices.final }} €</td>
+						<td>{{ payload.prices.final }} €</td>
 					</tr>
 				</tbody>
 			</v-simple-table>
 		</template>
 
-		<AddField :display.sync="addField" :id="invoice.invoice.id" />
-		<PromotionDialog :display.sync="promotionDialog" :id="invoice.invoice.id" :promotion="invoice.invoice.promotion" />
+		<AddField :display.sync="addField" :id="payload.invoice.id" />
+		<EditionDialog
+			:display.sync="editionDialog"
+			:invoice.sync="payload.invoice"
+		/>
 	</v-navigation-drawer>
 </template>
 
 <script lang="ts">
-import AddField from './Dialogs/FieldDialog.vue'
-import PromotionDialog from './Dialogs/PromotionDialog.vue'
+import AddField from "./Dialogs/AddField.vue";
+import EditionDialog from "./Dialogs/EditionDialog.vue";
+
 import { InvoiceOutput } from "@/types";
 import { mapState } from "vuex";
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
 	components: {
 		AddField,
-		PromotionDialog
+		EditionDialog,
 	},
 	computed: {
-		...mapState("invoices", ["invoice"]),
+		...mapState("invoices", {
+			payload: (state: any) => state.invoice as InvoiceOutput,
+		}),
 	},
 })
 export default class Sidebar extends Vue {
-	addField = false
-	promotionDialog = false
+	addField = false;
+	editionDialog = false;
+
+	async remove() {
+		if (
+			confirm(
+				"Êtes-vous sur de vouloir supprimer ce fichier ? Cette action est irréversible."
+			)
+		) {
+			try {
+				await this.$store.dispatch("invoices/delete", {
+					params: {
+						id: this.payload.invoice.id,
+					},
+				});
+
+				this.$router.push("/invoices");
+			} catch {
+				alert("Une erreur est survenue!");
+			}
+		}
+	}
 }
 </script>

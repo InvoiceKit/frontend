@@ -1,5 +1,5 @@
 <template>
-	<div v-if="invoice.invoice && invoice.prices">
+	<div>
 		<Table />
 
 		<Sidebar />
@@ -9,31 +9,27 @@
 <script lang="ts">
 import Sidebar from "./Sidebar.vue";
 import Table from "./Table.vue";
-import { Component, Vue, Watch } from "vue-property-decorator";
-import { mapState } from "vuex";
-import { InvoiceOutput, InvoiceStatus, InvoiceType } from "@/types";
+
+import { Component, Vue } from "vue-property-decorator";
+import store from "@/store/index";
 
 @Component({
 	components: {
 		Sidebar,
-		Table
+		Table,
 	},
 
-	computed: {
-		...mapState('invoices', [
-			'invoice'
-		])
-	},
-
-	async created() {
+	async beforeRouteEnter(to, from, next) {
 		try {
-			await this.$store.dispatch("invoices/get", {
+			await store.dispatch("invoices/get", {
 				params: {
-					id: this.$route.params.id,
+					id: to.params.id,
 				},
 			});
+
+			next();
 		} catch {
-			this.$router.push("/invoices");
+			next({ path: "/invoices" });
 		}
 	},
 })

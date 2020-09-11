@@ -10,28 +10,26 @@
 				transition="slide-y-transition"
 				v-model="error"
 			>
-				Impossible d'ajouter l'objet
+				Impossible d'ajouter ou de mettre à jour l'objet.
 			</v-alert>
 
 			<v-card-text>
-				<v-textarea label="Description" v-model.trim="payload.name" prepend-icon="mdi-rename-box" />
+				<v-textarea label="Description" prepend-inner-icon="mdi-cube" v-model.trim="payload.name" />
 
 				<v-row>
 					<v-col>
 						<v-text-field
 							label="Prix H.T."
-							prepend-icon="mdi-currency-eur"
-							v-model.number="payload.price"
 							suffix="€"
+							v-model.number="payload.price"
 						/>
 					</v-col>
 
 					<v-col>
 						<v-text-field
-							label="T.V.A."
-							prepend-icon="mdi-label-percent"
-							v-model.number="payload.vat"
+							label="TVA"
 							suffix="%"
+							v-model.number="payload.vat"
 						/>
 					</v-col>
 				</v-row>
@@ -49,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { Field } from '@/types/field';
+import { Field } from "@/types";
 import { Component, PropSync, Prop, Vue, Watch } from "vue-property-decorator";
 
 const defaultPayload: Field = {
@@ -59,10 +57,10 @@ const defaultPayload: Field = {
 };
 
 @Component
-export default class AddCustomer extends Vue {
+export default class AddField extends Vue {
 	@PropSync("display", { type: Boolean }) show!: boolean;
 	@Prop(Object) readonly editedItem: Field | undefined
-	@Prop(String) readonly id: String | undefined
+	@Prop(String) readonly id!: String
 
 	payload: Field = defaultPayload
 
@@ -88,7 +86,7 @@ export default class AddCustomer extends Vue {
 				await this.$store.dispatch('invoices/updateField', {
 					params: {
 						id: this.id,
-						field: this.editedItem.id
+						field: this.payload.id
 					},
 					data: this.payload
 				})
