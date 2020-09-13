@@ -27,6 +27,12 @@
 				</v-list-item-content>
 			</v-list-item>
 		</v-list>
+
+		<template #append>
+			<v-btn @click="logout" tile text block large color="red">
+				Déconnexion
+			</v-btn>
+		</template>
 	</v-navigation-drawer>
 </template>
 
@@ -55,9 +61,9 @@ export default class Sidebar extends Vue {
 			name: "Tableau de bord",
 		},
 		{
-			link: '/invoices',
-			icon: 'receipt',
-			name: 'Factures'
+			link: "/invoices",
+			icon: "receipt",
+			name: "Factures",
 		},
 		{
 			link: "/customers",
@@ -67,8 +73,14 @@ export default class Sidebar extends Vue {
 		{
 			link: "/settings",
 			icon: "cog",
-			name: "Paramètres"
-		}
+			name: "Paramètres",
+		},
 	];
+
+	logout() {
+		localStorage.removeItem("token");
+
+		this.$router.push("/authentication");
+	}
 }
 </script>
