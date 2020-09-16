@@ -37,6 +37,15 @@ const routes = [{
     }
 },
 {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import('@/views/Settings/Settings.vue'), // TODO
+    meta: {
+        name: "Tableau de bord",
+        auth: true
+    }
+},
+{
     path: '/settings',
     name: 'Settings',
     component: () =>
@@ -98,16 +107,11 @@ router.beforeEach((to, from, next) => {
 
     // Authentication redirection
     if (to.matched.some(record => record.meta.auth)) {
-        console.log("Auth needed")
-
         if (localStorage.getItem('token') === null) {
-            console.log("No token")
             next({
                 path: '/authentication'
             })
         } else {
-            console.log("Token yes")
-
             // Set common token
             Axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
 

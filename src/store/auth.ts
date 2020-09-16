@@ -10,26 +10,27 @@ export default new Vapi({
 }).put({
     action: 'register',
     property: 'team',
-    path: '/teams/register'
+    path: '/teams/register',
+    onSuccess: (state: any, payload: any) => {
+        // Store token
+        localStorage.setItem('token', payload.data.token)
+    }
 }).post({
     action: 'login',
     property: 'team',
     path: '/teams/login',
-    headers: ({ username, password }: any) => ({
-        'Authorization': 'Basic ' + btoa(`${username}:${password}`)
-    }),
     onSuccess: (state: any, payload: any) => {
         // Store the token
-        localStorage.setItem('token', payload.data.token.value)
+        localStorage.setItem('token', payload.data.token)
     }
 }).get({
     action: 'get',
     property: 'team',
-    path: '/teams/profile'
+    path: '/teams'
 }).patch({
     action: 'save',
     property: 'team',
-    path: '/teams/profile'
+    path: '/teams'
 }).getStore({
     namespaced: true
 })

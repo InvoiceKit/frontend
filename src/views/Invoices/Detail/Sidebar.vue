@@ -4,14 +4,14 @@
 			<v-list-item-content>
 				<v-list-item-title>
 					{{
-						payload.invoice.type == "invoice" ? "Facture" : "Devis"
+						invoice.type == "invoice" ? "Facture" : "Devis"
 					}}
-					{{ payload.invoice.number || "non numérotée" }}
+					{{ invoice.number || "non numérotée" }}
 				</v-list-item-title>
 				<v-list-item-subtitle>
 					Dernière modification le
 					{{
-						new Date(payload.invoice.updatedAt).toLocaleDateString()
+						new Date(invoice.updatedAt).toLocaleDateString()
 					}}
 				</v-list-item-subtitle>
 			</v-list-item-content>
@@ -59,7 +59,7 @@
 			<v-list-item
 				:href="
 					'//localhost:8080/invoices/' +
-					payload.invoice.id +
+					invoice.id +
 					'/render'
 				"
 			>
@@ -71,46 +71,13 @@
 		</v-list>
 
 		<template #append>
-			<v-simple-table>
-				<tbody>
-					<tr>
-						<td>Total H.T.</td>
-						<td>{{ payload.prices.totalWV }} €</td>
-					</tr>
-					<tr>
-						<td>T.V.A.</td>
-						<td>{{ payload.prices.VAT }} €</td>
-					</tr>
-					<tr
-						v-if="
-							payload.prices.promotion &&
-							payload.prices.promotion != 0
-						"
-					>
-						<td>Remise commerciale</td>
-						<td>- {{ payload.prices.promotion }} €</td>
-					</tr>
-					<tr
-						v-if="
-							payload.invoice.deposit &&
-							payload.invoice.deposit != 0
-						"
-					>
-						<td>Acompte</td>
-						<td>- {{ payload.invoice.deposit }} €</td>
-					</tr>
-					<tr>
-						<td>Total T.T.C.</td>
-						<td>{{ payload.prices.final }} €</td>
-					</tr>
-				</tbody>
-			</v-simple-table>
+			<PriceTable :invoice.sync="payload" />
 		</template>
 
-		<AddField :display.sync="addField" :id="payload.invoice.id" />
+		<AddField :display.sync="addField" :id="invoice.id" />
 		<EditionDialog
 			:display.sync="editionDialog"
-			:invoice.sync="payload.invoice"
+			:invoice.sync="invoice"
 		/>
 	</v-navigation-drawer>
 </template>
@@ -118,15 +85,17 @@
 <script lang="ts">
 import AddField from "./Dialogs/AddField.vue";
 import EditionDialog from "./Dialogs/EditionDialog.vue";
+import PriceTable from "./Components/PriceTable.vue"
 
 import { InvoiceOutput } from "@/types";
 import { mapState } from "vuex";
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 
 @Component({
 	components: {
 		AddField,
 		EditionDialog,
+		PriceTable
 	},
 	computed: {
 		...mapState("invoices", {
@@ -138,6 +107,13 @@ export default class Sidebar extends Vue {
 	addField = false;
 	editionDialog = false;
 
+	invoice?: InvoiceOutput
+
+	@Watch('payload', { deep: true, immediate: true })
+	onLoad(invoice: InvoiceOutput) {
+		this.invoice = invoice
+	}
+
 	async remove() {
 		if (
 			confirm(
@@ -147,7 +123,7 @@ export default class Sidebar extends Vue {
 			try {
 				await this.$store.dispatch("invoices/delete", {
 					params: {
-						id: this.payload.invoice.id,
+						id: this.invoice?.id,
 					},
 				});
 

@@ -88,10 +88,6 @@ export default class Login extends Vue {
 		try {
 			// Login
 			await this.$store.dispatch("auth/login", {
-				params: {
-					username: this.username,
-					password: this.password,
-				},
 				data: {
 					username: this.username,
 					password: this.password,

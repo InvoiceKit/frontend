@@ -1,9 +1,7 @@
 <template>
 	<v-dialog v-model="show" max-width="550px" @click:outside="show = !show">
 		<v-card>
-			<v-card-title
-				>Mettre à jour</v-card-title
-			>
+			<v-card-title>Mettre à jour</v-card-title>
 
 			<v-alert
 				dense
@@ -17,34 +15,63 @@
 
 			<v-card-text>
 				<v-row>
-                    <v-col>
-                        <h4>Type de fichier</h4>
+					<v-col>
+						<h4>Type de fichier</h4>
 
-                        <v-radio-group mandatory v-model="item.type">
-                            <v-radio value="invoice" label="Facture" />
-                            <v-radio value="quote" label="Devis" />
-                        </v-radio-group>
-                    </v-col>
+						<v-radio-group mandatory v-model="item.type">
+							<v-radio value="invoice" label="Facture" />
+							<v-radio value="quote" label="Devis" />
+						</v-radio-group>
+					</v-col>
 
-                    <v-col>
-                        <h4>Statut</h4>
+					<v-col>
+						<h4>Statut</h4>
 
-                        <v-radio-group mandatory v-model="item.status">
-                            <v-radio value="paid" label="Payé" />
-                            <v-radio value="waiting" label="En attente" />
-                            <v-radio value="canceled" label="Annulé" />
-                        </v-radio-group>
-                    </v-col>
+						<v-radio-group mandatory v-model="item.status">
+							<v-radio value="paid" label="Payé" />
+							<v-radio value="waiting" label="En attente" />
+							<v-radio value="canceled" label="Annulé" />
+						</v-radio-group>
+					</v-col>
 				</v-row>
 
-                <v-text-field prepend-icon="mdi-pound" label="Numéro du fichier" v-model.trim="item.number" />
+				<v-text-field
+					prepend-icon="mdi-pound"
+					label="Numéro du fichier"
+					v-model.trim="item.number"
+					append-icon="mdi-close"
+					@click:append="item.number = ''"
+				/>
 
 				<v-row>
 					<v-col>
-						<v-text-field label="Acompte" v-model.number="item.deposit" prepend-icon="mdi-bank-transfer" suffix="€" />
+						<v-text-field
+							label="Acompte"
+							v-model.number="item.deposit"
+							prepend-icon="mdi-bank-transfer"
+							suffix="€"
+							append-icon="mdi-close"
+							@click:append="item.deposit = 0"
+						/>
+
+						<v-text-field
+							label="Date d'échéance"
+							v-model.trim="item.dueDate"
+							prepend-icon="mdi-calendar-clock"
+							placeholder="JJ/MM/AAAA"
+							append-icon="mdi-close"
+							@click:append="item.dueDate = ''"
+						/>
 					</v-col>
 					<v-col>
-						<v-text-field label="Remise commerciale" prepend-icon="mdi-label-percent" v-model.number="item.promotion" suffix="%" />
+						<v-text-field
+							label="Remise commerciale"
+							prepend-icon="mdi-label-percent"
+							v-model.number="item.promotion"
+							suffix="%"
+							append-icon="mdi-close"
+							@click:append="item.promotion = 0"
+						/>
 					</v-col>
 				</v-row>
 			</v-card-text>

@@ -1,5 +1,5 @@
 <template>
-	<v-card class="mt-6" v-if="payload.invoice">
+	<v-card class="mt-6" v-if="invoice">
 		<v-card-title>
 			<CardIcon color="teal" icon="cube-outline" />
 
@@ -8,7 +8,7 @@
 
 		<v-data-table
 			:headers="headers"
-			:items="payload.invoice.fields"
+			:items="payload.fields"
 			:items-per-page="-1"
 		>
 			<template #item.actions="{ item }">
@@ -24,7 +24,7 @@
 
 		<AddField
 			:display.sync="editionDialog"
-			:id="payload.invoice.id"
+			:id="invoice.id"
 			:editedItem="editedItem"
 		/>
 	</v-card>
@@ -34,7 +34,7 @@
 import AddField from "./Dialogs/AddField.vue";
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapState } from "vuex";
-import { InvoiceOutput, Field } from "@/types";
+import { InvoiceOutput, Field, Invoice } from "@/types";
 
 @Component({
 	components: {
@@ -42,11 +42,13 @@ import { InvoiceOutput, Field } from "@/types";
 	},
 
 	computed: {
-		...mapState("invoices", ["invoice"]),
+		...mapState("invoices", {
+			payload: (state: any) => state.invoice as InvoiceOutput
+		}),
 	},
 })
 export default class Table extends Vue {
-	payload: InvoiceOutput = {};
+	invoice?: InvoiceOutput
 
 	headers = [
 		{
@@ -78,22 +80,22 @@ export default class Table extends Vue {
 		vat: 0,
 	};
 
-	@Watch("invoice", { deep: true, immediate: true })
+	@Watch("payload", { deep: true, immediate: true })
 	onLoad(invoice: InvoiceOutput) {
-		this.payload = invoice;
+		this.invoice = invoice;
 	}
 
 	async deleteItem(item: Field) {
 		await this.$store.dispatch("invoices/deleteField", {
 			params: {
-				id: this.payload.invoice?.id,
+				id: this.invoice?.id,
 				field: item.id,
 			},
 		});
 
 		await this.$store.dispatch("invoices/get", {
 			params: {
-				id: this.payload.invoice?.id,
+				id: this.invoice?.id,
 			},
 		});
 	}
