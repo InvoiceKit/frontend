@@ -1,9 +1,7 @@
 <template>
 	<div>
 		<v-app-bar app>
-			<v-toolbar-title>
-				Factures
-			</v-toolbar-title>
+			<v-toolbar-title>Factures</v-toolbar-title>
 
 			<v-spacer />
 
@@ -23,25 +21,22 @@
 		</v-app-bar>
 
 		<v-card>
-			<v-data-table
-				:search="search"
-				:headers="headers"
-				:items="invoiceList"
-				@click:row="open"
-			>
-			
-			<template v-slot:item.name="{ item }">
-				{{ item.customer.firstName }} <b>{{ item.customer.lastName }}</b>
-			</template>
+			<v-data-table :search="search" :headers="headers" :items="invoiceList" @click:row="open">
+				<template v-slot:item.name="{ item }">
+					<span v-if="item.customer.firstName || item.customer.lastName">
+						{{ item.customer.firstName }}
+						<b>{{ item.customer.lastName }}</b>
 
-			<template v-slot:item.updatedAt="{ item }">
-				{{ new Date(item.updatedAt).toLocaleString() }}
-			</template>
+						<span v-if="item.customer.company">&nbsp;({{item.customer.company}})</span>
+					</span>
+					<span v-else>{{item.customer.company}}</span>
+				</template>
 
-			<template v-slot:item.status="{ item }">
-				<StatusLabel :status="item.status" />
-			</template>
+				<template v-slot:item.updatedAt="{ item }">{{ new Date(item.updatedAt).toLocaleString() }}</template>
 
+				<template v-slot:item.status="{ item }">
+					<StatusLabel :status="item.status" />
+				</template>
 			</v-data-table>
 		</v-card>
 
@@ -50,16 +45,16 @@
 </template>
 
 <script lang="ts">
-import AddInvoice from './Dialogs/AddInvoice.vue'
+import AddInvoice from "./Dialogs/AddInvoice.vue";
 import { mapState } from "vuex";
 import { Component, Vue, Watch } from "vue-property-decorator";
-import invoices from '@/store/invoices';
-import { Invoice } from '@/types';
+import invoices from "@/store/invoices";
+import { Invoice } from "@/types";
 
 @Component({
-    components: {
-        AddInvoice
-    },
+	components: {
+		AddInvoice,
+	},
 	computed: {
 		...mapState("invoices", ["invoices"]),
 	},
@@ -74,11 +69,11 @@ export default class InvoiceList extends Vue {
 		{
 			text: "Nom ou entreprise",
 			value: "name",
-        },
-        {
-            text: "Numéro",
-			value: "number"
-        },
+		},
+		{
+			text: "Numéro",
+			value: "number",
+		},
 		{
 			text: "Dernière modification",
 			value: "updatedAt",
@@ -86,18 +81,18 @@ export default class InvoiceList extends Vue {
 		{
 			text: "Statut",
 			value: "status",
-		}
+		},
 	];
 
-	invoiceList: Array<Invoice> = []
+	invoiceList: Array<Invoice> = [];
 
-	@Watch('invoices', { deep: true })
+	@Watch("invoices", { deep: true })
 	onChange(newValue: any) {
-		for(const invoice of newValue.items) {
+		for (const invoice of newValue.items) {
 			this.invoiceList.push({
-				name: `${invoice.customer.firstName} ${invoice.customer.lastName}`,
-				...invoice
-			})
+				name: `${invoice.customer.firstName} ${invoice.customer.lastName} ${invoice.customer.company}`,
+				...invoice,
+			});
 		}
 	}
 
