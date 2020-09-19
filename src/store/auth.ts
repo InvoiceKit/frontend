@@ -5,11 +5,11 @@ export default new Vapi({
     state: {
         token: localStorage.getItem('token'),
         isLogged: localStorage.getItem('token') !== null,
-        team: {}
+        team: {},
+        image: null
     }
 }).put({
     action: 'register',
-    property: 'team',
     path: '/teams/register',
     onSuccess: (state: any, payload: any) => {
         // Store token
@@ -17,7 +17,6 @@ export default new Vapi({
     }
 }).post({
     action: 'login',
-    property: 'team',
     path: '/teams/login',
     onSuccess: (state: any, payload: any) => {
         // Store the token
@@ -30,7 +29,11 @@ export default new Vapi({
 }).patch({
     action: 'save',
     property: 'team',
-    path: '/teams'
+    path: ({ id }: any) => `/teams/${id}`
+}).post({
+    action: 'setImage',
+    property: 'team',
+    path: ({ id }: any) => `/teams/${id}/image`
 }).getStore({
     namespaced: true
 })

@@ -1,12 +1,11 @@
 <template>
 	<v-card class="mt-5">
 		<v-card-title>
-            <CardIcon color="amber" icon="map" />
-
-            Adresses
+			<CardIcon color="amber" icon="map" />Adresses
 		</v-card-title>
 
 		<v-data-table
+			no-data-text="Aucune adresse n'à été trouvée pour ce client"
 			:items="customer.addresses"
 			:headers="headers"
 		>
@@ -47,8 +46,8 @@ export default class Addresses extends Vue {
 			text: "Actions",
 			value: "actions",
 		},
-    ];
-    customer!: Customer
+	];
+	customer!: Customer;
 
 	async deleteAddress(item: Address) {
 		try {

@@ -12,12 +12,19 @@
 
 <script lang="ts">
 import Sidebar from "@/views/Layout/Sidebar.vue";
-
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({
 	components: {
 		Sidebar,
+	},
+
+	async mounted() {
+		try {
+			await this.$store.dispatch("auth/get");
+		} catch (ex) {
+			console.log(ex);
+		}
 	},
 })
 export default class Main extends Vue {}

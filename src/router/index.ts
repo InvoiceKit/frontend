@@ -39,7 +39,7 @@ const routes = [{
 {
     path: '/dashboard',
     name: 'Dashboard',
-    component: () => import('@/views/Settings/Settings.vue'), // TODO
+    component: () => import('@/views/Dashboard/Dashboard.vue'),
     meta: {
         name: "Tableau de bord",
         auth: true

@@ -4,11 +4,13 @@ import Vuex from 'vuex'
 import auth from './auth'
 import customers from './customers'
 import invoices from './invoices'
+import charts from './charts'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: <any>{
+        charts,
         auth,
         customers,
         invoices

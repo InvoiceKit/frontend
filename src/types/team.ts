@@ -1,4 +1,5 @@
 export interface Team {
+    id?: string
     username: string
     name: string
     passwordHash: string

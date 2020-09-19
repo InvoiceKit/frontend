@@ -6,13 +6,11 @@
 					<v-icon>mdi-arrow-left</v-icon>
 				</v-btn>
 
-				<v-toolbar-title> Créer une facture </v-toolbar-title>
+				<v-toolbar-title>Créer une facture</v-toolbar-title>
 
 				<v-spacer />
 
-				<v-btn text color="green" @click="save" :disabled="disabled">
-					Créer la facture
-				</v-btn>
+				<v-btn text color="green" @click="save" :disabled="disabled">Créer la facture</v-btn>
 			</v-app-bar>
 
 			<v-card-text class="pt-14">
@@ -32,36 +30,37 @@
 </template>
 
 <script lang="ts">
-import InformationCard from '../Components/InformationCard.vue';
-import CustomerCard from '../Components/CustomersCard.vue';
-import AddressesCard from '../Components/AddressesCard.vue';
+import InformationCard from "../Components/InformationCard.vue";
+import CustomerCard from "../Components/CustomersCard.vue";
+import AddressesCard from "../Components/AddressesCard.vue";
 
 import { InvoiceType, InvoiceStatus, Invoice } from "@/types";
 import { Component, PropSync, Prop, Vue, Watch } from "vue-property-decorator";
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 const defaultPayload: Invoice = {
-	customerID: '',
-	addressID: '',
+	customerID: "",
+	addressID: "",
 	type: InvoiceType.invoice,
 	status: InvoiceStatus.waiting,
+	dueDate: "",
 	number: "",
 	deposit: 0,
-	promotion: 0
+	promotion: 0,
 };
 
 @Component({
 	components: {
 		InformationCard,
 		CustomerCard,
-		AddressesCard
-	}
+		AddressesCard,
+	},
 })
 export default class AddInvoice extends Vue {
 	@PropSync("display", { type: Boolean }) show!: boolean;
 
 	payload: Invoice = defaultPayload;
-	disabled: boolean = true
+	disabled: boolean = true;
 
 	@Watch("display")
 	reset() {
@@ -70,7 +69,7 @@ export default class AddInvoice extends Vue {
 
 	@Watch("payload", { deep: true })
 	onChange(newValue: Invoice) {
-		this.disabled = !(newValue.customerID && newValue.addressID)
+		this.disabled = !(newValue.customerID && newValue.addressID);
 	}
 
 	async save() {
@@ -79,7 +78,9 @@ export default class AddInvoice extends Vue {
 				data: this.payload,
 			});
 
-			this.$router.push(`/invoices/${this.$store.state.invoices.invoice.id}`)
+			this.$router.push(
+				`/invoices/${this.$store.state.invoices.invoice.id}`
+			);
 		} catch {
 			// Nothing
 		}
