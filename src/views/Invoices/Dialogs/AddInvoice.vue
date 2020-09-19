@@ -47,6 +47,7 @@ const defaultPayload: Invoice = {
 	number: "",
 	deposit: 0,
 	promotion: 0,
+	additional_text: "",
 };
 
 @Component({

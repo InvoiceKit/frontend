@@ -9,9 +9,7 @@
 				class="ma-4"
 				transition="slide-y-transition"
 				v-model="error"
-			>
-				Impossible de mettre à jour le fichier.
-			</v-alert>
+			>Impossible de mettre à jour le fichier.</v-alert>
 
 			<v-card-text>
 				<v-row>
@@ -74,6 +72,12 @@
 						/>
 					</v-col>
 				</v-row>
+
+				<v-textarea
+					label="Informations complémentaires"
+					prepend-icon="mdi-information"
+					v-model.trim="item.additional_text"
+				/>
 			</v-card-text>
 
 			<v-card-actions>

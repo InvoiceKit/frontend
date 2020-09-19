@@ -19,6 +19,7 @@ export interface Invoice {
     number: string
     deposit: number
     promotion: number
+    additional_text: string
 }
 
 export interface InvoiceOutput extends Invoice {
