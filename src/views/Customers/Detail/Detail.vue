@@ -81,6 +81,14 @@ export default class CustomerDetail extends Vue {
 	 * Delete a customer
 	 */
 	async deleteCustomer() {
+		if (
+			!confirm(
+				"Êtes-vous sur de supprimer ce client? Les factures associées seront supprimées aussi."
+			)
+		) {
+			return;
+		}
+
 		try {
 			await this.$store.dispatch("customers/delete", {
 				params: {
