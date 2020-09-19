@@ -56,11 +56,14 @@
 		<v-divider />
 
 		<v-list nav>
-			<v-list-item :href="
+			<v-list-item
+				target="_blank"
+				:href="
 					'//localhost:8080/invoices/' +
 					invoice.id +
 					'/render'
-				">
+				"
+			>
 				<v-list-item-icon>
 					<v-icon>mdi-printer</v-icon>
 				</v-list-item-icon>
