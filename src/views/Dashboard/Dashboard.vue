@@ -17,7 +17,7 @@
 				</v-card-title>
 				<v-card-text align="center" class="white--text">
 					<h1 class="display-1">{{ charts.prices.paid.value }} €</h1>
-					<span class="overline">dont {{ charts.prices.paid.tax }} € de T.V.A.</span>
+					<span class="overline">+ {{ charts.prices.paid.tax }} € de T.V.A.</span>
 				</v-card-text>
 			</v-card>
 
@@ -29,7 +29,7 @@
 				</v-card-title>
 				<v-card-text align="center" class="white--text">
 					<h1 class="display-1">{{ charts.prices.waiting.value }} €</h1>
-					<span class="overline">dont {{ charts.prices.waiting.tax }} € de T.V.A.</span>
+					<span class="overline">+ {{ charts.prices.waiting.tax }} € de T.V.A.</span>
 				</v-card-text>
 			</v-card>
 
@@ -41,7 +41,7 @@
 				</v-card-title>
 				<v-card-text align="center" class="white--text">
 					<h1 class="display-1">{{ charts.prices.canceled.value }} €</h1>
-					<span class="overline">dont {{ charts.prices.canceled.tax }} € de T.V.A.</span>
+					<span class="overline">+ {{ charts.prices.canceled.tax }} € de T.V.A.</span>
 				</v-card-text>
 			</v-card>
 		</v-col>
