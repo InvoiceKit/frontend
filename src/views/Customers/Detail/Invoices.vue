@@ -22,7 +22,7 @@
 <script lang="ts">
 import { mapState } from "vuex";
 import { Component, Vue } from "vue-property-decorator";
-import { Address, Customer } from "@/types";
+import { Address, Customer, Invoice } from "@/types";
 
 @Component({
 	computed: {
@@ -49,7 +49,7 @@ export default class Invoices extends Vue {
 		},
 	];
 
-	open(row) {
+	open(row: Invoice) {
 		this.$router.push(`/invoices/${row.id}`);
 	}
 }
