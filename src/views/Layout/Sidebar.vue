@@ -54,6 +54,11 @@ export default class Sidebar extends Vue {
 			name: "Factures",
 		},
 		{
+			link: "/contracts",
+			icon: "text-box-outline",
+			name: "Contrats d'entretien",
+		},
+		{
 			link: "/customers",
 			icon: "account-details",
 			name: "Clients",

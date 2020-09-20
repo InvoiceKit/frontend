@@ -5,6 +5,7 @@ import auth from './auth'
 import customers from './customers'
 import invoices from './invoices'
 import charts from './charts'
+import contracts from './contracts'
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
         charts,
         auth,
         customers,
-        invoices
+        invoices,
+        contracts
     }
 })

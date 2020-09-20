@@ -1,28 +1,38 @@
 <template>
-    <v-chip :color="getColor()">{{ getText() }}</v-chip>
+	<v-chip :color="getColor()">{{ getText() }}</v-chip>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component
 export default class StatusLabel extends Vue {
-    @Prop(String) readonly status!: string
+	@Prop(String) readonly status!: string;
 
-    getText() {
-        switch(this.status) {
-            case "paid": return "Payé"
-            case "waiting": return "En attente"
-            case "canceled": return "Annulé"
-        }
-    }
+	getText() {
+		switch (this.status) {
+			case "paid":
+				return "Payé";
+			case "ongoing":
+				return "En cours";
+			case "waiting":
+				return "En attente";
+			case "canceled":
+				return "Annulé";
+		}
+	}
 
-    getColor() {
-        switch(this.status) {
-            case "paid": return "green"
-            case "waiting": return "orange"
-            case "canceled": return "red"
-        }
-    }
+	getColor() {
+		switch (this.status) {
+			case "paid":
+				return "green";
+			case "ongoing":
+				return "orange";
+			case "waiting":
+				return "orange";
+			case "canceled":
+				return "red";
+		}
+	}
 }
 </script>
