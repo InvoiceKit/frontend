@@ -37,7 +37,7 @@
 		<v-col cols="12" lg="8" md="8" sm="12">
 			<v-card class="mt-4">
 				<v-card-title>
-					<CardIcon color="light-blue darken-4" icon="chart-line-variant" />Nombre de factures
+					<CardIcon color="light-blue darken-4" icon="chart-line-variant" />Nombre de factures et de contrats
 				</v-card-title>
 
 				<ApexCharts type="line" height="350" :options="days.options" :series="days.series" />
@@ -102,6 +102,10 @@ export default {
 			series: [
 				{
 					name: "Nombre de factures",
+					data: [],
+				},
+				{
+					name: "Nombre de contrats",
 					data: [],
 				},
 			],
@@ -174,23 +178,37 @@ export default {
 			];
 
 			// Sort dates
-			var ordered = {};
+			var invoices = {};
 			Object.keys(newValue.daily)
 				.sort((a, b) => {
 					return this.dateConverter(a) - this.dateConverter(b);
 				})
 				.forEach((key) => {
-					ordered[key] = newValue.daily[key];
+					invoices[key] = newValue.daily[key];
+				});
+
+			var contracts = {};
+			Object.keys(newValue.contracts)
+				.sort((a, b) => {
+					return this.dateConverter(a) - this.dateConverter(b);
+				})
+				.forEach((key) => {
+					contracts[key] = newValue.contracts[key];
 				});
 
 			// Delete series
 			this.days.options.xaxis.categories = [];
 			this.days.series[0].data = [];
+			this.days.series[1].data = [];
 
 			// Set dates
-			for (let [key, value] of Object.entries(ordered)) {
+			for (let [key, value] of Object.entries(invoices)) {
 				this.days.options.xaxis.categories.push(key);
 				this.days.series[0].data.push(value);
+			}
+
+			for (let [key, value] of Object.entries(contracts)) {
+				this.days.series[1].data.push(value);
 			}
 		},
 	},
