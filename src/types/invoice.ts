@@ -1,3 +1,5 @@
+import { Field } from './field';
+
 export enum InvoiceType {
     invoice = "invoice",
     quote = "quote"
@@ -16,6 +18,7 @@ export interface Invoice {
     dueDate: string
     type: InvoiceType
     status: InvoiceStatus
+    fields: Array<Field>
     number: string
     deposit: number
     promotion: number

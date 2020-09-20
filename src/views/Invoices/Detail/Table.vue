@@ -1,16 +1,10 @@
 <template>
 	<v-card class="mt-6" v-if="invoice">
 		<v-card-title>
-			<CardIcon color="teal" icon="cube-outline" />
-
-			Liste des objets
+			<CardIcon color="teal" icon="cube-outline" />Liste des objets
 		</v-card-title>
 
-		<v-data-table
-			:headers="headers"
-			:items="payload.fields"
-			:items-per-page="-1"
-		>
+		<v-data-table :headers="headers" :items="payload.fields" :items-per-page="-1">
 			<template #item.actions="{ item }">
 				<v-btn icon @click="deleteItem(item)">
 					<v-icon>mdi-delete</v-icon>
@@ -22,11 +16,7 @@
 			</template>
 		</v-data-table>
 
-		<AddField
-			:display.sync="editionDialog"
-			:id="invoice.id"
-			:editedItem="editedItem"
-		/>
+		<AddField :display.sync="editionDialog" :invoice="invoice" :field="editedItem" />
 	</v-card>
 </template>
 
@@ -43,12 +33,12 @@ import { InvoiceOutput, Field, Invoice } from "@/types";
 
 	computed: {
 		...mapState("invoices", {
-			payload: (state: any) => state.invoice as InvoiceOutput
+			payload: (state: any) => state.invoice as InvoiceOutput,
 		}),
 	},
 })
 export default class Table extends Vue {
-	invoice?: InvoiceOutput
+	invoice?: InvoiceOutput;
 
 	headers = [
 		{
@@ -86,17 +76,19 @@ export default class Table extends Vue {
 	}
 
 	async deleteItem(item: Field) {
-		await this.$store.dispatch("invoices/deleteField", {
-			params: {
-				id: this.invoice?.id,
-				field: item.id,
-			},
-		});
+		// Delete from fields
+		let index = this.invoice?.fields.indexOf(item);
 
-		await this.$store.dispatch("invoices/get", {
+		if (index !== null || index > -1) {
+			this.invoice?.fields.splice(index, 1);
+		}
+
+		// Update
+		await this.$store.dispatch("invoices/update", {
 			params: {
 				id: this.invoice?.id,
 			},
+			data: this.invoice,
 		});
 	}
 

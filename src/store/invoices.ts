@@ -19,17 +19,9 @@ export default new Vapi({
     action: 'get',
     property: 'invoice',
     path: ({ id }: any) => `/invoices/${id}`
-}).put({
-    action: 'addField',
-    path: ({ id }: any) => `/invoices/${id}/fields`
-}).patch({
-    action: 'updateField',
-    path: ({ id, field }: any) => `/invoices/${id}/fields/${field}`
-}).delete({
-    action: 'deleteField',
-    path: ({ id, field }: any) => `/invoices/${id}/fields/${field}`
 }).patch({
     action: 'update',
+    property: 'invoice',
     path: ({ id }: any) => `/invoices/${id}`
 }).delete({
     action: 'delete',

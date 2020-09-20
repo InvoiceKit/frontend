@@ -72,10 +72,10 @@
 		</v-list>
 
 		<template #append>
-			<PriceTable :invoice.sync="payload" />
+			<PriceTable />
 		</template>
 
-		<AddField :display.sync="addField" :id="invoice.id" />
+		<AddField :display.sync="addField" :invoice="invoice" />
 		<EditionDialog :display.sync="editionDialog" :invoice.sync="invoice" />
 	</v-navigation-drawer>
 </template>

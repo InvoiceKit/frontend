@@ -48,6 +48,7 @@ const defaultPayload: Invoice = {
 	deposit: 0,
 	promotion: 0,
 	additional_text: "",
+	fields: [],
 };
 
 @Component({
@@ -82,8 +83,8 @@ export default class AddInvoice extends Vue {
 			this.$router.push(
 				`/invoices/${this.$store.state.invoices.invoice.id}`
 			);
-		} catch {
-			// Nothing
+		} catch (ex) {
+			console.log(ex);
 		}
 	}
 }
