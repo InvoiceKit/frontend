@@ -83,8 +83,6 @@ export default class Sidebar extends Vue {
 	logout() {
 		localStorage.removeItem("token");
 
-		this.$router.push("/authentication");
-
 		window.location.reload();
 	}
 }

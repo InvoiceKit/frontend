@@ -74,6 +74,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+
 @Component
 export default class Register extends Vue {
 	rules = {
@@ -104,9 +105,8 @@ export default class Register extends Vue {
 				},
 			});
 
-			this.$router.push("/dashboard");
-
-			window.location.reload();
+			// Redirect
+			window.location.href = "/dashboard";
 		} catch {
 			// Set error
 			this.success = false;

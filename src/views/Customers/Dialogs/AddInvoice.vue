@@ -18,7 +18,13 @@
 
 				<v-btn text color="red" @click="show = false">Annuler</v-btn>
 
-				<v-btn text color="green" :disabled="!payload.addressID" @click="save">Ajouter</v-btn>
+				<v-btn
+					text
+					color="green"
+					:disabled="!payload.addressID"
+					@click="save"
+					>Ajouter</v-btn
+				>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>

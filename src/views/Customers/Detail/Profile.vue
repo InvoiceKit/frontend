@@ -28,7 +28,9 @@
 					<td>Email</td>
 					<td>
 						<template v-if="customer.email">
-							<a :href="'mailto:' + customer.email">{{ customer.email }}</a>
+							<a :href="'mailto:' + customer.email">{{
+								customer.email
+							}}</a>
 						</template>
 						<template v-else>N/A</template>
 					</td>

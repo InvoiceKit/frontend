@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-app-bar app>
-			<v-toolbar-title> Clients </v-toolbar-title>
+			<v-toolbar-title>Clients</v-toolbar-title>
 
 			<v-spacer />
 
@@ -28,7 +28,8 @@
 				@click:row="open"
 			>
 				<template v-slot:item.name="{ item }">
-					{{ item.firstName }} <b>{{ item.lastName }}</b>
+					{{ item.firstName }}
+					<b>{{ item.lastName }}</b>
 				</template>
 			</v-data-table>
 		</v-card>
@@ -42,6 +43,7 @@ import AddCustomer from "./Dialogs/AddCustomer.vue";
 
 import { mapState } from "vuex";
 import { Component, Vue } from "vue-property-decorator";
+import { Customer, Pagination } from "@/types";
 
 @Component({
 	components: {
@@ -56,6 +58,7 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class CustomerList extends Vue {
 	addDialog = false;
+	customers!: Pagination<Customer>;
 	search = "";
 	headers = [
 		{

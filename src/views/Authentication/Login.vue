@@ -11,10 +11,14 @@
 						<v-card-title>Bienvenue sur InvoiceKit</v-card-title>
 
 						<v-card-text>
-							<v-alert v-if="error" border="left" color="red" text
-								>Les identifiants fournis sont
-								incorrects.</v-alert
+							<v-alert
+								v-if="error"
+								border="left"
+								color="red"
+								text
 							>
+								Les identifiants fournis sont incorrects.
+							</v-alert>
 
 							<v-text-field
 								v-model="username"
@@ -87,9 +91,7 @@ export default class Login extends Vue {
 			});
 
 			// Redirect
-			this.$router.push("/dashboard");
-
-			window.location.reload();
+			window.location.href = "/dashboard";
 		} catch {
 			// Set error
 			this.error = true;
