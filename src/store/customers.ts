@@ -29,7 +29,7 @@ export default new Vapi({
     path: ({ id }: any) => `/customers/${id}`
 }).delete({
     action: 'delete',
-    path: ({ id }: any) => `/customers/${id}` 
+    path: ({ id }: any) => `/customers/${id}`
 }).getStore({
     namespaced: true
 })

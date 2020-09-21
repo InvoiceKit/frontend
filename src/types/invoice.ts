@@ -37,4 +37,4 @@ export interface InvoiceOutput extends Invoice {
     total: number
     _promotion: number
     final: number
-} 
+}

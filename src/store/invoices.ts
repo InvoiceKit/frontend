@@ -25,7 +25,7 @@ export default new Vapi({
     path: ({ id }: any) => `/invoices/${id}`
 }).delete({
     action: 'delete',
-    path: ({ id }: any) => `/invoices/${id}` 
+    path: ({ id }: any) => `/invoices/${id}`
 }).getStore({
     namespaced: true
 })
