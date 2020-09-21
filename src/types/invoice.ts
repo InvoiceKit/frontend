@@ -30,16 +30,6 @@ export interface Invoice {
 }
 
 export interface InvoiceOutput extends Invoice {
-<<<<<<< Updated upstream
-    createdAt: number
-    updatedAt: number
-    no_vat: number
-    vat: number
-    total: number
-    _promotion: number
-    final: number
-}
-=======
 	createdAt: number;
 	updatedAt: number;
 	no_vat: number;
@@ -48,4 +38,3 @@ export interface InvoiceOutput extends Invoice {
 	_promotion: number;
 	final: number;
 }
->>>>>>> Stashed changes

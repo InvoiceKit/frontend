@@ -32,9 +32,7 @@
 					</h1>
 					<span class="overline"
 						>+
-						{{
-							charts.prices.paid.tax + charts.prices.waiting.tax
-						}}
+						{{ charts.prices.paid.tax + charts.prices.waiting.tax }}
 						€ de T.V.A.</span
 					>
 				</v-card-text>
