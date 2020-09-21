@@ -2,6 +2,10 @@
 	<v-card class="mt-5">
 		<v-card-title>
 			<CardIcon color="amber" icon="map" />Adresses
+			<v-spacer />
+			<v-btn text color="amber">
+				<v-icon left>mdi-plus</v-icon>Ajouter une adresse
+			</v-btn>
 		</v-card-title>
 
 		<v-data-table

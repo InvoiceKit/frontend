@@ -1,3 +1,5 @@
+import { Address } from './address';
+import { Customer } from './customer';
 import { Field } from './field';
 
 export enum InvoiceType {
@@ -14,7 +16,9 @@ export enum InvoiceStatus {
 export interface Invoice {
     id?: string
     customerID?: string
+    customer?: Customer
     addressID?: string
+    address?: Address
     dueDate: string
     type: InvoiceType
     status: InvoiceStatus

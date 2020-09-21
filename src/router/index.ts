@@ -44,16 +44,25 @@ const routes = [{
         name: "Tableau de bord",
         auth: true
     }
-    },
-    {
-        path: '/contracts',
-        name: 'Contrats',
-        component: () => import('@/views/Contracts/List.vue'),
-        meta: {
-            name: "Contrats",
-            auth: true
-        }
-    },
+},
+{
+    path: '/contracts',
+    name: 'Contrats',
+    component: () => import('@/views/Contracts/List.vue'),
+    meta: {
+        name: "Contrats",
+        auth: true
+    }
+},
+{
+    path: '/contracts/:id',
+    name: 'ContratsDetail',
+    component: () => import('@/views/Contracts/Detail/View.vue'),
+    meta: {
+        name: "Contrat",
+        auth: true
+    }
+},
 {
     path: '/settings',
     name: 'Settings',

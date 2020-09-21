@@ -1,3 +1,8 @@
+import customers from '@/store/customers';
+import { Address } from './address';
+import { Contract } from './contract';
+import { Invoice } from './invoice';
+
 export interface Customer {
     id?: string
     firstName?: string
@@ -5,4 +10,7 @@ export interface Customer {
     company?: string
     email?: string
     phone?: string
+    addresses?: Array<Address>
+    contracts?: Array<Contract>
+    invoices?: Array<Invoice>
 }

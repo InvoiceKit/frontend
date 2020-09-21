@@ -1,47 +1,50 @@
 <template>
 	<v-card class="mt-5">
 		<v-card-title>
-			<CardIcon color="green" icon="receipt" />Factures
+			<CardIcon color="red" icon="text-box-outline" />Contrats
 			<v-spacer />
-			<v-btn text color="green">
-				<v-icon left>mdi-plus</v-icon>Créer une facture
+			<v-btn text color="red" @click="display = true">
+				<v-icon left>mdi-plus</v-icon>Ajouter un contrat
 			</v-btn>
 		</v-card-title>
 
 		<v-data-table
-			no-data-text="Aucune facture n'a été crée pour ce client"
-			:items="customer.invoices"
+			no-data-text="Aucun contrats n'a été crée pour ce client"
+			:items="customer.contracts"
 			:headers="headers"
 			@click:row="open"
 		>
-			<template #item.type="{ item }">{{ item.type === "invoice" ? "Facture" : "Devis" }}</template>
 			<template #item.updatedAt="{ item }">{{ new Date(item.updatedAt).toLocaleDateString() }}</template>
 			<template #item.status="{ item }">
 				<StatusLabel :status="item.status" />
 			</template>
 		</v-data-table>
+
+		<AddContract :display.sync="display" :customer="customer" />
 	</v-card>
 </template>
 
 <script lang="ts">
+import AddContract from "../Dialogs/AddContract.vue";
 import { mapState } from "vuex";
 import { Component, Vue } from "vue-property-decorator";
-import { Address, Customer, Invoice } from "@/types";
 
 @Component({
+	components: {
+		AddContract,
+	},
+
 	computed: {
 		...mapState("customers", ["customer"]),
 	},
 })
-export default class Invoices extends Vue {
+export default class Contracts extends Vue {
+	display = false;
+
 	headers = [
 		{
-			text: "Type",
-			value: "type",
-		},
-		{
-			text: "Numéro",
-			value: "number",
+			text: "Numéro de série",
+			value: "serial",
 		},
 		{
 			text: "Dernière modification",
@@ -53,8 +56,8 @@ export default class Invoices extends Vue {
 		},
 	];
 
-	open(row: Invoice) {
-		this.$router.push(`/invoices/${row.id}`);
+	open(row: any) {
+		this.$router.push(`/contracts/${row.id}`);
 	}
 }
 </script>

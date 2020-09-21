@@ -20,10 +20,12 @@
 			</v-col>
 			<v-col cols="12" md="6" sm="12">
 				<Addresses />
+				<br />
+				<Contracts />
 			</v-col>
 		</v-row>
 
-		<v-app-bar bottom absolute>
+		<v-app-bar bottom fixed>
 			<v-spacer />
 
 			<v-btn text color="warning" @click="edit = true">Modifier le client</v-btn>
@@ -39,6 +41,7 @@
 <script lang="ts">
 import Profile from "./Profile.vue";
 import Invoices from "./Invoices.vue";
+import Contracts from "./Contracts.vue";
 import Addresses from "./Addresses.vue";
 import AddAddress from "../Dialogs/AddAddress.vue";
 import AddCustomer from "../Dialogs/AddCustomer.vue";
@@ -50,6 +53,7 @@ import { mapState } from "vuex";
 		Profile,
 		Addresses,
 		Invoices,
+		Contracts,
 		AddAddress,
 		AddCustomer,
 	},

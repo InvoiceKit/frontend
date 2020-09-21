@@ -22,7 +22,7 @@
 
 		<v-card>
 			<v-data-table :search="search" :headers="headers" :items="invoiceList" @click:row="open">
-				<template v-slot:item.name="{ item }">
+				<template #item.name="{ item }">
 					<span v-if="item.customer.firstName || item.customer.lastName">
 						{{ item.customer.firstName }}
 						<b>{{ item.customer.lastName }}</b>
@@ -32,9 +32,9 @@
 					<span v-else>{{item.customer.company}}</span>
 				</template>
 
-				<template v-slot:item.updatedAt="{ item }">{{ new Date(item.updatedAt).toLocaleString() }}</template>
+				<template #item.updatedAt="{ item }">{{ new Date(item.updatedAt).toLocaleString() }}</template>
 
-				<template v-slot:item.status="{ item }">
+				<template #item.status="{ item }">
 					<StatusLabel :status="item.status" />
 				</template>
 			</v-data-table>
@@ -47,19 +47,16 @@
 <script lang="ts">
 import AddInvoice from "./Dialogs/AddInvoice.vue";
 import { mapState } from "vuex";
-import { Component, Vue, Watch } from "vue-property-decorator";
-import invoices from "@/store/invoices";
-import { Invoice } from "@/types";
+import { Component, Vue } from "vue-property-decorator";
+import { Invoice, Pagination } from "@/types";
 
 @Component({
 	components: {
 		AddInvoice,
 	},
+
 	computed: {
 		...mapState("invoices", ["invoices"]),
-	},
-	async mounted() {
-		this.$store.dispatch("invoices/fetch");
 	},
 })
 export default class InvoiceList extends Vue {
@@ -84,15 +81,22 @@ export default class InvoiceList extends Vue {
 		},
 	];
 
+	invoices!: Pagination<Invoice>;
+
 	invoiceList: Array<Invoice> = [];
 
-	@Watch("invoices", { deep: true })
-	onChange(newValue: any) {
-		for (const invoice of newValue.items) {
-			this.invoiceList.push({
-				name: `${invoice.customer.firstName} ${invoice.customer.lastName} ${invoice.customer.company}`,
-				...invoice,
-			});
+	async mounted() {
+		try {
+			await this.$store.dispatch("invoices/fetch");
+
+			for (const invoice of this.invoices.items) {
+				this.invoiceList.push({
+					name: `${invoice.customer?.firstName} ${invoice.customer?.lastName} ${invoice.customer?.company}`,
+					...invoice,
+				});
+			}
+		} catch (ex) {
+			console.log(ex);
 		}
 	}
 

@@ -27,7 +27,7 @@ export default class StatusLabel extends Vue {
 			case "paid":
 				return "green";
 			case "ongoing":
-				return "orange";
+				return "green";
 			case "waiting":
 				return "orange";
 			case "canceled":

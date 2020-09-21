@@ -17,7 +17,7 @@
 		</v-app-bar>
 
 		<v-card>
-			<v-data-table :search="search" :headers="headers" :items="contractsList">
+			<v-data-table :search="search" :headers="headers" :items="contractsList" @click:row="open">
 				<template #item.name="{ item }">
 					<span v-if="item.customer.firstName || item.customer.lastName">
 						{{ item.customer.firstName }}
@@ -87,6 +87,11 @@ export default {
 		} catch (ex) {
 			console.log(ex);
 		}
+	},
+	methods: {
+		open(item) {
+			this.$router.push(`/contracts/${item.id}`);
+		},
 	},
 };
 </script>
