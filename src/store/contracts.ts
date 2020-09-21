@@ -1,7 +1,8 @@
 import Vapi from "vuex-rest-api";
+import API from './api'
 
 export default new Vapi({
-	baseURL: "http://localhost:8080",
+	baseURL: API.host,
 	state: {
 		contracts: [],
 		contract: {},

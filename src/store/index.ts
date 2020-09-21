@@ -10,6 +10,9 @@ import contracts from "./contracts";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+	state: {
+		'host': 'http://localhost:8080'
+	},
 	modules: <any>{
 		charts,
 		auth,

@@ -1,11 +1,11 @@
 import Vapi from "vuex-rest-api";
-import { Invoice, InvoiceOutput } from "@/types";
+import API from './api'
 
 export default new Vapi({
-	baseURL: "http://localhost:8080",
+	baseURL: API.host,
 	state: {
-		invoices: [] as Array<Invoice>,
-		invoice: {} as InvoiceOutput,
+		invoices: [],
+		invoice: {},
 	},
 })
 	.get({
