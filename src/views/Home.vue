@@ -8,7 +8,9 @@
 				<br />
 
 				<h1 class="display-3">InvoiceKit</h1>
-				<h2 class="overline">Un système efficace de gestion des factures</h2>
+				<h2 class="overline">
+					Un système efficace de gestion des factures
+				</h2>
 
 				<br />
 				<br />

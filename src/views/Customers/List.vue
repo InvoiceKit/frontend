@@ -1,9 +1,7 @@
 <template>
 	<div>
 		<v-app-bar app>
-			<v-toolbar-title>
-				Clients
-			</v-toolbar-title>
+			<v-toolbar-title> Clients </v-toolbar-title>
 
 			<v-spacer />
 

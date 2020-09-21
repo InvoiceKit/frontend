@@ -6,7 +6,12 @@
 					<CardIcon color="blue" icon="receipt" />Factures
 				</v-card-title>
 				<v-card-text>
-					<ApexCharts type="donut" height="350" :options="options" :series="series" />
+					<ApexCharts
+						type="donut"
+						height="350"
+						:options="options"
+						:series="series"
+					/>
 				</v-card-text>
 			</v-card>
 
@@ -14,11 +19,24 @@
 
 			<v-card class="mt-4">
 				<v-card-title>
-					<CardIcon color="teal accent-3" icon="check-bold" />Chiffre d'affaire
+					<CardIcon color="teal accent-3" icon="check-bold" />Chiffre
+					d'affaire
 				</v-card-title>
 				<v-card-text align="center" class="white--text">
-					<h1 class="display-1">{{ charts.prices.paid.value + charts.prices.waiting.value }} €</h1>
-					<span class="overline">+ {{ charts.prices.paid.tax + charts.prices.waiting.tax }} € de T.V.A.</span>
+					<h1 class="display-1">
+						{{
+							charts.prices.paid.value +
+							charts.prices.waiting.value
+						}}
+						€
+					</h1>
+					<span class="overline"
+						>+
+						{{
+							charts.prices.paid.tax + charts.prices.waiting.tax
+						}}
+						€ de T.V.A.</span
+					>
 				</v-card-text>
 			</v-card>
 
@@ -29,18 +47,30 @@
 					<CardIcon color="red" icon="close" />Factures annulées
 				</v-card-title>
 				<v-card-text align="center" class="white--text">
-					<h1 class="display-1">{{ charts.prices.canceled.value }} €</h1>
-					<span class="overline">+ {{ charts.prices.canceled.tax }} € de T.V.A.</span>
+					<h1 class="display-1">
+						{{ charts.prices.canceled.value }} €
+					</h1>
+					<span class="overline"
+						>+ {{ charts.prices.canceled.tax }} € de T.V.A.</span
+					>
 				</v-card-text>
 			</v-card>
 		</v-col>
 		<v-col cols="12" lg="8" md="8" sm="12">
 			<v-card class="mt-4">
 				<v-card-title>
-					<CardIcon color="light-blue darken-4" icon="chart-line-variant" />Nombre de factures et de contrats
+					<CardIcon
+						color="light-blue darken-4"
+						icon="chart-line-variant"
+					/>Nombre de factures et de contrats
 				</v-card-title>
 
-				<ApexCharts type="line" height="350" :options="days.options" :series="days.series" />
+				<ApexCharts
+					type="line"
+					height="350"
+					:options="days.options"
+					:series="days.series"
+				/>
 			</v-card>
 
 			<br />
@@ -49,18 +79,29 @@
 				<v-col cols="12" lg="6" md="6" sm="12">
 					<v-card class="mt-4">
 						<v-card-title>
-							<CardIcon color="amber accent-4" icon="clock" />Factures en attente
+							<CardIcon
+								color="amber accent-4"
+								icon="clock"
+							/>Factures en attente
 						</v-card-title>
 						<v-card-text align="center" class="white--text">
-							<h1 class="display-1">{{ charts.prices.waiting.value }} €</h1>
-							<span class="overline">+ {{ charts.prices.waiting.tax }} € de T.V.A.</span>
+							<h1 class="display-1">
+								{{ charts.prices.waiting.value }} €
+							</h1>
+							<span class="overline"
+								>+ {{ charts.prices.waiting.tax }} € de
+								T.V.A.</span
+							>
 						</v-card-text>
 					</v-card>
 				</v-col>
 				<v-col cols="12" lg="6" md="6" sm="12">
 					<v-card class="mt-4">
 						<v-card-title>
-							<CardIcon color="indigo" icon="account-group" />Clients
+							<CardIcon
+								color="indigo"
+								icon="account-group"
+							/>Clients
 						</v-card-title>
 						<v-card-text align="center" class="white--text">
 							<h1 class="display-1">{{ charts.customers }}</h1>

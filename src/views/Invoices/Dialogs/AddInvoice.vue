@@ -10,7 +10,9 @@
 
 				<v-spacer />
 
-				<v-btn text color="green" @click="save" :disabled="disabled">Créer la facture</v-btn>
+				<v-btn text color="green" @click="save" :disabled="disabled"
+					>Créer la facture</v-btn
+				>
 			</v-app-bar>
 
 			<v-card-text class="pt-14">

@@ -2,7 +2,8 @@
 	<div id="contract">
 		<v-card class="mt-6">
 			<v-card-title>
-				<CardIcon color="green" icon="text-box-outline" />Contrat d'entretien
+				<CardIcon color="green" icon="text-box-outline" />Contrat
+				d'entretien
 			</v-card-title>
 
 			<v-simple-table>
@@ -32,17 +33,27 @@
 					<tr>
 						<td>Client</td>
 						<td>
-							<span v-if="contract.customer.firstName || contract.customer.lastName">
+							<span
+								v-if="
+									contract.customer.firstName ||
+									contract.customer.lastName
+								"
+							>
 								{{ contract.customer.firstName }}
 								{{ contract.customer.lastName }}
-								<span
-									v-if="contract.customer.company"
-								>&nbsp;({{contract.customer.company}})</span>
+								<span v-if="contract.customer.company"
+									>&nbsp;({{
+										contract.customer.company
+									}})</span
+								>
 							</span>
 
-							<span v-else>{{contract.customer.company}}</span>
+							<span v-else>{{ contract.customer.company }}</span>
 
-							<v-btn icon :to="`/customers/${contract.customer.id}`">
+							<v-btn
+								icon
+								:to="`/customers/${contract.customer.id}`"
+							>
 								<v-icon>mdi-arrow-right</v-icon>
 							</v-btn>
 						</td>
@@ -50,17 +61,33 @@
 
 					<tr>
 						<td>Adresse</td>
-						<td>{{ contract.address.line }}, {{ contract.address.zip }}, {{ contract.address.city }}</td>
+						<td>
+							{{ contract.address.line }},
+							{{ contract.address.zip }},
+							{{ contract.address.city }}
+						</td>
 					</tr>
 
 					<tr>
 						<td>Date de création</td>
-						<td>{{ new Date(contract.createdAt).toLocaleDateString() }}</td>
+						<td>
+							{{
+								new Date(
+									contract.createdAt
+								).toLocaleDateString()
+							}}
+						</td>
 					</tr>
 
 					<tr>
 						<td>Dernière mise à jour</td>
-						<td>{{ new Date(contract.updatedAt).toLocaleDateString() }}</td>
+						<td>
+							{{
+								new Date(
+									contract.updatedAt
+								).toLocaleDateString()
+							}}
+						</td>
 					</tr>
 				</tbody>
 			</v-simple-table>
@@ -73,7 +100,11 @@
 				<CardIcon color="indigo" icon="cube" />Changements
 			</v-card-title>
 
-			<v-data-table :items-per-page="-1" :headers="headers" :items="contract.changes">
+			<v-data-table
+				:items-per-page="-1"
+				:headers="headers"
+				:items="contract.changes"
+			>
 				<template #item.actions="{ item }">
 					<v-btn icon @click="deleteItem(item)">
 						<v-icon>mdi-delete</v-icon>
@@ -88,7 +119,11 @@
 
 		<Sidebar />
 
-		<AddChange :display.sync="editionDialog" :contract.sync="contract" :change="editedItem" />
+		<AddChange
+			:display.sync="editionDialog"
+			:contract.sync="contract"
+			:change="editedItem"
+		/>
 	</div>
 </template>
 

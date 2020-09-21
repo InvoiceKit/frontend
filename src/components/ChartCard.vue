@@ -2,7 +2,13 @@
 	<v-card>
 		<v-row class="pa-2" align="center" justify="center">
 			<v-col cols="2" md="3" sm="6" class="ml-2 mr-2">
-				<v-sheet :color="color" rounded elevation="4" height="74px" width="74px">
+				<v-sheet
+					:color="color"
+					rounded
+					elevation="4"
+					height="74px"
+					width="74px"
+				>
 					<v-row align="center" justify="center" class="fill-height">
 						<v-col align="center">
 							<v-icon x-large>mdi-{{ icon }}</v-icon>

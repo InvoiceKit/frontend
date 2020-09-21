@@ -1,7 +1,10 @@
 <template>
 	<v-dialog v-model="show" max-width="550px" @click:outside="show = !show">
 		<v-card>
-			<v-card-title>{{ this.editedItem ? "Mettre à jour" : "Ajouter" }} un client</v-card-title>
+			<v-card-title
+				>{{ this.editedItem ? "Mettre à jour" : "Ajouter" }} un
+				client</v-card-title
+			>
 
 			<v-alert
 				dense
@@ -55,7 +58,9 @@
 
 				<v-btn text color="red" @click="show = !show">Annuler</v-btn>
 
-				<v-btn text color="green" @click="save">{{ this.editedItem ? "Mettre à jour " : "Ajouter" }}</v-btn>
+				<v-btn text color="green" @click="save">{{
+					this.editedItem ? "Mettre à jour " : "Ajouter"
+				}}</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>
@@ -76,35 +81,35 @@ const defaultPayload: Customer = {
 @Component
 export default class AddCustomer extends Vue {
 	@PropSync("display", { type: Boolean }) show!: boolean;
-	@Prop(Object) readonly editedItem: Customer | undefined
+	@Prop(Object) readonly editedItem: Customer | undefined;
 
-	payload: Customer = defaultPayload
+	payload: Customer = defaultPayload;
 
 	error = false;
 
-	@Watch('editedItem')
+	@Watch("editedItem")
 	change() {
 		if (this.editedItem) {
-			this.payload = this.editedItem
+			this.payload = this.editedItem;
 		}
 	}
 
-	@Watch('display')
+	@Watch("display")
 	reset() {
 		if (!this.editedItem) {
-			this.payload = Object.assign({}, defaultPayload)
+			this.payload = Object.assign({}, defaultPayload);
 		}
 	}
 
 	async save() {
 		try {
 			if (this.editedItem) {
-				await this.$store.dispatch('customers/update', {
+				await this.$store.dispatch("customers/update", {
 					params: {
-						id: this.editedItem.id
+						id: this.editedItem.id,
 					},
-					data: this.payload
-				})
+					data: this.payload,
+				});
 			} else {
 				await this.$store.dispatch("customers/add", {
 					data: this.payload,

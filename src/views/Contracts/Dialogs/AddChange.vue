@@ -1,7 +1,10 @@
 <template>
 	<v-dialog v-model="show" max-width="550px" @click:outside="show = !show">
 		<v-card>
-			<v-card-title>{{ change ? "Mettre à jour" : "Ajouter" }} un changement</v-card-title>
+			<v-card-title
+				>{{ change ? "Mettre à jour" : "Ajouter" }} un
+				changement</v-card-title
+			>
 
 			<v-alert
 				dense
@@ -9,10 +12,15 @@
 				class="ma-4"
 				transition="slide-y-transition"
 				v-model="error"
-			>Impossible d'ajouter ou de mettre à jour l'objet.</v-alert>
+				>Impossible d'ajouter ou de mettre à jour l'objet.</v-alert
+			>
 
 			<v-card-text>
-				<v-textarea label="Description" prepend-icon="mdi-cube" v-model.trim="payload.description" />
+				<v-textarea
+					label="Description"
+					prepend-icon="mdi-cube"
+					v-model.trim="payload.description"
+				/>
 
 				<v-text-field
 					prepend-icon="mdi-clock"
@@ -27,7 +35,9 @@
 
 				<v-btn text color="red" @click="show = !show">Annuler</v-btn>
 
-				<v-btn text color="green" @click="save">{{ change ? "Mettre à jour " : "Ajouter" }}</v-btn>
+				<v-btn text color="green" @click="save">{{
+					change ? "Mettre à jour " : "Ajouter"
+				}}</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>

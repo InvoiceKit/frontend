@@ -47,27 +47,27 @@
 <script lang="ts">
 import { mapState } from "vuex";
 import { Component, Vue, Watch } from "vue-property-decorator";
-import { Team } from '@/types';
+import { Team } from "@/types";
 
 @Component({
 	computed: {
 		...mapState("auth", ["team"]),
-	}
+	},
 })
 export default class Fields extends Vue {
 	fields?: string[] = [];
 	success = false;
-    error = false;
-	
+	error = false;
+
 	/**
 	 * Load team fields
-	 * 
+	 *
 	 * @param { Team } team
 	 */
-    @Watch('team', { deep: true, immediate: true })
-    load(team: Team) {
-        this.fields = team.fields
-    }
+	@Watch("team", { deep: true, immediate: true })
+	load(team: Team) {
+		this.fields = team.fields;
+	}
 
 	/**
 	 * Add a field
@@ -77,8 +77,7 @@ export default class Fields extends Vue {
 		const field = prompt("Champ à ajouter");
 
 		// Push
-		if (field)
-			this.fields?.push(field);
+		if (field) this.fields?.push(field);
 	}
 
 	/**

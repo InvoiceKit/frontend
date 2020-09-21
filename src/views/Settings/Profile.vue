@@ -7,7 +7,11 @@
 		<v-card-text>
 			<v-row>
 				<v-col>
-					<v-text-field label="Nom de la team" v-model="payload.name" placeholder="Exemple: InvoiceKit"></v-text-field>
+					<v-text-field
+						label="Nom de la team"
+						v-model="payload.name"
+						placeholder="Exemple: InvoiceKit"
+					></v-text-field>
 
 					<v-text-field
 						label="Nom juridique de l'entreprise"
@@ -50,12 +54,9 @@
 			<v-btn @click="save" text color="green">Sauvegarder</v-btn>
 		</v-card-actions>
 
-		<v-snackbar
-			v-model="success"
-			text
-			timeout="3000"
-			color="success"
-		>Les paramètres ont bien étés enregistrés.</v-snackbar>
+		<v-snackbar v-model="success" text timeout="3000" color="success"
+			>Les paramètres ont bien étés enregistrés.</v-snackbar
+		>
 
 		<v-snackbar v-model="error" text timeout="3000" color="danger">
 			Impossible de sauvegarder, vérifiez que les champs sont bien

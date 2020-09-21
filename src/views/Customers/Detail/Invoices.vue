@@ -14,8 +14,12 @@
 			:headers="headers"
 			@click:row="open"
 		>
-			<template #item.type="{ item }">{{ item.type === "invoice" ? "Facture" : "Devis" }}</template>
-			<template #item.updatedAt="{ item }">{{ new Date(item.updatedAt).toLocaleDateString() }}</template>
+			<template #item.type="{ item }">{{
+				item.type === "invoice" ? "Facture" : "Devis"
+			}}</template>
+			<template #item.updatedAt="{ item }">{{
+				new Date(item.updatedAt).toLocaleDateString()
+			}}</template>
 			<template #item.status="{ item }">
 				<StatusLabel :status="item.status" />
 			</template>

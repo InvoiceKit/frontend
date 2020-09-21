@@ -3,16 +3,12 @@
 		<v-list-item two-line>
 			<v-list-item-content>
 				<v-list-item-title>
-					{{
-					invoice.type == "invoice" ? "Facture" : "Devis"
-					}}
+					{{ invoice.type == "invoice" ? "Facture" : "Devis" }}
 					{{ invoice.number || "non numérotée" }}
 				</v-list-item-title>
 				<v-list-item-subtitle>
 					Dernière modification le
-					{{
-					new Date(invoice.updatedAt).toLocaleDateString()
-					}}
+					{{ new Date(invoice.updatedAt).toLocaleDateString() }}
 				</v-list-item-subtitle>
 			</v-list-item-content>
 		</v-list-item>
@@ -58,11 +54,7 @@
 		<v-list nav>
 			<v-list-item
 				target="_blank"
-				:href="
-					'//localhost:8080/invoices/' +
-					invoice.id +
-					'/render'
-				"
+				:href="'//localhost:8080/invoices/' + invoice.id + '/render'"
 			>
 				<v-list-item-icon>
 					<v-icon>mdi-printer</v-icon>

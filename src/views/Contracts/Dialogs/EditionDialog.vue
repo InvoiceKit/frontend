@@ -9,7 +9,8 @@
 				class="ma-4"
 				transition="slide-y-transition"
 				v-model="error"
-			>Impossible de mettre à jour le fichier.</v-alert>
+				>Impossible de mettre à jour le fichier.</v-alert
+			>
 
 			<v-card-text>
 				<h4 class="overline">Type de fichier</h4>
@@ -19,9 +20,17 @@
 					<v-radio value="canceled" label="Annulé" />
 				</v-radio-group>
 
-				<v-text-field prepend-icon="mdi-cube" v-model.trim="item.type" label="Type de chaudière" />
+				<v-text-field
+					prepend-icon="mdi-cube"
+					v-model.trim="item.type"
+					label="Type de chaudière"
+				/>
 
-				<v-text-field prepend-icon="mdi-pound" v-model.trim="item.serial" label="Numéro de série" />
+				<v-text-field
+					prepend-icon="mdi-pound"
+					v-model.trim="item.serial"
+					label="Numéro de série"
+				/>
 
 				<v-text-field
 					prepend-icon="mdi-clock"

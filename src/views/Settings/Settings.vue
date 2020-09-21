@@ -11,9 +11,10 @@
 			<Detail />
 		</v-col>
 
-		<v-footer
-			absolute
-		>En cas de problème technique, contactez un administrateur avec votre identifiant unique.</v-footer>
+		<v-footer absolute
+			>En cas de problème technique, contactez un administrateur avec
+			votre identifiant unique.</v-footer
+		>
 	</v-row>
 </template>
 

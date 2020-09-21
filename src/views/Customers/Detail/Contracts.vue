@@ -14,7 +14,9 @@
 			:headers="headers"
 			@click:row="open"
 		>
-			<template #item.updatedAt="{ item }">{{ new Date(item.updatedAt).toLocaleDateString() }}</template>
+			<template #item.updatedAt="{ item }">{{
+				new Date(item.updatedAt).toLocaleDateString()
+			}}</template>
 			<template #item.status="{ item }">
 				<StatusLabel :status="item.status" />
 			</template>

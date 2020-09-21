@@ -9,7 +9,8 @@
 				class="ma-4"
 				transition="slide-y-transition"
 				v-model="error"
-			>Impossible de mettre à jour le fichier.</v-alert>
+				>Impossible de mettre à jour le fichier.</v-alert
+			>
 
 			<v-card-text>
 				<v-row>

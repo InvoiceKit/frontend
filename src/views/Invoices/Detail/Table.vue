@@ -4,7 +4,11 @@
 			<CardIcon color="teal" icon="cube-outline" />Liste des objets
 		</v-card-title>
 
-		<v-data-table :headers="headers" :items="payload.fields" :items-per-page="-1">
+		<v-data-table
+			:headers="headers"
+			:items="payload.fields"
+			:items-per-page="-1"
+		>
 			<template #item.actions="{ item }">
 				<v-btn icon @click="deleteItem(item)">
 					<v-icon>mdi-delete</v-icon>
@@ -16,7 +20,11 @@
 			</template>
 		</v-data-table>
 
-		<AddField :display.sync="editionDialog" :invoice="invoice" :field="editedItem" />
+		<AddField
+			:display.sync="editionDialog"
+			:invoice="invoice"
+			:field="editedItem"
+		/>
 	</v-card>
 </template>
 

@@ -17,18 +17,29 @@
 		</v-app-bar>
 
 		<v-card>
-			<v-data-table :search="search" :headers="headers" :items="contractsList" @click:row="open">
+			<v-data-table
+				:search="search"
+				:headers="headers"
+				:items="contractsList"
+				@click:row="open"
+			>
 				<template #item.name="{ item }">
-					<span v-if="item.customer.firstName || item.customer.lastName">
+					<span
+						v-if="item.customer.firstName || item.customer.lastName"
+					>
 						{{ item.customer.firstName }}
 						<b>{{ item.customer.lastName }}</b>
 
-						<span v-if="item.customer.company">&nbsp;({{item.customer.company}})</span>
+						<span v-if="item.customer.company"
+							>&nbsp;({{ item.customer.company }})</span
+						>
 					</span>
-					<span v-else>{{item.customer.company}}</span>
+					<span v-else>{{ item.customer.company }}</span>
 				</template>
 
-				<template #item.updatedAt="{ item }">{{ new Date(item.updatedAt).toLocaleString() }}</template>
+				<template #item.updatedAt="{ item }">{{
+					new Date(item.updatedAt).toLocaleString()
+				}}</template>
 
 				<template #item.status="{ item }">
 					<StatusLabel :status="item.status" />

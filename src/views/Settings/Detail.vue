@@ -12,7 +12,7 @@
 					<td>Nom d'utilisateur</td>
 					<td>{{ team.username }}</td>
 				</tr>
-                <tr>
+				<tr>
 					<td>Identifiant</td>
 					<td>{{ team.id }}</td>
 				</tr>
@@ -28,8 +28,7 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 @Component({
 	computed: {
 		...mapState("auth", ["team"]),
-	}
+	},
 })
-export default class Detail extends Vue {
-}
+export default class Detail extends Vue {}
 </script>

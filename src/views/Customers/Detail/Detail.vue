@@ -9,7 +9,9 @@
 
 			<v-spacer />
 
-			<v-btn text color="error" @click="deleteCustomer">Supprimer le client</v-btn>
+			<v-btn text color="error" @click="deleteCustomer"
+				>Supprimer le client</v-btn
+			>
 		</v-app-bar>
 
 		<v-row>
@@ -28,9 +30,13 @@
 		<v-app-bar bottom fixed>
 			<v-spacer />
 
-			<v-btn text color="warning" @click="edit = true">Modifier le client</v-btn>
+			<v-btn text color="warning" @click="edit = true"
+				>Modifier le client</v-btn
+			>
 
-			<v-btn text color="info" @click="address = true">Ajouter une adresse</v-btn>
+			<v-btn text color="info" @click="address = true"
+				>Ajouter une adresse</v-btn
+			>
 		</v-app-bar>
 
 		<AddAddress :display.sync="address" />

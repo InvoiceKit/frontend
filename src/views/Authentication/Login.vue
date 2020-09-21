@@ -11,12 +11,10 @@
 						<v-card-title>Bienvenue sur InvoiceKit</v-card-title>
 
 						<v-card-text>
-							<v-alert
-								v-if="error"
-								border="left"
-								color="red"
-								text
-							>Les identifiants fournis sont incorrects.</v-alert>
+							<v-alert v-if="error" border="left" color="red" text
+								>Les identifiants fournis sont
+								incorrects.</v-alert
+							>
 
 							<v-text-field
 								v-model="username"
@@ -41,9 +39,16 @@
 
 							<v-spacer></v-spacer>
 
-							<v-btn to="/authentication/register" text color="orange">S'inscrire</v-btn>
+							<v-btn
+								to="/authentication/register"
+								text
+								color="orange"
+								>S'inscrire</v-btn
+							>
 
-							<v-btn @click="login" text color="green">Se connecter</v-btn>
+							<v-btn @click="login" text color="green"
+								>Se connecter</v-btn
+							>
 						</v-card-actions>
 					</v-card>
 				</v-col>

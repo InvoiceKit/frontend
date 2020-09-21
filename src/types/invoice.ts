@@ -1,35 +1,36 @@
-import { Address } from './address';
-import { Customer } from './customer';
-import { Field } from './field';
+import { Address } from "./address";
+import { Customer } from "./customer";
+import { Field } from "./field";
 
 export enum InvoiceType {
-    invoice = "invoice",
-    quote = "quote"
+	invoice = "invoice",
+	quote = "quote",
 }
 
 export enum InvoiceStatus {
-    paid = "paid",
-    waiting = "waiting",
-    canceled = "canceled"
+	paid = "paid",
+	waiting = "waiting",
+	canceled = "canceled",
 }
 
 export interface Invoice {
-    id?: string
-    customerID?: string
-    customer?: Customer
-    addressID?: string
-    address?: Address
-    dueDate: string
-    type: InvoiceType
-    status: InvoiceStatus
-    fields: Array<Field>
-    number: string
-    deposit: number
-    promotion: number
-    additional_text: string
+	id?: string;
+	customerID?: string;
+	customer?: Customer;
+	addressID?: string;
+	address?: Address;
+	dueDate: string;
+	type: InvoiceType;
+	status: InvoiceStatus;
+	fields: Array<Field>;
+	number: string;
+	deposit: number;
+	promotion: number;
+	additional_text: string;
 }
 
 export interface InvoiceOutput extends Invoice {
+<<<<<<< Updated upstream
     createdAt: number
     updatedAt: number
     no_vat: number
@@ -38,3 +39,13 @@ export interface InvoiceOutput extends Invoice {
     _promotion: number
     final: number
 }
+=======
+	createdAt: number;
+	updatedAt: number;
+	no_vat: number;
+	vat: number;
+	total: number;
+	_promotion: number;
+	final: number;
+}
+>>>>>>> Stashed changes

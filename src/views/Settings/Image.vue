@@ -1,19 +1,21 @@
 <template>
 	<v-card class="mt-5">
 		<v-card-title>
-			<CardIcon color="green" icon="image-filter-hdr" />Bannière d'entreprise
+			<CardIcon color="green" icon="image-filter-hdr" />Bannière
+			d'entreprise
 		</v-card-title>
 
 		<v-card-text>
-			<v-file-input show-size label="Image bannière (idéalement 1218x144 pixels)" @change="save"></v-file-input>
+			<v-file-input
+				show-size
+				label="Image bannière (idéalement 1218x144 pixels)"
+				@change="save"
+			></v-file-input>
 		</v-card-text>
 
-		<v-snackbar
-			v-model="success"
-			text
-			timeout="3000"
-			color="success"
-		>Les paramètres ont bien étés enregistrés.</v-snackbar>
+		<v-snackbar v-model="success" text timeout="3000" color="success"
+			>Les paramètres ont bien étés enregistrés.</v-snackbar
+		>
 
 		<v-snackbar v-model="error" text timeout="3000" color="danger">
 			Impossible de sauvegarder, vérifiez que les champs sont bien
