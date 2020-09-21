@@ -12,7 +12,7 @@ export default new Vapi({
 })
 	.put({
 		action: "register",
-		path: "/teams/register",
+		path: "/teams",
 		onSuccess: (state: any, payload: any) => {
 			// Store token
 			localStorage.setItem("token", payload.data.token);
