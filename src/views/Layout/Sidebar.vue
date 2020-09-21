@@ -1,11 +1,8 @@
 <template>
 	<v-navigation-drawer app permanent>
 		<template v-slot:prepend>
-			<div class="pre-image" v-if="team.id">
-				<img
-					:src="`//localhost:8080/teams/${team.id}/image`"
-					class="image"
-				/>
+			<div class="pre-image" v-if="team.id && showImage">
+				<img :src="`${host}/teams/${team.id}/image`" class="image" @error="showImage = false" />
 			</div>
 			<v-list-item two-line>
 				<v-list-item-content>
@@ -18,12 +15,7 @@
 		<v-divider />
 
 		<v-list nav>
-			<v-list-item
-				v-for="item in items"
-				link
-				:to="item.link"
-				:key="item.title"
-			>
+			<v-list-item v-for="item in items" link :to="item.link" :key="item.title">
 				<v-list-item-icon>
 					<v-icon>mdi-{{ item.icon }}</v-icon>
 				</v-list-item-icon>
@@ -35,9 +27,7 @@
 		</v-list>
 
 		<template #append>
-			<v-btn @click="logout" tile text block large color="red"
-				>Déconnexion</v-btn
-			>
+			<v-btn @click="logout" tile text block large color="red">Déconnexion</v-btn>
 		</template>
 	</v-navigation-drawer>
 </template>
@@ -45,13 +35,17 @@
 <script lang="ts">
 import { mapState } from "vuex";
 import { Component, Vue, PropSync } from "vue-property-decorator";
+import API from "@/store/api";
 
 @Component({
 	computed: {
 		...mapState("auth", ["team"]),
+		host: () => API.host,
 	},
 })
 export default class Sidebar extends Vue {
+	showImage = true;
+
 	items = [
 		{
 			link: "/dashboard",
