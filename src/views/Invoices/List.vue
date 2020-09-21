@@ -17,29 +17,18 @@
 		</v-app-bar>
 
 		<v-card>
-			<v-data-table
-				:search="search"
-				:headers="headers"
-				:items="invoiceList"
-				@click:row="open"
-			>
+			<v-data-table :search="search" :headers="headers" :items="invoiceList" @click:row="open">
 				<template #item.name="{ item }">
-					<span
-						v-if="item.customer.firstName || item.customer.lastName"
-					>
+					<span v-if="item.customer.firstName || item.customer.lastName">
 						{{ item.customer.firstName }}
 						<b>{{ item.customer.lastName }}</b>
 
-						<span v-if="item.customer.company"
-							>&nbsp;({{ item.customer.company }})</span
-						>
+						<span v-if="item.customer.company">&nbsp;({{ item.customer.company }})</span>
 					</span>
 					<span v-else>{{ item.customer.company }}</span>
 				</template>
 
-				<template #item.updatedAt="{ item }">
-					{{ new Date(item.updatedAt).toLocaleString() }}
-				</template>
+				<template #item.updatedAt="{ item }">{{ new Date(item.updatedAt).toLocaleString() }}</template>
 
 				<template #item.status="{ item }">
 					<StatusLabel :status="item.status" />
@@ -83,15 +72,19 @@ export default class InvoiceList extends Vue {
 
 	invoices!: Pagination<Invoice>;
 
-	invoiceList: Array<Invoice> = [];
+	invoiceList: Array<any> = [];
 
 	async mounted() {
 		try {
 			await this.$store.dispatch("invoices/fetch");
 
 			for (const invoice of this.invoices.items) {
+				let fn = invoice.customer?.firstName || "";
+				let ln = invoice.customer?.lastName || "";
+				let company = invoice.customer?.company || "";
+
 				this.invoiceList.push({
-					name: `${invoice.customer?.firstName} ${invoice.customer?.lastName} ${invoice.customer?.company}`,
+					name: `${fn} ${ln} ${company}`,
 					...invoice,
 				});
 			}

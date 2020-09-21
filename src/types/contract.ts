@@ -15,8 +15,8 @@ export interface Contract {
 }
 
 export interface Change {
-	date: string;
-	description: string;
+	date?: string;
+	description?: string;
 }
 
 export enum ContractStatus {

@@ -4,11 +4,7 @@
 			<CardIcon color="teal" icon="cube-outline" />Liste des objets
 		</v-card-title>
 
-		<v-data-table
-			:headers="headers"
-			:items="payload.fields"
-			:items-per-page="-1"
-		>
+		<v-data-table :headers="headers" :items="invoice.fields" :items-per-page="-1">
 			<template #item.actions="{ item }">
 				<v-btn icon @click="deleteItem(item)">
 					<v-icon>mdi-delete</v-icon>
@@ -20,11 +16,7 @@
 			</template>
 		</v-data-table>
 
-		<AddField
-			:display.sync="editionDialog"
-			:invoice="invoice"
-			:field="editedItem"
-		/>
+		<AddField :display.sync="editionDialog" :invoice="invoice" :field="editedItem" />
 	</v-card>
 </template>
 
@@ -40,13 +32,11 @@ import { InvoiceOutput, Field, Invoice } from "@/types";
 	},
 
 	computed: {
-		...mapState("invoices", {
-			payload: (state: any) => state.invoice as InvoiceOutput,
-		}),
+		...mapState("invoices", ["invoice"]),
 	},
 })
 export default class Table extends Vue {
-	invoice?: InvoiceOutput;
+	invoice!: InvoiceOutput;
 
 	headers = [
 		{
@@ -78,16 +68,11 @@ export default class Table extends Vue {
 		vat: 0,
 	};
 
-	@Watch("payload", { deep: true, immediate: true })
-	onLoad(invoice: InvoiceOutput) {
-		this.invoice = invoice;
-	}
-
 	async deleteItem(item: Field) {
 		// Delete from fields
-		let index = this.invoice?.fields.indexOf(item);
+		let index = this.invoice.fields.indexOf(item);
 
-		if (index !== null || index > -1) {
+		if (index > -1) {
 			this.invoice?.fields.splice(index, 1);
 		}
 
