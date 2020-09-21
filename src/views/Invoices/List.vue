@@ -14,58 +14,40 @@
 			/>
 
 			<v-spacer />
-
-			<v-btn icon @click="addDialog = true" large>
-				<v-icon>mdi-plus</v-icon>
-			</v-btn>
 		</v-app-bar>
 
 		<v-card>
-			<v-data-table
-				:search="search"
-				:headers="headers"
-				:items="invoiceList"
-				@click:row="open"
-			>
+			<v-data-table :search="search" :headers="headers" :items="invoiceList" @click:row="open">
 				<template #item.name="{ item }">
-					<span
-						v-if="item.customer.firstName || item.customer.lastName"
-					>
+					<span v-if="item.customer.firstName || item.customer.lastName">
 						{{ item.customer.firstName }}
 						<b>{{ item.customer.lastName }}</b>
 
-						<span v-if="item.customer.company"
-							>&nbsp;({{ item.customer.company }})</span
-						>
+						<span v-if="item.customer.company">&nbsp;({{ item.customer.company }})</span>
 					</span>
 					<span v-else>{{ item.customer.company }}</span>
 				</template>
 
-				<template #item.updatedAt="{ item }">{{
+				<template #item.updatedAt="{ item }">
+					{{
 					new Date(item.updatedAt).toLocaleString()
-				}}</template>
+					}}
+				</template>
 
 				<template #item.status="{ item }">
 					<StatusLabel :status="item.status" />
 				</template>
 			</v-data-table>
 		</v-card>
-
-		<AddInvoice :display.sync="addDialog" />
 	</div>
 </template>
 
 <script lang="ts">
-import AddInvoice from "./Dialogs/AddInvoice.vue";
 import { mapState } from "vuex";
 import { Component, Vue } from "vue-property-decorator";
 import { Invoice, Pagination } from "@/types";
 
 @Component({
-	components: {
-		AddInvoice,
-	},
-
 	computed: {
 		...mapState("invoices", ["invoices"]),
 	},

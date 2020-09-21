@@ -14,9 +14,11 @@
 			:headers="headers"
 			@click:row="open"
 		>
-			<template #item.updatedAt="{ item }">{{
+			<template #item.updatedAt="{ item }">
+				{{
 				new Date(item.updatedAt).toLocaleDateString()
-			}}</template>
+				}}
+			</template>
 			<template #item.status="{ item }">
 				<StatusLabel :status="item.status" />
 			</template>
@@ -30,6 +32,7 @@
 import AddContract from "../Dialogs/AddContract.vue";
 import { mapState } from "vuex";
 import { Component, Vue } from "vue-property-decorator";
+import { Customer } from "@/types";
 
 @Component({
 	components: {
@@ -42,6 +45,8 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class Contracts extends Vue {
 	display = false;
+
+	customer!: Customer;
 
 	headers = [
 		{

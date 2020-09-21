@@ -3,7 +3,7 @@
 		<v-card-title>
 			<CardIcon color="amber" icon="map" />Adresses
 			<v-spacer />
-			<v-btn text color="amber">
+			<v-btn @click="display = true" text color="amber">
 				<v-icon left>mdi-plus</v-icon>Ajouter une adresse
 			</v-btn>
 		</v-card-title>
@@ -19,20 +19,28 @@
 				</v-btn>
 			</template>
 		</v-data-table>
+
+		<AddAddress :display.sync="display" />
 	</v-card>
 </template>
 
 <script lang="ts">
+import AddAddress from "../Dialogs/AddAddress.vue";
 import { mapState } from "vuex";
 import { Component, Vue } from "vue-property-decorator";
 import { Address, Customer } from "@/types";
 
 @Component({
+	components: {
+		AddAddress,
+	},
 	computed: {
 		...mapState("customers", ["customer"]),
 	},
 })
 export default class Addresses extends Vue {
+	display = false;
+
 	headers = [
 		{
 			text: "Adresse",

@@ -1,7 +1,7 @@
 <template>
 	<v-dialog v-model="show" @click:outside="show = false" max-width="700px">
 		<v-card>
-			<v-card-title>Ajouter un contrat d'entretien</v-card-title>
+			<v-card-title>Créer une facture</v-card-title>
 
 			<v-card-subtitle>Séléctionnez une adresse</v-card-subtitle>
 
@@ -26,31 +26,40 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, PropSync, Watch } from "vue-property-decorator";
-import { Address, Contract, ContractStatus, Customer } from "@/types";
+import {
+	Address,
+	Customer,
+	Invoice,
+	InvoiceStatus,
+	InvoiceType,
+} from "@/types";
 import { DataTableHeader } from "vuetify";
 import { mapState } from "vuex";
 
-const defaultPayload: Contract = {
+const defaultPayload: Invoice = {
 	customerID: "",
 	addressID: "",
-	type: "",
-	serial: "",
-	status: ContractStatus.ongoing,
-	changes: [],
-	date: "",
+	type: InvoiceType.invoice,
+	status: InvoiceStatus.waiting,
+	dueDate: "",
+	number: "",
+	promotion: 0,
+	deposit: 0,
+	additional_text: "",
+	fields: [],
 };
 
 @Component({
 	computed: {
-		...mapState("contracts", ["contract"]),
+		...mapState("invoices", ["invoice"]),
 	},
 })
-export default class AddContract extends Vue {
+export default class AddInvoice extends Vue {
 	@PropSync("display", { type: Boolean }) show!: boolean;
 	@Prop(Object) readonly customer!: Customer;
 
-	contract!: Contract;
-	payload: Contract = defaultPayload;
+	invoice!: Invoice;
+	payload: Invoice = defaultPayload;
 
 	headers: Array<DataTableHeader> = [
 		{
@@ -89,7 +98,7 @@ export default class AddContract extends Vue {
 			this.payload.customerID = this.customer.id;
 
 			// Push contract
-			await this.$store.dispatch("contracts/add", {
+			await this.$store.dispatch("invoices/add", {
 				params: {
 					id: this.customer.id,
 				},
@@ -97,7 +106,7 @@ export default class AddContract extends Vue {
 			});
 
 			// Redirect
-			this.$router.push(`/contracts/${this.contract.id}`);
+			this.$router.push(`/invoices/${this.invoice.id}`);
 		} catch {
 			this.error = true;
 		}
