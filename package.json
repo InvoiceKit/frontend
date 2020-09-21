@@ -51,10 +51,9 @@
 			"node": true
 		},
 		"extends": [
-			"plugin:@typescript-eslint/recommended",
-            "plugin:@typescript-eslint",
-            "plugin:prettier/recommended",
-			"plugin:vue/base"
+			"plugin:vue/essential",
+			"eslint:recommended",
+			"@vue/typescript"
 		],
 		"parserOptions": {
 			"parser": "@typescript-eslint/parser",
