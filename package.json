@@ -35,7 +35,7 @@
 		"@vue/cli-service": "^4.5.6",
 		"@vue/eslint-config-typescript": "^5.0.2",
 		"babel-eslint": "^10.1.0",
-		"eslint": "^6.7.2",
+		"eslint": "^6.8.0",
 		"eslint-plugin-vue": "^6.2.2",
 		"prettier": "2.1.2",
 		"sass": "^1.26.11",
@@ -51,11 +51,10 @@
 			"node": true
 		},
 		"extends": [
-			"prettier/@typescript-eslint",
-			"plugin:prettier/recommended",
-			"plugin:vue/base",
-			"prettier",
-			"prettier/vue"
+			"plugin:@typescript-eslint/recommended",
+            "plugin:@typescript-eslint",
+            "plugin:prettier/recommended",
+			"plugin:vue/base"
 		],
 		"parserOptions": {
 			"parser": "@typescript-eslint/parser",
