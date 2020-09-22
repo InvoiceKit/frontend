@@ -5,3 +5,4 @@ export { Team } from "./team";
 export { Invoice, InvoiceType, InvoiceStatus, InvoiceOutput } from "./invoice";
 export { Field } from "./field";
 export { Contract, ContractStatus, Change } from "./contract";
+export { Message } from "./message";

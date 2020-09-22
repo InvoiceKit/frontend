@@ -43,6 +43,15 @@ const routes = [
 		},
 	},
 	{
+		path: "/messages",
+		name: "Messages",
+		component: () => import("@/views/Messages/List.vue"),
+		meta: {
+			name: "Messages",
+			auth: true,
+		},
+	},
+	{
 		path: "/contracts",
 		name: "Contrats",
 		component: () => import("@/views/Contracts/List.vue"),
@@ -120,7 +129,6 @@ router.beforeEach((to, from, next) => {
 	// Authentication redirection
 	if (to.matched.some((record) => record.meta.auth)) {
 		if (localStorage.getItem("token") === null) {
-
 			next({
 				path: "/authentication",
 			});
@@ -133,7 +141,10 @@ router.beforeEach((to, from, next) => {
 			next();
 		}
 	} else {
-		if (localStorage.getItem("token") !== null && to.matched.some(record => record.meta.redirect)) {
+		if (
+			localStorage.getItem("token") !== null &&
+			to.matched.some((record) => record.meta.redirect)
+		) {
 			next({
 				path: "/dashboard",
 			});

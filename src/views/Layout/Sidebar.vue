@@ -68,6 +68,11 @@ export default class Sidebar extends Vue {
 			name: "Clients",
 		},
 		{
+			link: "/messages",
+			icon: "message",
+			name: "Messages",
+		},
+		{
 			link: "/settings",
 			icon: "cog",
 			name: "Paramètres",

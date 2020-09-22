@@ -6,6 +6,7 @@ import customers from "./customers";
 import invoices from "./invoices";
 import charts from "./charts";
 import contracts from "./contracts";
+import messages from "./messages";
 
 Vue.use(Vuex);
 
@@ -16,5 +17,6 @@ export default new Vuex.Store({
 		customers,
 		invoices,
 		contracts,
+		messages,
 	},
 });
