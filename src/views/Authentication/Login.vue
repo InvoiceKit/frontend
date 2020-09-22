@@ -16,9 +16,7 @@
 								border="left"
 								color="red"
 								text
-							>
-								Les identifiants fournis sont incorrects.
-							</v-alert>
+							>Les identifiants fournis sont incorrects.</v-alert>
 
 							<v-text-field
 								v-model="username"
@@ -43,16 +41,9 @@
 
 							<v-spacer></v-spacer>
 
-							<v-btn
-								to="/authentication/register"
-								text
-								color="orange"
-								>S'inscrire</v-btn
-							>
+							<v-btn to="/authentication/register" text color="orange">S'inscrire</v-btn>
 
-							<v-btn @click="login" text color="green"
-								>Se connecter</v-btn
-							>
+							<v-btn @click="login" text color="green">Se connecter</v-btn>
 						</v-card-actions>
 					</v-card>
 				</v-col>
@@ -91,7 +82,7 @@ export default class Login extends Vue {
 			});
 
 			// Redirect
-			window.location.href = "/dashboard";
+			window.location.reload();
 		} catch {
 			// Set error
 			this.error = true;

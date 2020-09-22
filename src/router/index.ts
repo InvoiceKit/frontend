@@ -21,7 +21,6 @@ const routes = [
 		component: () => import("@/views/Authentication/Login.vue"),
 		meta: {
 			name: "Connexion",
-			auth: false,
 			redirect: true,
 		},
 	},
@@ -31,7 +30,6 @@ const routes = [
 		component: () => import("@/views/Authentication/Register.vue"),
 		meta: {
 			name: "Inscription",
-			auth: false,
 			redirect: true,
 		},
 	},
@@ -122,6 +120,7 @@ router.beforeEach((to, from, next) => {
 	// Authentication redirection
 	if (to.matched.some((record) => record.meta.auth)) {
 		if (localStorage.getItem("token") === null) {
+
 			next({
 				path: "/authentication",
 			});
@@ -131,16 +130,15 @@ router.beforeEach((to, from, next) => {
 				"Authorization"
 			] = `Bearer ${localStorage.getItem("token")}`;
 
-			// Prevent accessing to authentication again
-			if (to.matched.some((record) => record.meta.redirect)) {
-				next({
-					path: "/dashboard",
-				});
-			}
-
 			next();
 		}
 	} else {
+		if (localStorage.getItem("token") !== null && to.matched.some(record => record.meta.redirect)) {
+			next({
+				path: "/dashboard",
+			});
+		}
+
 		next();
 	}
 });

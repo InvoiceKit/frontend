@@ -11,22 +11,12 @@
 						<v-card-title>Bienvenue sur InvoiceKit</v-card-title>
 
 						<v-card-text>
-							<v-alert
-								v-if="error"
-								border="left"
-								color="red"
-								text
-							>
+							<v-alert v-if="error" border="left" color="red" text>
 								Impossible de créer le compte, verifiez que les
 								champs sont correctement remplis.
 							</v-alert>
 
-							<v-alert
-								v-if="success"
-								border="left"
-								color="green"
-								text
-							>
+							<v-alert v-if="success" border="left" color="green" text>
 								Votre compte à bien été crée! Vous allez être
 								redirigé...
 							</v-alert>
@@ -61,9 +51,7 @@
 
 							<v-spacer></v-spacer>
 
-							<v-btn @click="register" text color="green"
-								>S'inscrire</v-btn
-							>
+							<v-btn @click="register" text color="green">S'inscrire</v-btn>
 						</v-card-actions>
 					</v-card>
 				</v-col>
@@ -106,7 +94,7 @@ export default class Register extends Vue {
 			});
 
 			// Redirect
-			window.location.href = "/dashboard";
+			window.location.reload();
 		} catch {
 			// Set error
 			this.success = false;
