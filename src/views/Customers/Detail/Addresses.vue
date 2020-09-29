@@ -1,9 +1,9 @@
 <template>
-	<v-card class="mt-5">
+	<v-card>
 		<v-card-title>
-			<CardIcon color="amber" icon="map" />Adresses
+			Adresses
 			<v-spacer />
-			<v-btn @click="display = true" text color="amber">
+			<v-btn @click="display = true" text color="blue">
 				<v-icon left>mdi-plus</v-icon>Ajouter une adresse
 			</v-btn>
 		</v-card-title>

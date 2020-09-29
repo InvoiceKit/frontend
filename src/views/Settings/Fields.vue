@@ -1,10 +1,6 @@
 <template>
-	<v-card class="mt-5">
-		<v-card-title>
-			<CardIcon color="red" icon="domain" />
-
-			Champs pour les factures
-		</v-card-title>
+	<v-card>
+		<v-card-title> Champs pour les factures </v-card-title>
 
 		<v-simple-table>
 			<thead>

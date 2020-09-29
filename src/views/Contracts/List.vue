@@ -1,20 +1,22 @@
 <template>
-	<div>
-		<v-app-bar app>
-			<v-toolbar-title>Contrats</v-toolbar-title>
+	<v-container fluid>
+		<v-row class="mb-4">
+			<v-col>
+				<p class="display-1">Contrats</p>
+			</v-col>
 
 			<v-spacer />
 
-			<v-text-field
-				hide-details
-				single-line
-				solo-inverted
-				label="Chercher un contrat"
-				v-model="search"
-			/>
-
-			<v-spacer />
-		</v-app-bar>
+			<v-col cols="4" align="right">
+				<v-text-field
+					hide-details
+					single-line
+					solo-inverted
+					label="Chercher un contrat"
+					v-model="search"
+				/>
+			</v-col>
+		</v-row>
 
 		<v-card>
 			<v-data-table
@@ -46,7 +48,7 @@
 				</template>
 			</v-data-table>
 		</v-card>
-	</div>
+	</v-container>
 </template>
 
 <script>

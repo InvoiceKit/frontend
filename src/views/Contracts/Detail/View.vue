@@ -1,11 +1,33 @@
 <template>
-	<div id="contract">
-		<v-card class="mt-6">
-			<v-card-title>
-				<CardIcon color="green" icon="text-box-outline" />Contrat
-				d'entretien
-			</v-card-title>
+	<v-container>
+		<v-row class="mb-4">
+			<v-col>
+				<p class="display-1">Contrat d'entretien</p>
+			</v-col>
 
+			<v-spacer />
+
+			<v-col cols="4" align="right">
+				<v-btn to="/contracts" exact icon large>
+					<v-icon>mdi-arrow-left</v-icon>
+				</v-btn>
+
+				<v-btn
+					@click="showEdit = true"
+					icon
+					large
+					color="orange darken-1"
+				>
+					<v-icon>mdi-pencil</v-icon>
+				</v-btn>
+
+				<v-btn @click="remove" icon large color="red darken-1">
+					<v-icon>mdi-delete</v-icon>
+				</v-btn>
+			</v-col>
+		</v-row>
+
+		<v-card>
 			<v-simple-table>
 				<tbody>
 					<tr>
@@ -41,18 +63,17 @@
 							>
 								{{ contract.customer.firstName }}
 								{{ contract.customer.lastName }}
-								<span
-									v-if="contract.customer.company"
-								>
-									&nbsp;({{
-									contract.customer.company
-									}})
+								<span v-if="contract.customer.company">
+									&nbsp;({{ contract.customer.company }})
 								</span>
 							</span>
 
 							<span v-else>{{ contract.customer.company }}</span>
 
-							<v-btn icon :to="`/customers/${contract.customer.id}`">
+							<v-btn
+								icon
+								:to="`/customers/${contract.customer.id}`"
+							>
 								<v-icon>mdi-arrow-right</v-icon>
 							</v-btn>
 						</td>
@@ -71,9 +92,9 @@
 						<td>Date de création</td>
 						<td>
 							{{
-							new Date(
-							contract.createdAt
-							).toLocaleDateString()
+								new Date(
+									contract.createdAt
+								).toLocaleDateString()
 							}}
 						</td>
 					</tr>
@@ -82,9 +103,9 @@
 						<td>Dernière mise à jour</td>
 						<td>
 							{{
-							new Date(
-							contract.updatedAt
-							).toLocaleDateString()
+								new Date(
+									contract.updatedAt
+								).toLocaleDateString()
 							}}
 						</td>
 					</tr>
@@ -94,12 +115,24 @@
 
 		<br />
 
-		<v-card v-if="contract.changes" class="mt-4">
+		<v-card v-if="contract.changes">
 			<v-card-title>
-				<CardIcon color="indigo" icon="cube" />Changements
+				Changements
+
+				<v-spacer />
+
+				<v-btn @click="addItem" text large color="blue darken-1">
+					<v-icon left>mdi-plus</v-icon>
+					Ajouter un changement
+				</v-btn>
 			</v-card-title>
 
-			<v-data-table :items-per-page="-1" :headers="headers" :items="contract.changes">
+			<v-data-table
+				:items-per-page="-1"
+				:headers="headers"
+				:items="contract.changes"
+				no-data-text="Aucun changements enregistrés"
+			>
 				<template #item.actions="{ item }">
 					<v-btn icon @click="deleteItem(item)">
 						<v-icon>mdi-delete</v-icon>
@@ -112,15 +145,18 @@
 			</v-data-table>
 		</v-card>
 
-		<Sidebar />
-
-		<AddChange :display.sync="editionDialog" :contract.sync="contract" :change="editedItem" />
-	</div>
+		<edition-dialog :display.sync="showEdit" :contract.sync="contract" />
+		<AddChange
+			:display.sync="editionDialog"
+			:contract.sync="contract"
+			:change="editedItem"
+		/>
+	</v-container>
 </template>
 
 <script lang="ts">
-import Sidebar from "./Sidebar.vue";
 import AddChange from "../Dialogs/AddChange.vue";
+import EditionDialog from "../Dialogs/EditionDialog.vue";
 import { Component, Vue } from "vue-property-decorator";
 import store from "@/store";
 import { mapState } from "vuex";
@@ -129,7 +165,7 @@ import { DataTableHeader } from "vuetify";
 
 @Component({
 	components: {
-		Sidebar,
+		EditionDialog,
 		AddChange,
 	},
 
@@ -153,8 +189,9 @@ import { DataTableHeader } from "vuetify";
 })
 export default class ContractView extends Vue {
 	contract!: Contract;
-	editedItem!: Change;
+	editedItem?: Change;
 	editionDialog = false;
+	showEdit = false;
 
 	headers: Array<DataTableHeader> = [
 		{
@@ -193,6 +230,29 @@ export default class ContractView extends Vue {
 	editItem(item: Contract) {
 		this.editedItem = item;
 		this.editionDialog = true;
+	}
+
+	addItem() {
+		this.editedItem = undefined;
+		this.editionDialog = true;
+	}
+
+	async remove() {
+		if (!confirm("Êtes-vous sur de vouloir supprimer ce contrat ?")) {
+			return;
+		}
+
+		try {
+			await this.$store.dispatch("contracts/delete", {
+				params: {
+					id: this.contract.id,
+				},
+			});
+
+			this.$router.push("/contracts");
+		} catch (ex) {
+			console.log(ex);
+		}
 	}
 }
 </script>

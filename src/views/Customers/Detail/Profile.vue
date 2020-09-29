@@ -1,10 +1,10 @@
 <template>
-	<v-card class="mt-5">
+	<v-card>
 		<v-card-title>
-			<CardIcon color="teal accent-3" icon="account" />Informations
+			Informations
 			<v-spacer />
 
-			<v-btn @click="display = true" text color="teal accent-3">
+			<v-btn @click="display = true" text color="blue">
 				<v-icon left>mdi-pencil</v-icon>Modifier les informations
 			</v-btn>
 		</v-card-title>

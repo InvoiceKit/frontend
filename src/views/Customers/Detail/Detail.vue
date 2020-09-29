@@ -1,18 +1,22 @@
 <template>
-	<div>
-		<v-app-bar app>
-			<v-btn icon exact to="/customers">
-				<v-icon>mdi-arrow-left</v-icon>
-			</v-btn>
-
-			<v-toolbar-title>Fiche client</v-toolbar-title>
+	<v-container fluid>
+		<v-row>
+			<v-col>
+				<p class="display-1">Fiche client</p>
+			</v-col>
 
 			<v-spacer />
 
-			<v-btn text color="error" @click="deleteCustomer"
-				>Supprimer le client</v-btn
-			>
-		</v-app-bar>
+			<v-col align="right">
+				<v-btn to="/customers" exact icon large>
+					<v-icon>mdi-arrow-left</v-icon>
+				</v-btn>
+
+				<v-btn @click="deleteCustomer" icon large color="red darken-1">
+					<v-icon>mdi-delete</v-icon>
+				</v-btn>
+			</v-col>
+		</v-row>
 
 		<v-row>
 			<v-col cols="12" md="6" sm="12">
@@ -26,22 +30,7 @@
 				<Contracts />
 			</v-col>
 		</v-row>
-
-		<v-app-bar bottom fixed>
-			<v-spacer />
-
-			<v-btn text color="warning" @click="edit = true"
-				>Modifier le client</v-btn
-			>
-
-			<v-btn text color="info" @click="address = true"
-				>Ajouter une adresse</v-btn
-			>
-		</v-app-bar>
-
-		<AddAddress :display.sync="address" />
-		<AddCustomer :display.sync="edit" :editedItem="customer" />
-	</div>
+	</v-container>
 </template>
 
 <script lang="ts">

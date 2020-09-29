@@ -1,10 +1,6 @@
 <template>
-	<v-card class="mt-5">
-		<v-card-title>
-			<CardIcon color="blue" icon="account" />
-
-			Profil
-		</v-card-title>
+	<v-card>
+		<v-card-title class="overline grey--text"> Profil </v-card-title>
 
 		<v-simple-table>
 			<tbody>

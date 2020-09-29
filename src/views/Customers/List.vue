@@ -1,24 +1,30 @@
 <template>
-	<div>
-		<v-app-bar app>
-			<v-toolbar-title>Clients</v-toolbar-title>
+	<v-container fluid>
+		<v-row class="mb-4">
+			<v-col>
+				<p class="display-1">Clients</p>
+			</v-col>
 
 			<v-spacer />
 
-			<v-text-field
-				hide-details
-				single-line
-				solo-inverted
-				label="Chercher un client"
-				v-model="search"
-			/>
+			<v-col cols="5">
+				<v-text-field
+					hide-details
+					single-line
+					solo-inverted
+					label="Chercher un client"
+					v-model="search"
+				/>
+			</v-col>
 
 			<v-spacer />
 
-			<v-btn icon @click="addDialog = true" large>
-				<v-icon>mdi-plus</v-icon>
-			</v-btn>
-		</v-app-bar>
+			<v-col align="right">
+				<v-btn icon @click="addDialog = true" large>
+					<v-icon>mdi-plus</v-icon>
+				</v-btn>
+			</v-col>
+		</v-row>
 
 		<v-card>
 			<v-data-table
@@ -35,7 +41,7 @@
 		</v-card>
 
 		<AddCustomer :display.sync="addDialog" />
-	</div>
+	</v-container>
 </template>
 
 <script lang="ts">

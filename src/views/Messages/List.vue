@@ -1,24 +1,40 @@
 <template>
-	<div>
-		<v-app-bar app>
-			<v-toolbar-title>Messages</v-toolbar-title>
+	<v-container>
+		<v-row class="mb-4">
+			<v-col>
+				<p class="display-1">
+					Messages
+					<br />
+					<span class="overline"
+						>Provenant du formulaire de contact</span
+					>
+				</p>
+			</v-col>
 
 			<v-spacer />
 
-			<v-text-field
-				hide-details
-				single-line
-				solo-inverted
-				label="Chercher un message"
-				v-model="search"
-			/>
-
-			<v-spacer />
-		</v-app-bar>
+			<v-col cols="4" align="right">
+				<v-text-field
+					hide-details
+					single-line
+					solo-inverted
+					label="Chercher un message"
+					v-model="search"
+				/>
+			</v-col>
+		</v-row>
 
 		<v-card>
-			<v-data-table :search="search" :headers="headers" :items="data" show-expand single-expand>
-				<template #item.createdAt="{ item }">{{ new Date(item.createdAt).toLocaleDateString() }}</template>
+			<v-data-table
+				:search="search"
+				:headers="headers"
+				:items="data"
+				show-expand
+				single-expand
+			>
+				<template #item.createdAt="{ item }">{{
+					new Date(item.createdAt).toLocaleDateString()
+				}}</template>
 				<template #expanded-item="{ headers, item }">
 					<td :colspan="headers.length">{{ item.text }}</td>
 				</template>
@@ -29,7 +45,7 @@
 				</template>
 			</v-data-table>
 		</v-card>
-	</div>
+	</v-container>
 </template>
 
 <script lang="ts">

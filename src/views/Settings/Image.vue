@@ -1,9 +1,6 @@
 <template>
-	<v-card class="mt-5">
-		<v-card-title>
-			<CardIcon color="green" icon="image-filter-hdr" />Bannière
-			d'entreprise
-		</v-card-title>
+	<v-card>
+		<v-card-title>Bannière d'entreprise </v-card-title>
 
 		<v-card-text>
 			<v-file-input

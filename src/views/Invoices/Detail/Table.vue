@@ -1,10 +1,20 @@
 <template>
-	<v-card class="mt-6" v-if="invoice">
+	<v-card>
 		<v-card-title>
-			<CardIcon color="teal" icon="cube-outline" />Liste des objets
+			Liste des objets
+			<v-spacer />
+
+			<v-btn @click="addItem" text color="blue">
+				<v-icon left>mdi-plus</v-icon>
+				Ajouter un objet
+			</v-btn>
 		</v-card-title>
 
-		<v-data-table :headers="headers" :items="invoice.fields" :items-per-page="-1">
+		<v-data-table
+			:headers="headers"
+			:items="invoice.fields"
+			:items-per-page="-1"
+		>
 			<template #item.actions="{ item }">
 				<v-btn icon @click="deleteItem(item)">
 					<v-icon>mdi-delete</v-icon>
@@ -16,7 +26,11 @@
 			</template>
 		</v-data-table>
 
-		<AddField :display.sync="editionDialog" :invoice="invoice" :field="editedItem" />
+		<AddField
+			:display.sync="editionDialog"
+			:invoice="invoice"
+			:field="editedItem"
+		/>
 	</v-card>
 </template>
 
@@ -62,7 +76,7 @@ export default class Table extends Vue {
 
 	editionDialog = false;
 
-	editedItem: Field = {
+	editedItem?: Field = {
 		name: "",
 		price: 0,
 		vat: 0,
@@ -87,6 +101,11 @@ export default class Table extends Vue {
 
 	editItem(item: Field) {
 		this.editedItem = item;
+		this.editionDialog = true;
+	}
+
+	addItem() {
+		this.editedItem = undefined;
 		this.editionDialog = true;
 	}
 }

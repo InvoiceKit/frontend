@@ -68,25 +68,6 @@ import AddChange from "../Dialogs/AddChange.vue";
 export default class ContractSidebar extends Vue {
 	contract!: Contract;
 
-	showEdit = false;
 	showChange = false;
-
-	async remove() {
-		if (!confirm("Êtes-vous sur de vouloir supprimer ce contrat ?")) {
-			return;
-		}
-
-		try {
-			await this.$store.dispatch("contracts/delete", {
-				params: {
-					id: this.contract.id,
-				},
-			});
-
-			this.$router.push("/contracts");
-		} catch (ex) {
-			console.log(ex);
-		}
-	}
 }
 </script>

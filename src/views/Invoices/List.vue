@@ -1,41 +1,54 @@
 <template>
-	<div>
-		<v-app-bar app>
-			<v-toolbar-title>Factures</v-toolbar-title>
+	<v-container fluid>
+		<v-row class="mb-4">
+			<v-col>
+				<p class="display-1">Factures</p>
+			</v-col>
 
 			<v-spacer />
 
-			<v-text-field
-				hide-details
-				single-line
-				solo-inverted
-				label="Chercher une facture ou un devis"
-				v-model="search"
-			/>
-
-			<v-spacer />
-		</v-app-bar>
+			<v-col cols="4" align="right">
+				<v-text-field
+					hide-details
+					single-line
+					solo-inverted
+					label="Chercher une facture"
+					v-model="search"
+				/>
+			</v-col>
+		</v-row>
 
 		<v-card>
-			<v-data-table :search="search" :headers="headers" :items="invoiceList" @click:row="open">
+			<v-data-table
+				:search="search"
+				:headers="headers"
+				:items="invoiceList"
+				@click:row="open"
+			>
 				<template #item.name="{ item }">
-					<span v-if="item.customer.firstName || item.customer.lastName">
+					<span
+						v-if="item.customer.firstName || item.customer.lastName"
+					>
 						{{ item.customer.firstName }}
 						<b>{{ item.customer.lastName }}</b>
 
-						<span v-if="item.customer.company">&nbsp;({{ item.customer.company }})</span>
+						<span v-if="item.customer.company"
+							>&nbsp;({{ item.customer.company }})</span
+						>
 					</span>
 					<span v-else>{{ item.customer.company }}</span>
 				</template>
 
-				<template #item.updatedAt="{ item }">{{ new Date(item.updatedAt).toLocaleString() }}</template>
+				<template #item.updatedAt="{ item }">{{
+					new Date(item.updatedAt).toLocaleString()
+				}}</template>
 
 				<template #item.status="{ item }">
 					<StatusLabel :status="item.status" />
 				</template>
 			</v-data-table>
 		</v-card>
-	</div>
+	</v-container>
 </template>
 
 <script lang="ts">

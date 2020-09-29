@@ -1,21 +1,34 @@
 <template>
 	<v-navigation-drawer app permanent>
 		<template v-slot:prepend>
-			<div class="pre-image" v-if="team.id && showImage">
-				<img :src="`${host}/teams/${team.id}/image`" class="image" @error="showImage = false" />
-			</div>
-			<v-list-item two-line>
-				<v-list-item-content>
-					<v-list-item-title>{{ team.name }}</v-list-item-title>
-					<v-list-item-subtitle>Connecté</v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
+			<v-container class="mt-2 d-flex flex-row">
+				<v-sheet
+					class="ml-3 team_sheet"
+					color="green accent-2"
+					height="60"
+					width="60"
+				>
+					<v-row align="center" justify="center">
+						<v-col align="center">
+							<v-icon large> mdi-cube-outline </v-icon>
+						</v-col>
+					</v-row>
+				</v-sheet>
+				<v-row align="center" justify="center">
+					<v-col class="ml-4">
+						<span class="team_name">{{ team.name }}</span>
+					</v-col>
+				</v-row>
+			</v-container>
 		</template>
 
-		<v-divider />
-
 		<v-list nav>
-			<v-list-item v-for="item in items" link :to="item.link" :key="item.title">
+			<v-list-item
+				v-for="item in items"
+				link
+				:to="item.link"
+				:key="item.title"
+			>
 				<v-list-item-icon>
 					<v-icon>mdi-{{ item.icon }}</v-icon>
 				</v-list-item-icon>
@@ -25,27 +38,19 @@
 				</v-list-item-content>
 			</v-list-item>
 		</v-list>
-
-		<template #append>
-			<v-btn @click="logout" tile text block large color="red">Déconnexion</v-btn>
-		</template>
 	</v-navigation-drawer>
 </template>
 
 <script lang="ts">
 import { mapState } from "vuex";
 import { Component, Vue, PropSync } from "vue-property-decorator";
-import API from "@/store/api";
 
 @Component({
 	computed: {
 		...mapState("auth", ["team"]),
-		host: () => API.host,
 	},
 })
 export default class Sidebar extends Vue {
-	showImage = true;
-
 	items = [
 		{
 			link: "/dashboard",
@@ -72,29 +77,26 @@ export default class Sidebar extends Vue {
 			icon: "message",
 			name: "Messages",
 		},
-		{
-			link: "/settings",
-			icon: "cog",
-			name: "Paramètres",
-		},
 	];
-
-	logout() {
-		localStorage.removeItem("token");
-
-		window.location.reload();
-	}
 }
 </script>
 
-<style scoped>
-.image {
-	width: calc(100% - 5% * 2.25);
+<style>
+.team_name {
+	font-size: 14pt;
+	font-weight: 600;
 }
 
-.pre-image {
-	width: 300px;
-	padding: 5%;
-	background: #fff;
+.team_sheet {
+	border-radius: 14px !important;
+	box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.v-navigation-drawer {
+	background: linear-gradient(
+		to left,
+		rgba(245, 245, 245, 0.4),
+		rgba(250, 250, 250, 0.4)
+	) !important;
 }
 </style>

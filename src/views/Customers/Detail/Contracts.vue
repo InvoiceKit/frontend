@@ -1,9 +1,9 @@
 <template>
-	<v-card class="mt-5">
+	<v-card>
 		<v-card-title>
-			<CardIcon color="red" icon="text-box-outline" />Contrats
+			Contrats
 			<v-spacer />
-			<v-btn text color="red" @click="display = true">
+			<v-btn text color="blue" @click="display = true">
 				<v-icon left>mdi-plus</v-icon>Ajouter un contrat
 			</v-btn>
 		</v-card-title>

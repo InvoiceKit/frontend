@@ -1,21 +1,31 @@
 <template>
-	<v-row>
-		<v-col cols="12" sm="12" md="6" lg="7">
-			<Profile />
+	<v-container>
+		<p class="display-1">
+			Paramètres du compte
 			<br />
-			<ImageSettings />
-		</v-col>
-		<v-col cols="12" sm="12" md="6" lg="5">
-			<Fields />
-			<br />
-			<Detail />
-		</v-col>
+			<span class="overline"
+				>Gérez votre compte et l'apparence des factures</span
+			>
+		</p>
 
-		<v-footer absolute
-			>En cas de problème technique, contactez un administrateur avec
-			votre identifiant unique.</v-footer
-		>
-	</v-row>
+		<v-row>
+			<v-col cols="12" sm="12" md="6" lg="7">
+				<Profile />
+				<br />
+				<ImageSettings />
+			</v-col>
+			<v-col cols="12" sm="12" md="6" lg="5">
+				<Fields />
+				<br />
+				<Detail />
+			</v-col>
+
+			<v-footer absolute
+				>En cas de problème technique, contactez un administrateur avec
+				votre identifiant unique.</v-footer
+			>
+		</v-row>
+	</v-container>
 </template>
 
 <script lang="ts">

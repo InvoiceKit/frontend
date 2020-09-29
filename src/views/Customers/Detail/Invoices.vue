@@ -1,9 +1,9 @@
 <template>
-	<v-card class="mt-5">
+	<v-card>
 		<v-card-title>
-			<CardIcon color="green" icon="receipt" />Factures
+			Factures
 			<v-spacer />
-			<v-btn @click="display = true" text color="green">
+			<v-btn @click="display = true" text color="blue">
 				<v-icon left>mdi-plus</v-icon>Créer une facture
 			</v-btn>
 		</v-card-title>

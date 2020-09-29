@@ -1,22 +1,84 @@
 <template>
-	<div>
-		<Table />
+	<v-container v-if="invoice.type">
+		<v-row class="mb-4">
+			<v-col>
+				<p class="display-1">
+					{{ invoice.type === "invoice" ? "Facture" : "Devis" }}
+					{{ invoice.number || "non numérotée" }}
+					<br />
+					<span class="overline">
+						Dernière modification le
+						{{ new Date(invoice.updatedAt).toLocaleDateString() }}
+					</span>
+				</p>
+			</v-col>
 
-		<Sidebar />
-	</div>
+			<v-spacer />
+
+			<v-col align="right">
+				<v-btn to="/invoices" exact icon large>
+					<v-icon>mdi-arrow-left</v-icon>
+				</v-btn>
+
+				<v-btn
+					target="_blank"
+					:href="
+						'//localhost:8080/invoices/' + invoice.id + '/render'
+					"
+					icon
+					large
+					color="blue darken-1"
+				>
+					<v-icon>mdi-printer</v-icon>
+				</v-btn>
+
+				<v-btn
+					@click="editionDialog = true"
+					icon
+					large
+					color="orange darken-1"
+				>
+					<v-icon>mdi-pencil</v-icon>
+				</v-btn>
+
+				<v-btn @click="remove" icon large color="red darken-1">
+					<v-icon>mdi-delete</v-icon>
+				</v-btn>
+			</v-col>
+		</v-row>
+
+		<v-row>
+			<v-col cols="9">
+				<Table />
+			</v-col>
+			<v-col>
+				<PriceTable />
+			</v-col>
+		</v-row>
+
+		<EditionDialog :display.sync="editionDialog" :invoice.sync="invoice" />
+	</v-container>
 </template>
 
 <script lang="ts">
-import Sidebar from "./Sidebar.vue";
+import PriceTable from "./Components/PriceTable.vue";
 import Table from "./Table.vue";
+import EditionDialog from "./Dialogs/EditionDialog.vue";
 
 import { Component, Vue } from "vue-property-decorator";
 import store from "@/store/index";
+import { mapState } from "vuex";
+import { InvoiceOutput } from "@/types";
 
 @Component({
 	components: {
-		Sidebar,
+		PriceTable,
 		Table,
+		EditionDialog,
+	},
+
+	computed: {
+		...mapState("invoices", ["invoice"]),
 	},
 
 	async beforeRouteEnter(to, from, next) {
@@ -33,5 +95,30 @@ import store from "@/store/index";
 		}
 	},
 })
-export default class Detail extends Vue {}
+export default class Detail extends Vue {
+	invoice!: InvoiceOutput;
+	editionDialog = false;
+
+	async remove() {
+		if (
+			!confirm(
+				"Êtes-vous sur de vouloir supprimer ce fichier ? Cette action est irréversible."
+			)
+		) {
+			return;
+		}
+
+		try {
+			await this.$store.dispatch("invoices/delete", {
+				params: {
+					id: this.invoice?.id,
+				},
+			});
+
+			this.$router.push("/invoices");
+		} catch {
+			alert("Une erreur est survenue!");
+		}
+	}
+}
 </script>

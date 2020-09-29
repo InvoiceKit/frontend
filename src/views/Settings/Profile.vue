@@ -1,8 +1,6 @@
 <template>
-	<v-card class="mt-5">
-		<v-card-title>
-			<CardIcon color="orange" icon="cog" />Paramètres
-		</v-card-title>
+	<v-card>
+		<v-card-title> Paramètres </v-card-title>
 
 		<v-card-text>
 			<v-row>
