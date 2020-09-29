@@ -22,9 +22,7 @@
 
 				<v-btn
 					target="_blank"
-					:href="
-						'//localhost:8080/invoices/' + invoice.id + '/render'
-					"
+					:href="host + '/invoices/' + invoice.id + '/render'"
 					icon
 					large
 					color="blue darken-1"
@@ -69,6 +67,7 @@ import { Component, Vue } from "vue-property-decorator";
 import store from "@/store/index";
 import { mapState } from "vuex";
 import { InvoiceOutput } from "@/types";
+import api from "@/store/api";
 
 @Component({
 	components: {
@@ -79,6 +78,10 @@ import { InvoiceOutput } from "@/types";
 
 	computed: {
 		...mapState("invoices", ["invoice"]),
+
+		host() {
+			return api.host;
+		},
 	},
 
 	async beforeRouteEnter(to, from, next) {
