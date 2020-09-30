@@ -48,9 +48,9 @@
 						<br />
 
 						<p class="body-2 description">
-							Tout vos documents sont synchronisés en temps réel.
+							Tous vos documents sont synchronisés en temps réel.
 							Aucun besoin de télécharger les documents. Cela
-							assure également un accès sur tout vos appareils.
+							assure également un accès sur tous vos appareils.
 						</p>
 					</v-col>
 					<v-col align="center">
@@ -84,8 +84,8 @@
 						<br />
 
 						<p class="body-2 description">
-							InvoiceKit à pour but de supporter un maximum de
-							plateformes, à commencer par l'ordinateurs et les
+							InvoiceKit a pour but de supporter un maximum de
+							plateformes, à commencer par l'ordinateur et les
 							iPhones.
 						</p>
 					</v-col>
