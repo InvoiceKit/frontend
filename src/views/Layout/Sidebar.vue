@@ -3,8 +3,7 @@
 		<template v-slot:prepend>
 			<v-container class="mt-2 d-flex flex-row">
 				<v-sheet
-					class="ml-3 team_sheet"
-					color="green accent-2"
+					class="ml-3 team_sheet secondary--bg"
 					height="60"
 					width="60"
 				>
@@ -22,7 +21,7 @@
 			</v-container>
 		</template>
 
-		<v-list nav>
+		<v-list>
 			<v-list-item
 				v-for="item in items"
 				link
@@ -80,23 +79,3 @@ export default class Sidebar extends Vue {
 	];
 }
 </script>
-
-<style>
-.team_name {
-	font-size: 14pt;
-	font-weight: 600;
-}
-
-.team_sheet {
-	border-radius: 14px !important;
-	box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.2) !important;
-}
-
-.v-navigation-drawer {
-	background: linear-gradient(
-		to left,
-		rgba(245, 245, 245, 0.4),
-		rgba(250, 250, 250, 0.4)
-	) !important;
-}
-</style>

@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<p class="display-1">
+		<p class="header">
 			Paramètres du compte
 			<br />
 			<span class="overline"

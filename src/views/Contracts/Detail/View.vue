@@ -2,7 +2,7 @@
 	<v-container>
 		<v-row class="mb-4">
 			<v-col>
-				<p class="display-1">Contrat d'entretien</p>
+				<p class="header">Contrat d'entretien</p>
 			</v-col>
 
 			<v-spacer />

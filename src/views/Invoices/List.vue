@@ -2,7 +2,7 @@
 	<v-container fluid>
 		<v-row class="mb-4">
 			<v-col>
-				<p class="display-1">Factures</p>
+				<p class="header">Factures</p>
 			</v-col>
 
 			<v-spacer />

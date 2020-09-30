@@ -2,7 +2,7 @@
 	<v-container fluid>
 		<v-row>
 			<v-col>
-				<p class="display-1">Fiche client</p>
+				<p class="header">Fiche client</p>
 			</v-col>
 
 			<v-spacer />

@@ -2,7 +2,7 @@
 	<v-container fluid>
 		<v-row>
 			<v-col cols="10">
-				<p class="display-1">
+				<p class="header">
 					Bienvenue sur votre tableau de bord
 					<br />
 					<span class="overline">Résumé de l'activité</span>
@@ -72,9 +72,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-.display-1 {
-	line-height: 2rem !important;
-}
-</style>

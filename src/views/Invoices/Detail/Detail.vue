@@ -1,8 +1,8 @@
 <template>
 	<v-container v-if="invoice.type">
-		<v-row class="mb-4">
+		<v-row>
 			<v-col>
-				<p class="display-1">
+				<p class="header">
 					{{ invoice.type === "invoice" ? "Facture" : "Devis" }}
 					{{ invoice.number || "non numérotée" }}
 					<br />

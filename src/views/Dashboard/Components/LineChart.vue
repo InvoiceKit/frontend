@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card class="primary--bg--card">
 		<v-card-title>Factures et contrats</v-card-title>
 
 		<v-card-text>

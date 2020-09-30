@@ -1,0 +1,110 @@
+/*
+ * Colors
+ */
+.primary--text {
+	color: #18b699 !important;
+}
+
+.primary--bg {
+	background: #18b699 !important;
+}
+
+.primary--bg--card {
+	background: rgba(24, 182, 153, 0.5) !important;
+}
+
+.secondary--text {
+	color: #d22b48 !important;
+}
+
+.secondary--bg {
+	background: #d22b48 !important;
+}
+
+:root {
+	--primary: #18b699;
+	--secondary: #d22b48;
+}
+
+/* 
+ * Header 
+ */
+.header {
+	line-height: 2rem !important;
+	font-size: 26pt;
+	font-weight: 600;
+}
+
+/*
+ * Sidebar
+ */
+.team_name {
+	font-size: 14pt;
+	font-weight: 600;
+}
+
+.team_sheet {
+	border-radius: 14px !important;
+	box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.v-list-item--active {
+	border-right: 5px solid var(--secondary);
+}
+
+.v-navigation-drawer {
+	background: linear-gradient(
+		to left,
+		rgba(245, 245, 245, 0.4),
+		rgba(250, 250, 250, 0.4)
+	) !important;
+}
+
+/*
+ * Application
+ */
+html,
+body {
+	background: linear-gradient(
+		-45deg,
+		rgba(243, 245, 248, 1),
+		rgba(227, 230, 235, 1)
+	);
+}
+
+.v-application {
+	background: transparent !important;
+	font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Ubuntu !important;
+}
+
+.v-card {
+	background: radial-gradient(95%, #ffffff, #d7d7dc);
+	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.075) !important;
+	border: none !important;
+}
+
+.v-card-title {
+	background: transparent !important;
+}
+
+.v-dialog,
+.v-card {
+	border-radius: 18px !important;
+}
+
+.v-data-table,
+tr {
+	background: transparent !important;
+}
+
+.v-app-bar,
+header {
+	background: linear-gradient(
+		to top,
+		rgba(245, 245, 240, 0.025),
+		rgba(255, 255, 255, 0.025)
+	) !important;
+	border: none !important;
+	box-shadow: none !important;
+}
