@@ -23,7 +23,10 @@ import { Component, Vue } from "vue-property-decorator";
 		try {
 			await this.$store.dispatch("auth/get");
 		} catch (ex) {
+			// Logout
 			console.log(ex);
+			localStorage.removeItem("token");
+			window.location.reload();
 		}
 	},
 })
