@@ -40,7 +40,7 @@
 				</template>
 
 				<template #item.updatedAt="{ item }">{{
-					new Date(item.updatedAt).toLocaleString()
+					new Date(item.updatedAt).toLocaleDateString()
 				}}</template>
 
 				<template #item.status="{ item }">
