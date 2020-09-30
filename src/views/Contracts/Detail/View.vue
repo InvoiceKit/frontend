@@ -189,7 +189,10 @@ import { DataTableHeader } from "vuetify";
 })
 export default class ContractView extends Vue {
 	contract!: Contract;
-	editedItem?: Change;
+	editedItem?: Change = {
+		description: "",
+		date: "",
+	};
 	editionDialog = false;
 	showEdit = false;
 
