@@ -51,8 +51,9 @@ export default {
 }
 
 .desc {
+	display: inline-block;
 	border-top: 2px solid #f94144;
-	padding-top: 5px;
+	margin-top: 5px;
 	font-size: 9pt !important;
 }
 </style>
