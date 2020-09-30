@@ -24,32 +24,41 @@
 							prepend-icon="mdi-account"
 							v-model.trim="payload.firstName"
 						/>
-
+					</v-col>
+					<v-col>
+						<v-text-field
+							label="Nom"
+							v-model.trim="payload.lastName"
+						/>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col>
 						<v-text-field
 							label="Société"
 							prepend-icon="mdi-domain"
 							v-model.trim="payload.company"
 						/>
+					</v-col>
 
+					<v-col>
 						<v-text-field
 							label="Email"
 							prepend-icon="mdi-email"
 							v-model.trim="payload.email"
 						/>
 					</v-col>
-
+				</v-row>
+				<v-row>
 					<v-col>
-						<v-text-field
-							label="Nom"
-							v-model.trim="payload.lastName"
-						/>
-
 						<v-text-field
 							label="Téléphone"
 							prepend-icon="mdi-phone"
 							v-model.trim="payload.phone"
 						/>
 					</v-col>
+
+					<v-col></v-col>
 				</v-row>
 			</v-card-text>
 
