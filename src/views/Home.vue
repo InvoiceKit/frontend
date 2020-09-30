@@ -134,15 +134,21 @@
 
 <style scoped>
 .header-section {
+	display: block;
+	padding: 1rem;
 	height: 65vh;
 	background: rgba(245, 245, 245, 0.85);
 }
 
 .header-section-2 {
-	height: 50vh;
+	min-height: 50vh;
+	padding: 1rem;
+	display: block;
 }
 
 .header-section-3 {
+	padding: 1rem;
+	display: block;
 	min-height: 40vh;
 	background: rgba(245, 245, 245, 0.45);
 }
@@ -153,7 +159,7 @@
 }
 
 .description-dev {
-	width: 500px;
+	max-width: 500px;
 	text-align: justify;
 }
 </style>
