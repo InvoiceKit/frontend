@@ -78,6 +78,9 @@ export default class AddField extends Vue {
 	change() {
 		if (this.field) {
 			this.payload = this.field;
+
+			// Fix line-break
+			this.payload.name = this.payload.name.split("<br />").join("\n");
 		}
 	}
 
@@ -89,6 +92,9 @@ export default class AddField extends Vue {
 	}
 
 	async save() {
+		// Add line-break
+		this.payload.name = this.payload.name.split("\n").join("<br />");
+
 		if (this.field) {
 			// Find index
 			let index = this.syncInvoice.fields.indexOf(this.field);
