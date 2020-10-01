@@ -51,6 +51,10 @@
 			</v-col>
 			<v-col>
 				<PriceTable />
+
+				<br />
+
+				<DetailCard />
 			</v-col>
 		</v-row>
 
@@ -60,6 +64,7 @@
 
 <script lang="ts">
 import PriceTable from "./Components/PriceTable.vue";
+import DetailCard from "./Components/DetailCard.vue";
 import Table from "./Table.vue";
 import EditionDialog from "./Dialogs/EditionDialog.vue";
 
@@ -72,6 +77,7 @@ import api from "@/store/api";
 @Component({
 	components: {
 		PriceTable,
+		DetailCard,
 		Table,
 		EditionDialog,
 	},
