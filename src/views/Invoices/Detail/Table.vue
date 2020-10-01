@@ -16,7 +16,7 @@
 			:items-per-page="-1"
 		>
 			<template #item.name="{ item }">
-				<p v-html="item.name" />
+				<span v-html="item.name" />
 			</template>
 			<template #item.actions="{ item }">
 				<v-btn icon @click="deleteItem(item)">
