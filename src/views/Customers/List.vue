@@ -30,7 +30,7 @@
 			<v-data-table
 				:search="search"
 				:headers="headers"
-				:items="customers.items"
+				:items="customersList"
 				@click:row="open"
 			>
 				<template v-slot:item.name="{ item }">
@@ -55,16 +55,10 @@ import { Customer, Pagination } from "@/types";
 	components: {
 		AddCustomer,
 	},
-	computed: {
-		...mapState("customers", ["customers"]),
-	},
-	async mounted() {
-		this.$store.dispatch("customers/fetch");
-	},
 })
 export default class CustomerList extends Vue {
 	addDialog = false;
-	customers!: Pagination<Customer>;
+	customersList: Array<Customer> = [];
 	search = "";
 	headers = [
 		{
@@ -84,6 +78,21 @@ export default class CustomerList extends Vue {
 			value: "phone",
 		},
 	];
+
+	async mounted() {
+		try {
+			let data = (await this.$store.dispatch("customers/fetch")).data;
+
+			data.items.forEach((customer: Customer) => {
+				this.customersList.push({
+					name: `${customer.firstName} ${customer.lastName} ${customer.company}`,
+					...customer,
+				});
+			});
+		} catch (ex) {
+			console.log(ex);
+		}
+	}
 
 	open(row: any) {
 		this.$router.push(`/customers/${row.id}`);
