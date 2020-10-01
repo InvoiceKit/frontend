@@ -39,10 +39,6 @@
 					<span v-else>{{ item.customer.company }}</span>
 				</template>
 
-				<template #item.updatedAt="{ item }">{{
-					new Date(item.updatedAt).toLocaleDateString()
-				}}</template>
-
 				<template #item.status="{ item }">
 					<StatusLabel :status="item.status" />
 				</template>
@@ -71,7 +67,7 @@ export default {
 			},
 			{
 				text: "Dernière modification",
-				value: "updatedAt",
+				value: "dateUpdate",
 			},
 			{
 				text: "Statut",
@@ -94,6 +90,9 @@ export default {
 
 				this.contractsList.push({
 					name: `${customer.firstName} ${customer.lastName} ${customer.company}`,
+					dateUpdate: new Date(
+						contract.updatedAt
+					).toLocaleDateString(),
 					...contract,
 				});
 			}

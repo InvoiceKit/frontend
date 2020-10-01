@@ -39,10 +39,6 @@
 					<span v-else>{{ item.customer.company }}</span>
 				</template>
 
-				<template #item.updatedAt="{ item }">{{
-					new Date(item.updatedAt).toLocaleDateString()
-				}}</template>
-
 				<template #item.status="{ item }">
 					<StatusLabel :status="item.status" />
 				</template>
@@ -75,7 +71,7 @@ export default class InvoiceList extends Vue {
 		},
 		{
 			text: "Dernière modification",
-			value: "updatedAt",
+			value: "date",
 		},
 		{
 			text: "Statut",
@@ -98,6 +94,7 @@ export default class InvoiceList extends Vue {
 
 				this.invoiceList.push({
 					name: `${fn} ${ln} ${company}`,
+					date: new Date(invoice.updatedAt).toLocaleDateString(),
 					...invoice,
 				});
 			}
