@@ -19,8 +19,6 @@ export interface Invoice {
 	customer?: Customer;
 	addressID?: string;
 	address?: Address;
-	updatedAt: string;
-	createdAt: string;
 	dueDate: string;
 	type: InvoiceType;
 	status: InvoiceStatus;
@@ -32,6 +30,8 @@ export interface Invoice {
 }
 
 export interface InvoiceOutput extends Invoice {
+	updatedAt: string;
+	createdAt: string;
 	no_vat: number;
 	vat: number;
 	total: number;

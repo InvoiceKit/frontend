@@ -50,7 +50,7 @@
 <script lang="ts">
 import { mapState } from "vuex";
 import { Component, Vue } from "vue-property-decorator";
-import { Invoice, Pagination } from "@/types";
+import { Invoice, InvoiceOutput, Pagination } from "@/types";
 
 @Component({
 	computed: {
@@ -79,7 +79,7 @@ export default class InvoiceList extends Vue {
 		},
 	];
 
-	invoices!: Pagination<Invoice>;
+	invoices!: Pagination<InvoiceOutput>;
 
 	invoiceList: Array<any> = [];
 
