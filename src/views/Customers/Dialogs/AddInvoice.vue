@@ -14,6 +14,17 @@
 			/>
 
 			<v-card-actions>
+				<input type="file" hidden ref="upload" @change="importFile" />
+				<v-btn
+					text
+					color="orange darken-2"
+					@click="$refs.upload.click()"
+					:disabled="!payload.addressID"
+				>
+					<v-icon left> mdi-arrow-up</v-icon>
+					Importer
+				</v-btn>
+
 				<v-spacer />
 
 				<v-btn text color="red" @click="show = false">Annuler</v-btn>
@@ -35,12 +46,14 @@ import { Component, Vue, Prop, PropSync, Watch } from "vue-property-decorator";
 import {
 	Address,
 	Customer,
+	Field,
 	Invoice,
 	InvoiceStatus,
 	InvoiceType,
 } from "@/types";
 import { DataTableHeader } from "vuetify";
 import { mapState } from "vuex";
+import Fields from "@/views/Settings/Fields.vue";
 
 const defaultPayload: Invoice = {
 	customerID: "",
@@ -93,6 +106,48 @@ export default class AddInvoice extends Vue {
 
 	handle(address: any) {
 		this.payload.addressID = address.value ? address.item.id : null;
+	}
+
+	importFile(event: any) {
+		// Init a FileReader
+		const reader = new FileReader();
+
+		// Callback
+		reader.onload = async (e: any) => {
+			// Parse JSON
+			const result = JSON.parse(e.target.result);
+
+			// Fill fields
+			this.payload.type =
+				result.type === "Devis"
+					? InvoiceType.quote
+					: InvoiceType.invoice;
+			this.payload.number = result.number.trim();
+			this.payload.deposit = result.acompte.amount * 1;
+			this.payload.promotion = result.promotion.percentage * 1;
+
+			// Fill entries
+			result.entries.forEach((entry: any) => {
+				const field: Field = {
+					name: entry.name.trim(),
+					price: entry.price * 1,
+					vat: entry.tva * 1,
+				};
+
+				// Fix old invoice format
+				if (field.vat == null || field.vat == undefined) {
+					field.vat = (result.tva !== null ? result.tva : 10) * 1;
+				}
+
+				this.payload.fields.push(field);
+			});
+
+			// Save file
+			await this.save();
+		};
+
+		// Read file
+		reader.readAsText(event.target.files[0]);
 	}
 
 	/**
