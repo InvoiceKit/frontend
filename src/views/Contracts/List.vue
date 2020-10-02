@@ -49,8 +49,11 @@
 
 <script>
 import { mapState } from "vuex";
+import date from "@/mixins/date";
+
 export default {
 	name: "ContractsList",
+	mixins: [date],
 	computed: {
 		...mapState("contracts", ["contracts"]),
 	},
@@ -90,9 +93,7 @@ export default {
 
 				this.contractsList.push({
 					name: `${customer.firstName} ${customer.lastName} ${customer.company}`,
-					dateUpdate: new Date(
-						contract.updatedAt
-					).toLocaleDateString(),
+					dateUpdate: this.getString(new Date(contract.updatedAt)),
 					...contract,
 				});
 			}

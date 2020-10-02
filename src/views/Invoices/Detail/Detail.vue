@@ -8,7 +8,7 @@
 					<br />
 					<span class="overline">
 						Dernière modification le
-						{{ new Date(invoice.updatedAt).toLocaleDateString() }}
+						{{ getString(new Date(invoice.updatedAt)) }}
 					</span>
 				</p>
 			</v-col>
@@ -73,6 +73,7 @@ import store from "@/store/index";
 import { mapState } from "vuex";
 import { InvoiceOutput } from "@/types";
 import api from "@/store/api";
+import date from "@/mixins/date";
 
 @Component({
 	components: {
@@ -81,6 +82,8 @@ import api from "@/store/api";
 		Table,
 		EditionDialog,
 	},
+
+	mixins: [date],
 
 	computed: {
 		...mapState("invoices", ["invoice"]),

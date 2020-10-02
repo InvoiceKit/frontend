@@ -91,22 +91,14 @@
 					<tr>
 						<td>Date de création</td>
 						<td>
-							{{
-								new Date(
-									contract.createdAt
-								).toLocaleDateString()
-							}}
+							{{ getString(new Date(contract.createdAt)) }}
 						</td>
 					</tr>
 
 					<tr>
 						<td>Dernière mise à jour</td>
 						<td>
-							{{
-								new Date(
-									contract.updatedAt
-								).toLocaleDateString()
-							}}
+							{{ getString(new Date(contract.updatedAt)) }}
 						</td>
 					</tr>
 				</tbody>
@@ -162,12 +154,15 @@ import store from "@/store";
 import { mapState } from "vuex";
 import { Change, Contract } from "@/types";
 import { DataTableHeader } from "vuetify";
+import date from "@/mixins/date";
 
 @Component({
 	components: {
 		EditionDialog,
 		AddChange,
 	},
+
+	mixins: [date],
 
 	computed: {
 		...mapState("contracts", ["contract"]),

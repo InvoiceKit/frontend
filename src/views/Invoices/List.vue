@@ -51,11 +51,14 @@
 import { mapState } from "vuex";
 import { Component, Vue } from "vue-property-decorator";
 import { Invoice, InvoiceOutput, Pagination } from "@/types";
+import date from "@/mixins/date";
 
 @Component({
 	computed: {
 		...mapState("invoices", ["invoices"]),
 	},
+
+	mixins: [date],
 })
 export default class InvoiceList extends Vue {
 	addDialog = false;
@@ -94,7 +97,7 @@ export default class InvoiceList extends Vue {
 
 				this.invoiceList.push({
 					name: `${fn} ${ln} ${company}`,
-					date: new Date(invoice.updatedAt).toLocaleDateString(),
+					date: this.getString(new Date(invoice.updatedAt)),
 					...invoice,
 				});
 			}
