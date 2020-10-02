@@ -8,10 +8,16 @@
 			<v-spacer />
 
 			<v-col align="right">
-				<v-btn @click="searchByDate" text large>
+				<v-btn @click="searchByDate(true)" text large>
+					<v-icon left> mdi-calendar-month </v-icon>
+
+					Année dernière
+				</v-btn>
+
+				<v-btn @click="searchByDate(false)" text large>
 					<v-icon left> mdi-clock </v-icon>
 
-					Par mois
+					Ce mois
 				</v-btn>
 			</v-col>
 
@@ -114,9 +120,15 @@ export default {
 			this.$router.push(`/contracts/${item.id}`);
 		},
 
-		searchByDate() {
+		searchByDate(lastYear) {
 			if (this.search == "") {
-				this.search = this.getMMYYYY(new Date());
+				let date = new Date();
+
+				if (lastYear) {
+					date.setFullYear(date.getFullYear() - 1);
+				}
+
+				this.search = this.getMMYYYY(date);
 			} else {
 				this.search = "";
 			}
