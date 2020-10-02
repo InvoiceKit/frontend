@@ -35,7 +35,7 @@ export default {
 							beginAtZero: true,
 							precision: 0,
 							min: 0,
-							max: 10,
+							suggestedMax: 10,
 						},
 					},
 				],
