@@ -14,5 +14,9 @@ export default {
 				d.getFullYear(),
 			].join("/");
 		},
+
+		getMMYYYY(d) {
+			return [this.pad(d.getMonth() + 1), d.getFullYear()].join("/");
+		},
 	},
 };

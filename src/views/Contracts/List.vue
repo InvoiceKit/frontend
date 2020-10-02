@@ -1,11 +1,19 @@
 <template>
 	<v-container fluid>
-		<v-row class="mb-4">
+		<v-row class="mb-4" align="center" justify="center">
 			<v-col>
 				<p class="header">Contrats</p>
 			</v-col>
 
 			<v-spacer />
+
+			<v-col align="right">
+				<v-btn @click="searchByDate" text large>
+					<v-icon left> mdi-clock </v-icon>
+
+					Par mois
+				</v-btn>
+			</v-col>
 
 			<v-col cols="4" align="right">
 				<v-text-field
@@ -69,8 +77,8 @@ export default {
 				value: "serial",
 			},
 			{
-				text: "Dernière modification",
-				value: "dateUpdate",
+				text: "Date de création",
+				value: "dateCreate",
 			},
 			{
 				text: "Statut",
@@ -93,7 +101,7 @@ export default {
 
 				this.contractsList.push({
 					name: `${customer.firstName} ${customer.lastName} ${customer.company}`,
-					dateUpdate: this.getString(new Date(contract.updatedAt)),
+					dateCreate: this.getString(new Date(contract.createdAt)),
 					...contract,
 				});
 			}
@@ -104,6 +112,14 @@ export default {
 	methods: {
 		open(item) {
 			this.$router.push(`/contracts/${item.id}`);
+		},
+
+		searchByDate() {
+			if (this.search == "") {
+				this.search = this.getMMYYYY(new Date());
+			} else {
+				this.search = "";
+			}
 		},
 	},
 };
