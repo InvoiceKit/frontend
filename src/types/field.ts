@@ -1,5 +1,5 @@
 export interface Field {
-	name: string;
-	vat: number;
-	price: number;
+    name: string;
+    vat: number;
+    price: number;
 }

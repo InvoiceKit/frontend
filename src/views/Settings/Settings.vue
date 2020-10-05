@@ -2,27 +2,28 @@
 	<v-container>
 		<p class="header">
 			Paramètres du compte
-			<br />
+			<br/>
 			<span class="overline"
-				>Gérez votre compte et l'apparence des factures</span
+			>Gérez votre compte et l'apparence des factures</span
 			>
 		</p>
 
 		<v-row>
-			<v-col cols="12" sm="12" md="6" lg="7">
-				<Profile />
-				<br />
-				<ImageSettings />
+			<v-col cols="12" lg="7" md="6" sm="12">
+				<Profile/>
+				<br/>
+				<ImageSettings/>
 			</v-col>
-			<v-col cols="12" sm="12" md="6" lg="5">
-				<Fields />
-				<br />
-				<Detail />
+			<v-col cols="12" lg="5" md="6" sm="12">
+				<Fields/>
+				<br/>
+				<Detail/>
 			</v-col>
 
 			<v-footer absolute
-				>En cas de problème technique, contactez un administrateur avec
-				votre identifiant unique.</v-footer
+			>En cas de problème technique, contactez un administrateur avec
+				votre identifiant unique.
+			</v-footer
 			>
 		</v-row>
 	</v-container>
@@ -34,7 +35,7 @@ import ImageSettings from "./Image.vue";
 import Fields from "./Fields.vue";
 import Detail from "./Detail.vue";
 
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 
 @Component({
 	components: {
@@ -44,5 +45,6 @@ import { Component, Vue } from "vue-property-decorator";
 		Detail,
 	},
 })
-export default class Settings extends Vue {}
+export default class Settings extends Vue {
+}
 </script>

@@ -4,12 +4,13 @@
 			<v-card-title>Mettre à jour</v-card-title>
 
 			<v-alert
-				dense
-				type="error"
-				class="ma-4"
-				transition="slide-y-transition"
 				v-model="error"
-				>Impossible de mettre à jour le fichier.</v-alert
+				class="ma-4"
+				dense
+				transition="slide-y-transition"
+				type="error"
+			>Impossible de mettre à jour le fichier.
+			</v-alert
 			>
 
 			<v-card-text>
@@ -17,89 +18,89 @@
 					<v-col>
 						<h4>Type de fichier</h4>
 
-						<v-radio-group mandatory v-model="item.type">
-							<v-radio value="invoice" label="Facture" />
-							<v-radio value="quote" label="Devis" />
+						<v-radio-group v-model="item.type" mandatory>
+							<v-radio label="Facture" value="invoice"/>
+							<v-radio label="Devis" value="quote"/>
 						</v-radio-group>
 					</v-col>
 
 					<v-col>
 						<h4>Statut</h4>
 
-						<v-radio-group mandatory v-model="item.status">
-							<v-radio value="paid" label="Payé" />
-							<v-radio value="waiting" label="En attente" />
-							<v-radio value="canceled" label="Annulé" />
+						<v-radio-group v-model="item.status" mandatory>
+							<v-radio label="Payé" value="paid"/>
+							<v-radio label="En attente" value="waiting"/>
+							<v-radio label="Annulé" value="canceled"/>
 						</v-radio-group>
 					</v-col>
 				</v-row>
 
 				<v-text-field
-					prepend-icon="mdi-pound"
-					label="Numéro du fichier"
 					v-model.trim="item.number"
 					append-icon="mdi-close"
+					label="Numéro du fichier"
+					prepend-icon="mdi-pound"
 					@click:append="item.number = ''"
 				/>
 
 				<v-row>
 					<v-col>
 						<v-text-field
-							label="Acompte"
 							v-model.number="item.deposit"
+							append-icon="mdi-close"
+							label="Acompte"
 							prepend-icon="mdi-bank-transfer"
 							suffix="€"
-							append-icon="mdi-close"
 							@click:append="item.deposit = 0"
 						/>
 
 						<v-text-field
-							label="Date d'échéance"
 							v-model.trim="item.dueDate"
-							prepend-icon="mdi-calendar-clock"
-							placeholder="JJ/MM/AAAA"
 							append-icon="mdi-close"
+							label="Date d'échéance"
+							placeholder="JJ/MM/AAAA"
+							prepend-icon="mdi-calendar-clock"
 							@click:append="item.dueDate = ''"
 						/>
 					</v-col>
 					<v-col>
 						<v-text-field
+							v-model.number="item.promotion"
+							append-icon="mdi-close"
 							label="Remise commerciale"
 							prepend-icon="mdi-label-percent"
-							v-model.number="item.promotion"
 							suffix="%"
-							append-icon="mdi-close"
 							@click:append="item.promotion = 0"
 						/>
 					</v-col>
 				</v-row>
 
 				<v-textarea
+					v-model.trim="item.additional_text"
 					label="Informations complémentaires"
 					prepend-icon="mdi-information"
-					v-model.trim="item.additional_text"
 				/>
 			</v-card-text>
 
 			<v-card-actions>
-				<v-spacer />
+				<v-spacer/>
 
-				<v-btn text color="orange" @click="show = !show">Annuler</v-btn>
+				<v-btn color="orange" text @click="show = !show">Annuler</v-btn>
 
-				<v-btn text color="green" @click="save">Mettre à jour</v-btn>
+				<v-btn color="green" text @click="save">Mettre à jour</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>
 </template>
 
 <script lang="ts">
-import { Invoice } from "@/types";
-import { Component, PropSync, Prop, Vue, Watch } from "vue-property-decorator";
+import {Invoice} from "@/types";
+import {Component, PropSync, Vue} from "vue-property-decorator";
 
 @Component
 export default class EditInvoice extends Vue {
-	@PropSync("display", { type: Boolean }) show!: boolean;
-	@PropSync("invoice", { type: Object }) readonly item!: Invoice;
+	@PropSync("display", {type: Boolean}) show!: boolean;
+	@PropSync("invoice", {type: Object}) readonly item!: Invoice;
 
 	error = false;
 

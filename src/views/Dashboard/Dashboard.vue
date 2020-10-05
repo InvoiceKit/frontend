@@ -4,17 +4,17 @@
 			<v-col cols="10">
 				<p class="header">
 					Bienvenue sur votre tableau de bord
-					<br />
+					<br/>
 					<span class="overline">Résumé de l'activité</span>
 				</p>
 			</v-col>
 
-			<v-col cols="2" align="right">
-				<v-btn to="/settings" icon large color="orange darken-1">
+			<v-col align="right" cols="2">
+				<v-btn color="orange darken-1" icon large to="/settings">
 					<v-icon>mdi-cog</v-icon>
 				</v-btn>
 
-				<v-btn @click="logout" icon large color="red">
+				<v-btn color="red" icon large @click="logout">
 					<v-icon>mdi-logout-variant</v-icon>
 				</v-btn>
 			</v-col>
@@ -22,26 +22,25 @@
 
 		<v-row>
 			<v-col cols="12" lg="8" md="8" sm="12">
-				<LineChart />
+				<LineChart/>
 			</v-col>
 
 			<v-col cols="12" lg="4" md="4" sm="12">
-				<Revenue />
+				<Revenue/>
 
-				<br />
+				<br/>
 
-				<Invoices />
+				<Invoices/>
 
-				<br />
+				<br/>
 
-				<Other />
+				<Other/>
 			</v-col>
 		</v-row>
 	</v-container>
 </template>
 
 <script>
-import { mapState } from "vuex";
 import LineChart from "./Components/LineChart.vue";
 import Revenue from "./Components/Revenue.vue";
 import Invoices from "./Components/Invoices.vue";

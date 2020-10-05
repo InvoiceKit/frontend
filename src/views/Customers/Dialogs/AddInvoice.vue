@@ -1,40 +1,41 @@
 <template>
-	<v-dialog v-model="show" @click:outside="show = false" max-width="700px">
+	<v-dialog v-model="show" max-width="700px" @click:outside="show = false">
 		<v-card>
 			<v-card-title>Créer une facture</v-card-title>
 
 			<v-card-subtitle>Séléctionnez une adresse</v-card-subtitle>
 
 			<v-data-table
+				:headers="headers"
+				:items="customer.addresses"
 				show-select
 				single-select
 				@item-selected="handle"
-				:items="customer.addresses"
-				:headers="headers"
 			/>
 
 			<v-card-actions>
-				<input type="file" hidden ref="upload" @change="importFile" />
+				<input ref="upload" hidden type="file" @change="importFile"/>
 				<v-btn
-					text
-					color="orange darken-2"
-					@click="$refs.upload.click()"
 					:disabled="!payload.addressID"
+					color="orange darken-2"
+					text
+					@click="$refs.upload.click()"
 				>
 					<v-icon left> mdi-arrow-up</v-icon>
 					Importer
 				</v-btn>
 
-				<v-spacer />
+				<v-spacer/>
 
-				<v-btn text color="red" @click="show = false">Annuler</v-btn>
+				<v-btn color="red" text @click="show = false">Annuler</v-btn>
 
 				<v-btn
-					text
-					color="green"
 					:disabled="!payload.addressID"
+					color="green"
+					text
 					@click="save"
-					>Ajouter</v-btn
+				>Ajouter
+				</v-btn
 				>
 			</v-card-actions>
 		</v-card>
@@ -42,18 +43,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, PropSync, Watch } from "vue-property-decorator";
-import {
-	Address,
-	Customer,
-	Field,
-	Invoice,
-	InvoiceStatus,
-	InvoiceType,
-} from "@/types";
-import { DataTableHeader } from "vuetify";
-import { mapState } from "vuex";
-import Fields from "@/views/Settings/Fields.vue";
+import {Component, Prop, PropSync, Vue, Watch} from "vue-property-decorator";
+import {Customer, Field, Invoice, InvoiceStatus, InvoiceType,} from "@/types";
+import {DataTableHeader} from "vuetify";
+import {mapState} from "vuex";
 
 const defaultPayload: Invoice = {
 	customerID: "",
@@ -74,7 +67,7 @@ const defaultPayload: Invoice = {
 	},
 })
 export default class AddInvoice extends Vue {
-	@PropSync("display", { type: Boolean }) show!: boolean;
+	@PropSync("display", {type: Boolean}) show!: boolean;
 	@Prop(Object) readonly customer!: Customer;
 
 	invoice!: Invoice;

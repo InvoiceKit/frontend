@@ -5,7 +5,7 @@
 				<p class="header">
 					{{ invoice.type === "invoice" ? "Facture" : "Devis" }}
 					{{ invoice.number || "non numérotée" }}
-					<br />
+					<br/>
 					<span class="overline">
 						Dernière modification le
 						{{ getString(new Date(invoice.updatedAt)) }}
@@ -13,33 +13,33 @@
 				</p>
 			</v-col>
 
-			<v-spacer />
+			<v-spacer/>
 
 			<v-col align="right">
-				<v-btn to="/invoices" exact icon large>
+				<v-btn exact icon large to="/invoices">
 					<v-icon>mdi-arrow-left</v-icon>
 				</v-btn>
 
 				<v-btn
-					target="_blank"
 					:href="host + '/invoices/' + invoice.id + '/render'"
+					color="blue darken-1"
 					icon
 					large
-					color="blue darken-1"
+					target="_blank"
 				>
 					<v-icon>mdi-printer</v-icon>
 				</v-btn>
 
 				<v-btn
-					@click="editionDialog = true"
+					color="orange darken-1"
 					icon
 					large
-					color="orange darken-1"
+					@click="editionDialog = true"
 				>
 					<v-icon>mdi-pencil</v-icon>
 				</v-btn>
 
-				<v-btn @click="remove" icon large color="red darken-1">
+				<v-btn color="red darken-1" icon large @click="remove">
 					<v-icon>mdi-delete</v-icon>
 				</v-btn>
 			</v-col>
@@ -47,18 +47,18 @@
 
 		<v-row>
 			<v-col cols="9">
-				<Table />
+				<Table/>
 			</v-col>
 			<v-col>
-				<PriceTable />
+				<PriceTable/>
 
-				<br />
+				<br/>
 
-				<DetailCard />
+				<DetailCard/>
 			</v-col>
 		</v-row>
 
-		<EditionDialog :display.sync="editionDialog" :invoice.sync="invoice" />
+		<EditionDialog :display.sync="editionDialog" :invoice.sync="invoice"/>
 	</v-container>
 </template>
 
@@ -68,10 +68,10 @@ import DetailCard from "./Components/DetailCard.vue";
 import Table from "./Table.vue";
 import EditionDialog from "./Dialogs/EditionDialog.vue";
 
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import store from "@/store/index";
-import { mapState } from "vuex";
-import { InvoiceOutput } from "@/types";
+import {mapState} from "vuex";
+import {InvoiceOutput} from "@/types";
 import api from "@/store/api";
 import date from "@/mixins/date";
 
@@ -103,7 +103,7 @@ import date from "@/mixins/date";
 
 			next();
 		} catch {
-			next({ path: "/invoices" });
+			next({path: "/invoices"});
 		}
 	},
 })

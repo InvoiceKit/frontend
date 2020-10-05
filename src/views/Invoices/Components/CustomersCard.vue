@@ -1,27 +1,27 @@
 <template>
 	<v-card class="mt-10">
 		<v-card-title>
-			<CardIcon color="indigo" icon="account-group" />
+			<CardIcon color="indigo" icon="account-group"/>
 
 			Clients
 
-			<v-spacer />
+			<v-spacer/>
 
 			<v-text-field
 				v-model="search"
+				hide-details
 				label="Chercher un client"
 				solo-inverted
-				hide-details
 			/>
 		</v-card-title>
 
 		<v-data-table
-			v-on:item-selected="handleSelection"
-			:search="search"
 			:headers="headers"
 			:items="customers.items"
+			:search="search"
 			:single-select="true"
 			show-select
+			v-on:item-selected="handleSelection"
 		>
 			<template #item.name="{ item }">
 				{{ item.firstName }} <b>{{ item.lastName }}</b>
@@ -31,9 +31,9 @@
 </template>
 
 <script lang="ts">
-import { Customer, Invoice } from "@/types";
-import { Component, PropSync, Vue, Watch } from "vue-property-decorator";
-import { mapState } from "vuex";
+import {Invoice} from "@/types";
+import {Component, PropSync, Vue} from "vue-property-decorator";
+import {mapState} from "vuex";
 
 @Component({
 	computed: {
@@ -45,7 +45,7 @@ import { mapState } from "vuex";
 	},
 })
 export default class InformationCard extends Vue {
-	@PropSync("payload", { type: Object }) syncedPayload!: Invoice;
+	@PropSync("payload", {type: Object}) syncedPayload!: Invoice;
 
 	search = "";
 

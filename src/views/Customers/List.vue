@@ -5,22 +5,22 @@
 				<p class="header">Clients</p>
 			</v-col>
 
-			<v-spacer />
+			<v-spacer/>
 
 			<v-col cols="5">
 				<v-text-field
+					v-model="search"
 					hide-details
+					label="Chercher un client"
 					single-line
 					solo-inverted
-					label="Chercher un client"
-					v-model="search"
 				/>
 			</v-col>
 
-			<v-spacer />
+			<v-spacer/>
 
 			<v-col align="right">
-				<v-btn icon @click="addDialog = true" large>
+				<v-btn icon large @click="addDialog = true">
 					<v-icon>mdi-plus</v-icon>
 				</v-btn>
 			</v-col>
@@ -28,9 +28,9 @@
 
 		<v-card>
 			<v-data-table
-				:search="search"
 				:headers="headers"
 				:items="customersList"
+				:search="search"
 				@click:row="open"
 			>
 				<template v-slot:item.name="{ item }">
@@ -40,16 +40,14 @@
 			</v-data-table>
 		</v-card>
 
-		<AddCustomer :display.sync="addDialog" />
+		<AddCustomer :display.sync="addDialog"/>
 	</v-container>
 </template>
 
 <script lang="ts">
 import AddCustomer from "./Dialogs/AddCustomer.vue";
-
-import { mapState } from "vuex";
-import { Component, Vue } from "vue-property-decorator";
-import { Customer, Pagination } from "@/types";
+import {Component, Vue} from "vue-property-decorator";
+import {Customer} from "@/types";
 
 @Component({
 	components: {
@@ -58,7 +56,7 @@ import { Customer, Pagination } from "@/types";
 })
 export default class CustomerList extends Vue {
 	addDialog = false;
-	customersList: Array<Customer> = [];
+	customersList: Array<any> = [];
 	search = "";
 	headers = [
 		{

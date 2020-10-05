@@ -5,14 +5,14 @@
 				<p class="header">Fiche client</p>
 			</v-col>
 
-			<v-spacer />
+			<v-spacer/>
 
 			<v-col align="right">
-				<v-btn to="/customers" exact icon large>
+				<v-btn exact icon large to="/customers">
 					<v-icon>mdi-arrow-left</v-icon>
 				</v-btn>
 
-				<v-btn @click="deleteCustomer" icon large color="red darken-1">
+				<v-btn color="red darken-1" icon large @click="deleteCustomer">
 					<v-icon>mdi-delete</v-icon>
 				</v-btn>
 			</v-col>
@@ -20,14 +20,14 @@
 
 		<v-row>
 			<v-col cols="12" md="6" sm="12">
-				<Profile />
-				<br />
-				<Invoices />
+				<Profile/>
+				<br/>
+				<Invoices/>
 			</v-col>
 			<v-col cols="12" md="6" sm="12">
-				<Addresses />
-				<br />
-				<Contracts />
+				<Addresses/>
+				<br/>
+				<Contracts/>
 			</v-col>
 		</v-row>
 	</v-container>
@@ -40,8 +40,8 @@ import Contracts from "./Contracts.vue";
 import Addresses from "./Addresses.vue";
 import AddAddress from "../Dialogs/AddAddress.vue";
 import AddCustomer from "../Dialogs/AddCustomer.vue";
-import { Component, Vue } from "vue-property-decorator";
-import { mapState } from "vuex";
+import {Component, Vue} from "vue-property-decorator";
+import {mapState} from "vuex";
 
 @Component({
 	components: {

@@ -2,9 +2,9 @@
 	<v-card>
 		<v-card-title>
 			Liste des objets
-			<v-spacer />
+			<v-spacer/>
 
-			<v-btn @click="addItem" text color="blue">
+			<v-btn color="blue" text @click="addItem">
 				<v-icon left>mdi-plus</v-icon>
 				Ajouter un objet
 			</v-btn>
@@ -16,7 +16,7 @@
 			:items-per-page="-1"
 		>
 			<template #item.name="{ item }">
-				<span v-html="item.name" />
+				<span v-html="item.name"/>
 			</template>
 			<template #item.actions="{ item }">
 				<v-btn icon @click="deleteItem(item)">
@@ -31,17 +31,17 @@
 
 		<AddField
 			:display.sync="editionDialog"
-			:invoice="invoice"
 			:field="editedItem"
+			:invoice="invoice"
 		/>
 	</v-card>
 </template>
 
 <script lang="ts">
 import AddField from "./Dialogs/AddField.vue";
-import { Component, Vue, Watch } from "vue-property-decorator";
-import { mapState } from "vuex";
-import { InvoiceOutput, Field, Invoice } from "@/types";
+import {Component, Vue} from "vue-property-decorator";
+import {mapState} from "vuex";
+import {Field, InvoiceOutput} from "@/types";
 
 @Component({
 	components: {

@@ -1,10 +1,10 @@
 <template>
 	<v-app>
-		<Sidebar />
+		<Sidebar/>
 
 		<v-main>
 			<v-container fluid>
-				<router-view />
+				<router-view/>
 			</v-container>
 		</v-main>
 	</v-app>
@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import Sidebar from "@/views/Layout/Sidebar.vue";
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 
 @Component({
 	components: {
@@ -30,5 +30,6 @@ import { Component, Vue } from "vue-property-decorator";
 		}
 	},
 })
-export default class Main extends Vue {}
+export default class Main extends Vue {
+}
 </script>

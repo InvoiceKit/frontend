@@ -6,15 +6,15 @@
 			<Chart
 				v-if="loaded"
 				:data="data"
-				:options="options"
 				:height="200"
+				:options="options"
 			/>
 		</v-card-text>
 	</v-card>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 import Chart from "./Chart";
 
 export default {
@@ -22,7 +22,7 @@ export default {
 		Chart,
 	},
 
-	computed: { ...mapState("charts", ["charts"]) },
+	computed: {...mapState("charts", ["charts"])},
 
 	data: () => ({
 		loaded: false,

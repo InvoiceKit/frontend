@@ -1,15 +1,15 @@
 <template>
 	<v-card>
-		<v-row class="pa-2" align="center" justify="center">
-			<v-col cols="2" md="3" sm="6" class="ml-2 mr-2">
+		<v-row align="center" class="pa-2" justify="center">
+			<v-col class="ml-2 mr-2" cols="2" md="3" sm="6">
 				<v-sheet
 					:color="color"
-					rounded
 					elevation="4"
 					height="74px"
+					rounded
 					width="74px"
 				>
-					<v-row align="center" justify="center" class="fill-height">
+					<v-row align="center" class="fill-height" justify="center">
 						<v-col align="center">
 							<v-icon x-large>mdi-{{ icon }}</v-icon>
 						</v-col>
@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 
 @Component
 export default class ChartCard extends Vue {

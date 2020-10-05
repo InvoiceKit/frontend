@@ -2,35 +2,36 @@
 	<v-card>
 		<v-card-title>
 			Contrats
-			<v-spacer />
-			<v-btn text color="blue" @click="display = true">
-				<v-icon left>mdi-plus</v-icon>Ajouter un contrat
+			<v-spacer/>
+			<v-btn color="blue" text @click="display = true">
+				<v-icon left>mdi-plus</v-icon>
+				Ajouter un contrat
 			</v-btn>
 		</v-card-title>
 
 		<v-data-table
-			no-data-text="Aucun contrats n'a été crée pour ce client"
-			:items="customer.contracts"
 			:headers="headers"
+			:items="customer.contracts"
+			no-data-text="Aucun contrats n'a été crée pour ce client"
 			@click:row="open"
 		>
 			<template #item.updatedAt="{ item }">
 				{{ new Date(item.updatedAt).toLocaleDateString() }}
 			</template>
 			<template #item.status="{ item }">
-				<StatusLabel :status="item.status" />
+				<StatusLabel :status="item.status"/>
 			</template>
 		</v-data-table>
 
-		<AddContract :display.sync="display" :customer="customer" />
+		<AddContract :customer="customer" :display.sync="display"/>
 	</v-card>
 </template>
 
 <script lang="ts">
 import AddContract from "../Dialogs/AddContract.vue";
-import { mapState } from "vuex";
-import { Component, Vue } from "vue-property-decorator";
-import { Customer } from "@/types";
+import {mapState} from "vuex";
+import {Component, Vue} from "vue-property-decorator";
+import {Customer} from "@/types";
 
 @Component({
 	components: {

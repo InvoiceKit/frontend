@@ -1,46 +1,46 @@
 <template>
 	<v-card>
-		<v-card-title> Paramètres </v-card-title>
+		<v-card-title> Paramètres</v-card-title>
 
 		<v-card-text>
 			<v-row>
 				<v-col>
 					<v-text-field
-						label="Nom de la team"
 						v-model="payload.name"
+						label="Nom de la team"
 						placeholder="Exemple: InvoiceKit"
 					></v-text-field>
 
 					<v-text-field
+						v-model="payload.company"
 						label="Nom juridique de l'entreprise"
 						placeholder="Exemple: SAS InvoiceKit"
-						v-model="payload.company"
 					></v-text-field>
 
 					<v-text-field
+						v-model="payload.zip"
 						label="Code postal du siège social"
 						placeholder="Exemple: 59000"
-						v-model="payload.zip"
 					></v-text-field>
 				</v-col>
 
 				<v-col>
 					<v-text-field
+						v-model="payload.website"
 						label="Site internet de l'entreprise"
 						placeholder="Exemple: https://www.invoicekit.io"
-						v-model="payload.website"
 					></v-text-field>
 
 					<v-text-field
+						v-model="payload.address"
 						label="Adresse du siège social"
 						placeholder="Exemple: 12 rue des lilas"
-						v-model="payload.address"
 					></v-text-field>
 
 					<v-text-field
+						v-model="payload.city"
 						label="Ville du siège social"
 						placeholder="Exemple: Lille"
-						v-model="payload.city"
 					></v-text-field>
 				</v-col>
 			</v-row>
@@ -49,14 +49,15 @@
 		<v-card-actions>
 			<v-spacer></v-spacer>
 
-			<v-btn @click="save" text color="green">Sauvegarder</v-btn>
+			<v-btn color="green" text @click="save">Sauvegarder</v-btn>
 		</v-card-actions>
 
-		<v-snackbar v-model="success" text timeout="3000" color="success"
-			>Les paramètres ont bien étés enregistrés.</v-snackbar
+		<v-snackbar v-model="success" color="success" text timeout="3000"
+		>Les paramètres ont bien étés enregistrés.
+		</v-snackbar
 		>
 
-		<v-snackbar v-model="error" text timeout="3000" color="danger">
+		<v-snackbar v-model="error" color="danger" text timeout="3000">
 			Impossible de sauvegarder, vérifiez que les champs sont bien
 			remplis.
 		</v-snackbar>
@@ -64,9 +65,9 @@
 </template>
 
 <script lang="ts">
-import { mapState } from "vuex";
-import { Component, Vue, Watch } from "vue-property-decorator";
-import { Team } from "@/types";
+import {mapState} from "vuex";
+import {Component, Vue, Watch} from "vue-property-decorator";
+import {Team} from "@/types";
 
 @Component({
 	computed: {
@@ -83,7 +84,7 @@ export default class Profile extends Vue {
 	 *
 	 * @param { Team } team
 	 */
-	@Watch("team", { deep: true, immediate: true })
+	@Watch("team", {deep: true, immediate: true})
 	load(team: Team) {
 		if (team) {
 			this.payload = team;

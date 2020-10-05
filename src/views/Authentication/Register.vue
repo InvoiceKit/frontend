@@ -1,13 +1,13 @@
 <template>
 	<v-app>
-		<v-container fluid fill-height>
+		<v-container fill-height fluid>
 			<v-row align="center" justify="center">
-				<v-col cols="5" align="right">
-					<img src="@/assets/logo.png" />
+				<v-col align="right" cols="5">
+					<img src="@/assets/logo.png"/>
 				</v-col>
 
 				<v-col cols="7">
-					<v-card outlined max-width="500px">
+					<v-card max-width="500px" outlined>
 						<v-card-title>Bienvenue sur InvoiceKit</v-card-title>
 
 						<v-card-text>
@@ -39,19 +39,20 @@
 								v-model="password"
 								:rules="rules.password"
 								label="Mot de passe"
-								type="password"
 								prepend-icon="mdi-lock"
+								type="password"
 							></v-text-field>
 						</v-card-text>
 
 						<v-card-actions>
-							<v-btn to="/authentication" text color="grey">
-								<v-icon left>mdi-arrow-left</v-icon>Retour
+							<v-btn color="grey" text to="/authentication">
+								<v-icon left>mdi-arrow-left</v-icon>
+								Retour
 							</v-btn>
 
 							<v-spacer></v-spacer>
 
-							<v-btn @click="register" text color="green">S'inscrire</v-btn>
+							<v-btn color="green" text @click="register">S'inscrire</v-btn>
 						</v-card-actions>
 					</v-card>
 				</v-col>
@@ -61,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 
 @Component
 export default class Register extends Vue {

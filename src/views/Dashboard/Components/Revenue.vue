@@ -8,23 +8,23 @@
 			<v-row>
 				<v-col>
 					<span class="value"> {{ total }} € </span>
-					<br />
+					<br/>
 					<span class="overline desc">Validé et en attente</span>
 
-					<br />
-					<br />
+					<br/>
+					<br/>
 
 					<span class="value">
 						{{ charts.prices.canceled.value }} €
 					</span>
-					<br />
+					<br/>
 					<span class="overline desc">Factures annulées</span>
 				</v-col>
 				<v-col>
 					<span class="value">
 						{{ charts.prices.waiting.value }} €
 					</span>
-					<br />
+					<br/>
 					<span class="overline desc">En attente de paiement</span>
 				</v-col>
 			</v-row>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 
 export default {
 	name: "Revenue",

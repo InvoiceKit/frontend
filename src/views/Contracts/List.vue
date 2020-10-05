@@ -1,33 +1,33 @@
 <template>
 	<v-container fluid>
-		<v-row class="mb-4" align="center" justify="center">
+		<v-row align="center" class="mb-4" justify="center">
 			<v-col>
 				<p class="header">Contrats</p>
 			</v-col>
 
-			<v-spacer />
+			<v-spacer/>
 
 			<v-col align="right">
-				<v-btn @click="searchByDate(true)" text large>
-					<v-icon left> mdi-calendar-month </v-icon>
+				<v-btn large text @click="searchByDate(true)">
+					<v-icon left> mdi-calendar-month</v-icon>
 
 					Année dernière
 				</v-btn>
 
-				<v-btn @click="searchByDate(false)" text large>
-					<v-icon left> mdi-clock </v-icon>
+				<v-btn large text @click="searchByDate(false)">
+					<v-icon left> mdi-clock</v-icon>
 
 					Ce mois
 				</v-btn>
 			</v-col>
 
-			<v-col cols="4" align="right">
+			<v-col align="right" cols="4">
 				<v-text-field
+					v-model="search"
 					hide-details
+					label="Chercher un contrat"
 					single-line
 					solo-inverted
-					label="Chercher un contrat"
-					v-model="search"
 				>
 					<v-icon slot="append" @click="search = ''">
 						mdi-close
@@ -38,9 +38,9 @@
 
 		<v-card>
 			<v-data-table
-				:search="search"
 				:headers="headers"
 				:items="contractsList"
+				:search="search"
 				@click:row="open"
 			>
 				<template #item.name="{ item }">
@@ -51,52 +51,56 @@
 						<b>{{ item.customer.lastName }}</b>
 
 						<span v-if="item.customer.company"
-							>&nbsp;({{ item.customer.company }})</span
+						>&nbsp;({{ item.customer.company }})</span
 						>
 					</span>
 					<span v-else>{{ item.customer.company }}</span>
 				</template>
 
 				<template #item.status="{ item }">
-					<StatusLabel :status="item.status" />
+					<StatusLabel :status="item.status"/>
 				</template>
 			</v-data-table>
 		</v-card>
 	</v-container>
 </template>
 
-<script>
-import { mapState } from "vuex";
-import date from "@/mixins/date";
+<script lang="ts">
+import {mapState} from "vuex";
+import DateMixin from "@/mixins/date";
+import {Component, Mixins} from "vue-property-decorator";
+import {Contract, Pagination} from "@/types";
 
-export default {
-	name: "ContractsList",
-	mixins: [date],
+@Component({
 	computed: {
-		...mapState("contracts", ["contracts"]),
-	},
-	data: () => ({
-		search: "",
-		headers: [
-			{
-				text: "Nom complet ou entreprise",
-				value: "name",
-			},
-			{
-				text: "Numéro de série",
-				value: "serial",
-			},
-			{
-				text: "Date de création",
-				value: "dateCreate",
-			},
-			{
-				text: "Statut",
-				value: "status",
-			},
-		],
-		contractsList: [],
-	}),
+		...mapState('contracts', [
+			'contracts'
+		])
+	}
+})
+export default class ContractsList extends Mixins(DateMixin) {
+	contracts!: Pagination<Contract>
+	search = ""
+	headers = [
+		{
+			text: "Nom complet ou entreprise",
+			value: "name",
+		},
+		{
+			text: "Numéro de série",
+			value: "serial",
+		},
+		{
+			text: "Date de création",
+			value: "dateCreate",
+		},
+		{
+			text: "Statut",
+			value: "status",
+		},
+	]
+	contractsList: Array<any> = []
+
 	async mounted() {
 		try {
 			// Update
@@ -107,32 +111,31 @@ export default {
 
 			// Set list
 			for (const contract of this.contracts.items) {
-				const customer = contract.customer;
+				const customer = contract.customer!;
 
 				this.contractsList.push({
 					name: `${customer.firstName} ${customer.lastName} ${customer.company}`,
-					dateCreate: this.getString(new Date(contract.createdAt)),
+					dateCreate: this.getString(new Date(contract.createdAt!)),
 					...contract,
 				});
 			}
 		} catch (ex) {
 			console.log(ex);
 		}
-	},
-	methods: {
-		open(item) {
-			this.$router.push(`/contracts/${item.id}`);
-		},
+	}
 
-		searchByDate(lastYear) {
-			let date = new Date();
+	open(item: Contract) {
+		this.$router.push(`/contracts/${item.id}`);
+	}
 
-			if (lastYear) {
-				date.setFullYear(date.getFullYear() - 1);
-			}
+	searchByDate(lastYear: boolean) {
+		let date = new Date();
 
-			this.search = this.getMMYYYY(date);
-		},
-	},
-};
+		if (lastYear) {
+			date.setFullYear(date.getFullYear() - 1);
+		}
+
+		this.search = this.getMMYYYY(date);
+	}
+}
 </script>

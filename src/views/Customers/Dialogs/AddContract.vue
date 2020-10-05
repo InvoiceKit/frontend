@@ -1,29 +1,30 @@
 <template>
-	<v-dialog v-model="show" @click:outside="show = false" max-width="700px">
+	<v-dialog v-model="show" max-width="700px" @click:outside="show = false">
 		<v-card>
 			<v-card-title>Ajouter un contrat d'entretien</v-card-title>
 
 			<v-card-subtitle>Séléctionnez une adresse</v-card-subtitle>
 
 			<v-data-table
+				:headers="headers"
+				:items="customer.addresses"
 				show-select
 				single-select
 				@item-selected="handle"
-				:items="customer.addresses"
-				:headers="headers"
 			/>
 
 			<v-card-actions>
-				<v-spacer />
+				<v-spacer/>
 
-				<v-btn text color="red" @click="show = false">Annuler</v-btn>
+				<v-btn color="red" text @click="show = false">Annuler</v-btn>
 
 				<v-btn
-					text
-					color="green"
 					:disabled="!payload.addressID"
+					color="green"
+					text
 					@click="save"
-					>Ajouter</v-btn
+				>Ajouter
+				</v-btn
 				>
 			</v-card-actions>
 		</v-card>
@@ -31,10 +32,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, PropSync, Watch } from "vue-property-decorator";
-import { Address, Contract, ContractStatus, Customer } from "@/types";
-import { DataTableHeader } from "vuetify";
-import { mapState } from "vuex";
+import {Component, Prop, PropSync, Vue, Watch} from "vue-property-decorator";
+import {Contract, ContractStatus, Customer} from "@/types";
+import {DataTableHeader} from "vuetify";
+import {mapState} from "vuex";
 
 const defaultPayload: Contract = {
 	customerID: "",
@@ -52,7 +53,7 @@ const defaultPayload: Contract = {
 	},
 })
 export default class AddContract extends Vue {
-	@PropSync("display", { type: Boolean }) show!: boolean;
+	@PropSync("display", {type: Boolean}) show!: boolean;
 	@Prop(Object) readonly customer!: Customer;
 
 	contract!: Contract;

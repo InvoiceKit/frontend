@@ -5,24 +5,24 @@
 				<p class="header">Factures</p>
 			</v-col>
 
-			<v-spacer />
+			<v-spacer/>
 
-			<v-col cols="4" align="right">
+			<v-col align="right" cols="4">
 				<v-text-field
+					v-model="search"
 					hide-details
+					label="Chercher une facture"
 					single-line
 					solo-inverted
-					label="Chercher une facture"
-					v-model="search"
 				/>
 			</v-col>
 		</v-row>
 
 		<v-card>
 			<v-data-table
-				:search="search"
 				:headers="headers"
 				:items="invoiceList"
+				:search="search"
 				@click:row="open"
 			>
 				<template #item.name="{ item }">
@@ -33,14 +33,14 @@
 						<b>{{ item.customer.lastName }}</b>
 
 						<span v-if="item.customer.company"
-							>&nbsp;({{ item.customer.company }})</span
+						>&nbsp;({{ item.customer.company }})</span
 						>
 					</span>
 					<span v-else>{{ item.customer.company }}</span>
 				</template>
 
 				<template #item.status="{ item }">
-					<StatusLabel :status="item.status" />
+					<StatusLabel :status="item.status"/>
 				</template>
 			</v-data-table>
 		</v-card>
@@ -48,20 +48,17 @@
 </template>
 
 <script lang="ts">
-import { mapState } from "vuex";
-import { Component, Vue } from "vue-property-decorator";
-import { Invoice, InvoiceOutput, Pagination } from "@/types";
-import date from "@/mixins/date";
+import {mapState} from "vuex";
+import {Component, Mixins} from "vue-property-decorator";
+import {InvoiceOutput, Pagination} from "@/types";
+import DateMixin from "@/mixins/date"
 
 @Component({
 	computed: {
 		...mapState("invoices", ["invoices"]),
-	},
-
-	mixins: [date],
+	}
 })
-export default class InvoiceList extends Vue {
-	addDialog = false;
+export default class InvoiceList extends Mixins(DateMixin) {
 	search = "";
 	headers = [
 		{

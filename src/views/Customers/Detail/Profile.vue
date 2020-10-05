@@ -2,61 +2,62 @@
 	<v-card>
 		<v-card-title>
 			Informations
-			<v-spacer />
+			<v-spacer/>
 
-			<v-btn @click="display = true" text color="blue">
-				<v-icon left>mdi-pencil</v-icon>Modifier les informations
+			<v-btn color="blue" text @click="display = true">
+				<v-icon left>mdi-pencil</v-icon>
+				Modifier les informations
 			</v-btn>
 		</v-card-title>
 
 		<v-simple-table>
 			<tbody>
-				<tr>
-					<td>Nom complet</td>
-					<td>
-						{{ customer.firstName || "N/A" }}
-						{{ customer.lastName }}
-					</td>
-				</tr>
+			<tr>
+				<td>Nom complet</td>
+				<td>
+					{{ customer.firstName || "N/A" }}
+					{{ customer.lastName }}
+				</td>
+			</tr>
 
-				<tr>
-					<td>Entreprise</td>
-					<td>{{ customer.company || "N/A" }}</td>
-				</tr>
+			<tr>
+				<td>Entreprise</td>
+				<td>{{ customer.company || "N/A" }}</td>
+			</tr>
 
-				<tr>
-					<td>Email</td>
-					<td>
-						<template v-if="customer.email">
-							<a :href="'mailto:' + customer.email">{{
+			<tr>
+				<td>Email</td>
+				<td>
+					<template v-if="customer.email">
+						<a :href="'mailto:' + customer.email">{{
 								customer.email
 							}}</a>
-						</template>
-						<template v-else>N/A</template>
-					</td>
-				</tr>
+					</template>
+					<template v-else>N/A</template>
+				</td>
+			</tr>
 
-				<tr>
-					<td>Téléphone</td>
-					<td>{{ customer.phone || "N/A" }}</td>
-				</tr>
+			<tr>
+				<td>Téléphone</td>
+				<td>{{ customer.phone || "N/A" }}</td>
+			</tr>
 
-				<tr>
-					<td>Identifiant</td>
-					<td>{{ customer.id || "Erreur" }}</td>
-				</tr>
+			<tr>
+				<td>Identifiant</td>
+				<td>{{ customer.id || "Erreur" }}</td>
+			</tr>
 			</tbody>
 		</v-simple-table>
 
-		<add-customer :display.sync="display" :editedItem="customer" />
+		<add-customer :display.sync="display" :editedItem="customer"/>
 	</v-card>
 </template>
 
 <script lang="ts">
 import AddCustomer from "../Dialogs/AddCustomer.vue";
-import { Component, Vue } from "vue-property-decorator";
-import { mapState } from "vuex";
-import { Customer } from "@/types";
+import {Component, Vue} from "vue-property-decorator";
+import {mapState} from "vuex";
+import {Customer} from "@/types";
 
 @Component({
 	components: {

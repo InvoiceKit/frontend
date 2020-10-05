@@ -1,3 +1,3 @@
 export default {
-	host: "https://invoicekit.herokuapp.com",
+    host: "http://localhost:8080",
 };

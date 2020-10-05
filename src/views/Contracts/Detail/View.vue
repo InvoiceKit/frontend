@@ -5,23 +5,23 @@
 				<p class="header">Contrat d'entretien</p>
 			</v-col>
 
-			<v-spacer />
+			<v-spacer/>
 
-			<v-col cols="4" align="right">
-				<v-btn to="/contracts" exact icon large>
+			<v-col align="right" cols="4">
+				<v-btn exact icon large to="/contracts">
 					<v-icon>mdi-arrow-left</v-icon>
 				</v-btn>
 
 				<v-btn
-					@click="showEdit = true"
+					color="orange darken-1"
 					icon
 					large
-					color="orange darken-1"
+					@click="showEdit = true"
 				>
 					<v-icon>mdi-pencil</v-icon>
 				</v-btn>
 
-				<v-btn @click="remove" icon large color="red darken-1">
+				<v-btn color="red darken-1" icon large @click="remove">
 					<v-icon>mdi-delete</v-icon>
 				</v-btn>
 			</v-col>
@@ -30,31 +30,31 @@
 		<v-card>
 			<v-simple-table>
 				<tbody>
-					<tr>
-						<td>Statut</td>
-						<td>
-							<StatusLabel :status="contract.status" />
-						</td>
-					</tr>
+				<tr>
+					<td>Statut</td>
+					<td>
+						<StatusLabel :status="contract.status"/>
+					</td>
+				</tr>
 
-					<tr>
-						<td>Type de chaudière</td>
-						<td>{{ contract.type }}</td>
-					</tr>
+				<tr>
+					<td>Type de chaudière</td>
+					<td>{{ contract.type }}</td>
+				</tr>
 
-					<tr>
-						<td>Numéro de série</td>
-						<td>{{ contract.serial }}</td>
-					</tr>
+				<tr>
+					<td>Numéro de série</td>
+					<td>{{ contract.serial }}</td>
+				</tr>
 
-					<tr>
-						<td>Date de signature du contract</td>
-						<td>{{ contract.date || "N/A" }}</td>
-					</tr>
+				<tr>
+					<td>Date de signature du contract</td>
+					<td>{{ contract.date || "N/A" }}</td>
+				</tr>
 
-					<tr>
-						<td>Client</td>
-						<td>
+				<tr>
+					<td>Client</td>
+					<td>
 							<span
 								v-if="
 									contract.customer.firstName ||
@@ -68,61 +68,61 @@
 								</span>
 							</span>
 
-							<span v-else>{{ contract.customer.company }}</span>
+						<span v-else>{{ contract.customer.company }}</span>
 
-							<v-btn
-								icon
-								:to="`/customers/${contract.customer.id}`"
-							>
-								<v-icon>mdi-arrow-right</v-icon>
-							</v-btn>
-						</td>
-					</tr>
+						<v-btn
+							:to="`/customers/${contract.customer.id}`"
+							icon
+						>
+							<v-icon>mdi-arrow-right</v-icon>
+						</v-btn>
+					</td>
+				</tr>
 
-					<tr>
-						<td>Adresse</td>
-						<td>
-							{{ contract.address.line }},
-							{{ contract.address.zip }},
-							{{ contract.address.city }}
-						</td>
-					</tr>
+				<tr>
+					<td>Adresse</td>
+					<td>
+						{{ contract.address.line }},
+						{{ contract.address.zip }},
+						{{ contract.address.city }}
+					</td>
+				</tr>
 
-					<tr>
-						<td>Date de création</td>
-						<td>
-							{{ getString(new Date(contract.createdAt)) }}
-						</td>
-					</tr>
+				<tr>
+					<td>Date de création</td>
+					<td>
+						{{ getString(new Date(contract.createdAt)) }}
+					</td>
+				</tr>
 
-					<tr>
-						<td>Dernière mise à jour</td>
-						<td>
-							{{ getString(new Date(contract.updatedAt)) }}
-						</td>
-					</tr>
+				<tr>
+					<td>Dernière mise à jour</td>
+					<td>
+						{{ getString(new Date(contract.updatedAt)) }}
+					</td>
+				</tr>
 				</tbody>
 			</v-simple-table>
 		</v-card>
 
-		<br />
+		<br/>
 
 		<v-card v-if="contract.changes">
 			<v-card-title>
 				Changements
 
-				<v-spacer />
+				<v-spacer/>
 
-				<v-btn @click="addItem" text large color="blue darken-1">
+				<v-btn color="blue darken-1" large text @click="addItem">
 					<v-icon left>mdi-plus</v-icon>
 					Ajouter un changement
 				</v-btn>
 			</v-card-title>
 
 			<v-data-table
-				:items-per-page="-1"
 				:headers="headers"
 				:items="contract.changes"
+				:items-per-page="-1"
 				no-data-text="Aucun changements enregistrés"
 			>
 				<template #item.actions="{ item }">
@@ -137,11 +137,11 @@
 			</v-data-table>
 		</v-card>
 
-		<edition-dialog :display.sync="showEdit" :contract.sync="contract" />
+		<edition-dialog :contract.sync="contract" :display.sync="showEdit"/>
 		<AddChange
-			:display.sync="editionDialog"
-			:contract.sync="contract"
 			:change="editedItem"
+			:contract.sync="contract"
+			:display.sync="editionDialog"
 		/>
 	</v-container>
 </template>
@@ -149,11 +149,11 @@
 <script lang="ts">
 import AddChange from "../Dialogs/AddChange.vue";
 import EditionDialog from "../Dialogs/EditionDialog.vue";
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import store from "@/store";
-import { mapState } from "vuex";
-import { Change, Contract } from "@/types";
-import { DataTableHeader } from "vuetify";
+import {mapState} from "vuex";
+import {Change, Contract} from "@/types";
+import {DataTableHeader} from "vuetify";
 import date from "@/mixins/date";
 
 @Component({
@@ -178,7 +178,7 @@ import date from "@/mixins/date";
 
 			next();
 		} catch {
-			next({ path: "/contracts" });
+			next({path: "/contracts"});
 		}
 	},
 })

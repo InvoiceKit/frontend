@@ -2,16 +2,17 @@
 	<v-card>
 		<v-card-title>
 			Factures
-			<v-spacer />
-			<v-btn @click="display = true" text color="blue">
-				<v-icon left>mdi-plus</v-icon>Créer une facture
+			<v-spacer/>
+			<v-btn color="blue" text @click="display = true">
+				<v-icon left>mdi-plus</v-icon>
+				Créer une facture
 			</v-btn>
 		</v-card-title>
 
 		<v-data-table
-			no-data-text="Aucune facture n'a été crée pour ce client"
-			:items="customer.invoices"
 			:headers="headers"
+			:items="customer.invoices"
+			no-data-text="Aucune facture n'a été crée pour ce client"
 			@click:row="open"
 		>
 			<template #item.type="{ item }">
@@ -21,19 +22,19 @@
 				{{ new Date(item.updatedAt).toLocaleDateString() }}
 			</template>
 			<template #item.status="{ item }">
-				<StatusLabel :status="item.status" />
+				<StatusLabel :status="item.status"/>
 			</template>
 		</v-data-table>
 
-		<AddInvoice :display.sync="display" :customer="customer" />
+		<AddInvoice :customer="customer" :display.sync="display"/>
 	</v-card>
 </template>
 
 <script lang="ts">
 import AddInvoice from "../Dialogs/AddInvoice.vue";
-import { mapState } from "vuex";
-import { Component, Vue } from "vue-property-decorator";
-import { Address, Customer, Invoice } from "@/types";
+import {mapState} from "vuex";
+import {Component, Vue} from "vue-property-decorator";
+import {Customer, Invoice} from "@/types";
 
 @Component({
 	components: {

@@ -1,5 +1,5 @@
 <template>
-	<v-navigation-drawer right permanent app>
+	<v-navigation-drawer app permanent right>
 		<v-list nav>
 			<v-list-item @click="showEdit = true">
 				<v-list-item-icon>
@@ -20,7 +20,7 @@
 			</v-list-item>
 		</v-list>
 
-		<v-divider />
+		<v-divider/>
 
 		<v-list nav>
 			<v-list-item @click="remove">
@@ -32,7 +32,7 @@
 				</v-list-item-content>
 			</v-list-item>
 
-			<v-list-item link exact to="/contracts">
+			<v-list-item exact link to="/contracts">
 				<v-list-item-icon>
 					<v-icon>mdi-close</v-icon>
 				</v-list-item-icon>
@@ -42,15 +42,15 @@
 			</v-list-item>
 		</v-list>
 
-		<edition-dialog :display.sync="showEdit" :contract.sync="contract" />
-		<add-change :display.sync="showChange" :contract.sync="contract" />
+		<edition-dialog :contract.sync="contract" :display.sync="showEdit"/>
+		<add-change :contract.sync="contract" :display.sync="showChange"/>
 	</v-navigation-drawer>
 </template>
 
 <script lang="ts">
-import { Contract } from "@/types";
-import { mapState } from "vuex";
-import { Component, Vue } from "vue-property-decorator";
+import {Contract} from "@/types";
+import {mapState} from "vuex";
+import {Component, Vue} from "vue-property-decorator";
 
 import EditionDialog from "../Dialogs/EditionDialog.vue";
 import AddChange from "../Dialogs/AddChange.vue";

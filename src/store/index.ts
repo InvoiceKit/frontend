@@ -11,12 +11,12 @@ import messages from "./messages";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-	modules: <any>{
-		charts,
-		auth,
-		customers,
-		invoices,
-		contracts,
-		messages,
-	},
+    modules: <any>{
+        charts,
+        auth,
+        customers,
+        invoices,
+        contracts,
+        messages,
+    },
 });

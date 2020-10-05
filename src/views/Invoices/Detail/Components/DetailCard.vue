@@ -1,12 +1,12 @@
 <template>
 	<v-card>
-		<v-card-title class="overline grey--text"> Détails </v-card-title>
+		<v-card-title class="overline grey--text"> Détails</v-card-title>
 
 		<v-simple-table>
 			<tbody>
-				<tr>
-					<td>Client</td>
-					<td>
+			<tr>
+				<td>Client</td>
+				<td>
 						<span v-if="invoice.customer.lastName">
 							{{ invoice.customer.firstName }}
 							{{ invoice.customer.lastName }}
@@ -16,31 +16,33 @@
 							</span>
 						</span>
 
-						<span v-else>
+					<span v-else>
 							{{ invoice.customer.company }}
 						</span>
-					</td>
-				</tr>
-				<tr height="75px">
-					<td>Adresse</td>
-					<td>
-						{{ invoice.address.line }},
-						{{ invoice.address.zip }}
-						{{ invoice.address.city }}
-					</td>
-				</tr>
+				</td>
+			</tr>
+			<tr height="75px">
+				<td>Adresse</td>
+				<td>
+					{{ invoice.address.line }},
+					{{ invoice.address.zip }}
+					{{ invoice.address.city }}
+				</td>
+			</tr>
 
-				<tr>
-					<td>Statut</td>
-					<td><StatusLabel :status="invoice.status" /></td>
-				</tr>
+			<tr>
+				<td>Statut</td>
+				<td>
+					<StatusLabel :status="invoice.status"/>
+				</td>
+			</tr>
 			</tbody>
 		</v-simple-table>
 	</v-card>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 
 export default {
 	name: "PriceTable",

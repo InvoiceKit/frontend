@@ -2,16 +2,17 @@
 	<v-dialog v-model="show" max-width="550px" @click:outside="show = !show">
 		<v-card>
 			<v-card-title
-				>{{ this.editedItem ? "Mettre à jour" : "Ajouter" }} un
-				client</v-card-title
+			>{{ this.editedItem ? "Mettre à jour" : "Ajouter" }} un
+				client
+			</v-card-title
 			>
 
 			<v-alert
-				dense
-				type="error"
-				class="ma-4"
-				transition="slide-y-transition"
 				v-model="error"
+				class="ma-4"
+				dense
+				transition="slide-y-transition"
+				type="error"
 			>
 				Impossible d'ajouter le client.
 			</v-alert>
@@ -20,41 +21,41 @@
 				<v-row>
 					<v-col>
 						<v-text-field
+							v-model.trim="payload.firstName"
 							label="Prénom"
 							prepend-icon="mdi-account"
-							v-model.trim="payload.firstName"
 						/>
 					</v-col>
 					<v-col>
 						<v-text-field
-							label="Nom"
 							v-model.trim="payload.lastName"
+							label="Nom"
 						/>
 					</v-col>
 				</v-row>
 				<v-row>
 					<v-col>
 						<v-text-field
+							v-model.trim="payload.company"
 							label="Société"
 							prepend-icon="mdi-domain"
-							v-model.trim="payload.company"
 						/>
 					</v-col>
 
 					<v-col>
 						<v-text-field
+							v-model.trim="payload.email"
 							label="Email"
 							prepend-icon="mdi-email"
-							v-model.trim="payload.email"
 						/>
 					</v-col>
 				</v-row>
 				<v-row>
 					<v-col>
 						<v-text-field
+							v-model.trim="payload.phone"
 							label="Téléphone"
 							prepend-icon="mdi-phone"
-							v-model.trim="payload.phone"
 						/>
 					</v-col>
 
@@ -63,21 +64,22 @@
 			</v-card-text>
 
 			<v-card-actions>
-				<v-spacer />
+				<v-spacer/>
 
-				<v-btn text color="red" @click="show = !show">Annuler</v-btn>
+				<v-btn color="red" text @click="show = !show">Annuler</v-btn>
 
-				<v-btn text color="green" @click="save">{{
-					this.editedItem ? "Mettre à jour " : "Ajouter"
-				}}</v-btn>
+				<v-btn color="green" text @click="save">{{
+						this.editedItem ? "Mettre à jour " : "Ajouter"
+					}}
+				</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>
 </template>
 
 <script lang="ts">
-import { Customer } from "@/types";
-import { Component, PropSync, Prop, Vue, Watch } from "vue-property-decorator";
+import {Customer} from "@/types";
+import {Component, Prop, PropSync, Vue, Watch} from "vue-property-decorator";
 
 const defaultPayload: Customer = {
 	firstName: "",
@@ -89,7 +91,7 @@ const defaultPayload: Customer = {
 
 @Component
 export default class AddCustomer extends Vue {
-	@PropSync("display", { type: Boolean }) show!: boolean;
+	@PropSync("display", {type: Boolean}) show!: boolean;
 	@Prop(Object) readonly editedItem: Customer | undefined;
 
 	payload: Customer = defaultPayload;

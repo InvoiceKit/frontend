@@ -1,17 +1,17 @@
 <template>
 	<div>
 		<template v-if="isLogged">
-			<template v-if="$route.path == '/'">
-				<router-view />
+			<template v-if="$route.path === '/'">
+				<router-view/>
 			</template>
 
 			<template v-else>
-				<Main />
+				<Main/>
 			</template>
 		</template>
 
 		<template v-else>
-			<router-view />
+			<router-view/>
 		</template>
 	</div>
 </template>
@@ -19,8 +19,8 @@
 <script lang="ts">
 import Main from "@/views/Layout/Main.vue";
 
-import { mapState } from "vuex";
-import { Component, Vue } from "vue-property-decorator";
+import {mapState} from "vuex";
+import {Component, Vue} from "vue-property-decorator";
 
 @Component({
 	computed: {
@@ -30,5 +30,6 @@ import { Component, Vue } from "vue-property-decorator";
 		Main,
 	},
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+}
 </script>

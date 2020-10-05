@@ -1,13 +1,13 @@
 <template>
 	<v-sheet
 		:color="color"
-		rounded
+		class="mt-n10 ml-n1 mr-4"
 		elevation="4"
 		height="90px"
+		rounded
 		width="90px"
-		class="mt-n10 ml-n1 mr-4"
 	>
-		<v-row align="center" justify="center" class="fill-height">
+		<v-row align="center" class="fill-height" justify="center">
 			<v-col align="center">
 				<v-icon x-large>mdi-{{ icon }}</v-icon>
 			</v-col>
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 
 @Component
 export default class CardIcon extends Vue {

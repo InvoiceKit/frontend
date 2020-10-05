@@ -1,23 +1,23 @@
 <template>
 	<v-card>
-		<v-card-title> Champs pour les factures </v-card-title>
+		<v-card-title> Champs pour les factures</v-card-title>
 
 		<v-simple-table>
 			<thead>
-				<tr>
-					<th>Champ</th>
-					<th width="50px">Actions</th>
-				</tr>
+			<tr>
+				<th>Champ</th>
+				<th width="50px">Actions</th>
+			</tr>
 			</thead>
 			<tbody>
-				<tr v-for="(field, idx) in fields" :key="idx">
-					<td>{{ field }}</td>
-					<td>
-						<v-btn icon @click="deleteField(idx)">
-							<v-icon>mdi-delete</v-icon>
-						</v-btn>
-					</td>
-				</tr>
+			<tr v-for="(field, idx) in fields" :key="idx">
+				<td>{{ field }}</td>
+				<td>
+					<v-btn icon @click="deleteField(idx)">
+						<v-icon>mdi-delete</v-icon>
+					</v-btn>
+				</td>
+			</tr>
 			</tbody>
 		</v-simple-table>
 
@@ -29,11 +29,11 @@
 			<v-btn color="green" text @click="save">Sauvegarder</v-btn>
 		</v-card-actions>
 
-		<v-snackbar v-model="success" text timeout="3000" color="success">
+		<v-snackbar v-model="success" color="success" text timeout="3000">
 			Les paramètres ont bien étés enregistrés.
 		</v-snackbar>
 
-		<v-snackbar v-model="error" text timeout="3000" color="danger">
+		<v-snackbar v-model="error" color="danger" text timeout="3000">
 			Impossible de sauvegarder, vérifiez que les champs sont bien
 			remplis.
 		</v-snackbar>
@@ -41,9 +41,9 @@
 </template>
 
 <script lang="ts">
-import { mapState } from "vuex";
-import { Component, Vue, Watch } from "vue-property-decorator";
-import { Team } from "@/types";
+import {mapState} from "vuex";
+import {Component, Vue, Watch} from "vue-property-decorator";
+import {Team} from "@/types";
 
 @Component({
 	computed: {
@@ -60,7 +60,7 @@ export default class Fields extends Vue {
 	 *
 	 * @param { Team } team
 	 */
-	@Watch("team", { deep: true, immediate: true })
+	@Watch("team", {deep: true, immediate: true})
 	load(team: Team) {
 		this.fields = team.fields;
 	}

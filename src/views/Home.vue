@@ -1,7 +1,7 @@
 <template>
 	<v-app>
 		<div class="header-section">
-			<v-row align="center" justify="center" class="fill-height">
+			<v-row align="center" class="fill-height" justify="center">
 				<v-col align="center">
 					<h1 class="display-2" style="font-weight: 600">
 						InvoiceKit
@@ -11,41 +11,43 @@
 						votre société
 					</p>
 
-					<br />
-					<br />
+					<br/>
+					<br/>
 
-					<v-btn text v-if="!isLogged" to="/authentication" large>
-						<v-icon left>mdi-account</v-icon>Connexion
+					<v-btn v-if="!isLogged" large text to="/authentication">
+						<v-icon left>mdi-account</v-icon>
+						Connexion
 					</v-btn>
 
-					<v-btn text v-else to="/dashboard" large>
-						<v-icon left>mdi-home</v-icon>Tableau de bord
+					<v-btn v-else large text to="/dashboard">
+						<v-icon left>mdi-home</v-icon>
+						Tableau de bord
 					</v-btn>
 				</v-col>
 			</v-row>
 		</div>
 		<div class="header-section-2">
 			<v-container>
-				<br />
+				<br/>
 
 				<p class="text-center headline">
 					Pourquoi utiliser InvoiceKit ?
 				</p>
 
-				<br />
+				<br/>
 
 				<v-row align="center" justify="center">
 					<v-col align="center">
-						<v-icon x-large class="primary--text">
+						<v-icon class="primary--text" x-large>
 							mdi-database-sync
 						</v-icon>
 
-						<br />
-						<br />
+						<br/>
+						<br/>
 
 						<h2>Synchronisé</h2>
 
-						<br />
+						<br/>
 
 						<p class="body-2 description">
 							Tous vos documents sont synchronisés en temps réel.
@@ -54,16 +56,16 @@
 						</p>
 					</v-col>
 					<v-col align="center">
-						<v-icon x-large class="primary--text">
+						<v-icon class="primary--text" x-large>
 							mdi-chart-bell-curve-cumulative
 						</v-icon>
 
-						<br />
-						<br />
+						<br/>
+						<br/>
 
 						<h2>Visualisation</h2>
 
-						<br />
+						<br/>
 
 						<p class="body-2 description">
 							Profitez d'un tableau de bord complet avec des
@@ -72,16 +74,16 @@
 						</p>
 					</v-col>
 					<v-col align="center">
-						<v-icon x-large class="primary--text">
+						<v-icon class="primary--text" x-large>
 							mdi-cellphone-link
 						</v-icon>
 
-						<br />
-						<br />
+						<br/>
+						<br/>
 
 						<h2>Accessibilité</h2>
 
-						<br />
+						<br/>
 
 						<p class="body-2 description">
 							InvoiceKit a pour but de supporter un maximum de
@@ -94,11 +96,11 @@
 		</div>
 		<div class="header-section-3">
 			<v-container>
-				<br />
+				<br/>
 
 				<p class="text-center headline">Développement et support</p>
 
-				<br />
+				<br/>
 
 				<v-row align="center" justify="center">
 					<v-col align="center">
@@ -109,18 +111,18 @@
 							le backend. VueJS, Vuex et Vuetify pour le frontend.
 							Swift avec SwiftUI pour l'application.
 
-							<br />
-							<br />
+							<br/>
+							<br/>
 
 							Le projet est actuellement en closed-source,
 							cependant si vous souhaitez contribuer, signaler des
 							bugs, proposer une suggestion, etc. vous pouvez me
 							contacter à l'adresse mail suivante:
 							<a href="mailto:victor.lourme@icloud.com"
-								>victor.lourme@icloud.com</a
+							>victor.lourme@icloud.com</a
 							>. Vous pouvez aussi
 							<a href="//github.com/vlourme"
-								>cliquer ici pour voir mon profil GitHub</a
+							>cliquer ici pour voir mon profil GitHub</a
 							>.
 						</p>
 					</v-col>
@@ -128,7 +130,7 @@
 			</v-container>
 		</div>
 
-		<v-footer> Victor Lourme © 2020 </v-footer>
+		<v-footer> Victor Lourme © 2020</v-footer>
 	</v-app>
 </template>
 
@@ -169,13 +171,15 @@
 -->
 
 <script lang="ts">
-import { mapState } from "vuex";
-import { Component, Vue } from "vue-property-decorator";
+import {mapState} from "vuex";
+import {Component, Vue} from "vue-property-decorator";
 
 @Component({
 	computed: {
 		...mapState("auth", ["isLogged"]),
 	},
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+	isLogged!: boolean
+}
 </script>

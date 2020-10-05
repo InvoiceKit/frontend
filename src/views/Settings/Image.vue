@@ -1,20 +1,21 @@
 <template>
 	<v-card>
-		<v-card-title>Bannière d'entreprise </v-card-title>
+		<v-card-title>Bannière d'entreprise</v-card-title>
 
 		<v-card-text>
 			<v-file-input
-				show-size
 				label="Image bannière (idéalement 1218x144 pixels)"
+				show-size
 				@change="save"
 			></v-file-input>
 		</v-card-text>
 
-		<v-snackbar v-model="success" text timeout="3000" color="success"
-			>Les paramètres ont bien étés enregistrés.</v-snackbar
+		<v-snackbar v-model="success" color="success" text timeout="3000"
+		>Les paramètres ont bien étés enregistrés.
+		</v-snackbar
 		>
 
-		<v-snackbar v-model="error" text timeout="3000" color="danger">
+		<v-snackbar v-model="error" color="danger" text timeout="3000">
 			Impossible de sauvegarder, vérifiez que les champs sont bien
 			remplis.
 		</v-snackbar>
@@ -22,11 +23,9 @@
 </template>
 
 <script lang="ts">
-import { mapState } from "vuex";
-import { Component, Vue, Watch } from "vue-property-decorator";
-import { Team } from "@/types";
-import Axios, { AxiosRequestConfig } from "axios";
-import FormData from "form-data";
+import {mapState} from "vuex";
+import {Component, Vue, Watch} from "vue-property-decorator";
+import {Team} from "@/types";
 
 @Component({
 	computed: {
@@ -43,7 +42,7 @@ export default class ImageSettings extends Vue {
 	 *
 	 * @param { Team } team
 	 */
-	@Watch("team", { deep: true, immediate: true })
+	@Watch("team", {deep: true, immediate: true})
 	load(team: Team) {
 		if (team) {
 			this.payload = team;
@@ -59,7 +58,7 @@ export default class ImageSettings extends Vue {
 		reader.onload = async (e: any) => {
 			const image = e.target.result.replace("data:image/png;base64,", "");
 
-			this.$store.dispatch("auth/setImage", {
+			await this.$store.dispatch("auth/setImage", {
 				params: {
 					id: this.payload?.id,
 				},

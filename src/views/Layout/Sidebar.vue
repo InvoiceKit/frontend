@@ -9,7 +9,7 @@
 				>
 					<v-row align="center" justify="center">
 						<v-col align="center">
-							<v-icon large> mdi-cube-outline </v-icon>
+							<v-icon large> mdi-cube-outline</v-icon>
 						</v-col>
 					</v-row>
 				</v-sheet>
@@ -24,9 +24,9 @@
 		<v-list>
 			<v-list-item
 				v-for="item in items"
-				link
-				:to="item.link"
 				:key="item.title"
+				:to="item.link"
+				link
 			>
 				<v-list-item-icon>
 					<v-icon>mdi-{{ item.icon }}</v-icon>
@@ -41,8 +41,8 @@
 </template>
 
 <script lang="ts">
-import { mapState } from "vuex";
-import { Component, Vue, PropSync } from "vue-property-decorator";
+import {mapState} from "vuex";
+import {Component, Vue} from "vue-property-decorator";
 
 @Component({
 	computed: {

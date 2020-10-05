@@ -1,49 +1,49 @@
 <template>
-	<v-dialog v-model="show" @click:outside="show = !show" max-width="450px">
+	<v-dialog v-model="show" max-width="450px" @click:outside="show = !show">
 		<v-card>
-			<v-card-title> Ajouter une adresse </v-card-title>
+			<v-card-title> Ajouter une adresse</v-card-title>
 
 			<v-alert
-				dense
-				type="error"
-				class="ma-4"
-				transition="slide-y-transition"
 				v-model="error"
+				class="ma-4"
+				dense
+				transition="slide-y-transition"
+				type="error"
 			>
 				Impossible d'ajouter l'adresse.
 			</v-alert>
 
 			<v-card-text>
 				<v-text-field
+					v-model.trim="payload.line"
 					label="Adresse"
 					prepend-icon="mdi-map-marker"
-					v-model.trim="payload.line"
 				/>
 
 				<v-row>
 					<v-col>
 						<v-text-field
+							v-model.trim="payload.zip"
 							label="Code postal"
 							prepend-icon="mdi-city-variant"
-							v-model.trim="payload.zip"
 						/>
 					</v-col>
 
 					<v-col>
 						<v-text-field
-							label="Ville"
 							v-model.trim="payload.city"
+							label="Ville"
 						/>
 					</v-col>
 				</v-row>
 			</v-card-text>
 
 			<v-card-actions>
-				<v-spacer />
+				<v-spacer/>
 
-				<v-btn text color="red" @click="show = !show">Annuler</v-btn>
+				<v-btn color="red" text @click="show = !show">Annuler</v-btn>
 
-				<v-btn text color="green" @click="save">Ajouter</v-btn>
+				<v-btn color="green" text @click="save">Ajouter</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>
@@ -51,8 +51,8 @@
 
 <script lang="ts">
 import "reflect-metadata";
-import { Component, Vue, Prop, PropSync, Watch } from "vue-property-decorator";
-import { Address } from "@/types";
+import {Component, PropSync, Vue, Watch} from "vue-property-decorator";
+import {Address} from "@/types";
 
 const defaultPayload: Address = {
 	line: "",
@@ -62,7 +62,7 @@ const defaultPayload: Address = {
 
 @Component
 export default class AddAddress extends Vue {
-	@PropSync("display", { type: Boolean }) show!: boolean;
+	@PropSync("display", {type: Boolean}) show!: boolean;
 
 	payload: Address = defaultPayload;
 
