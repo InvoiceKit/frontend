@@ -6,6 +6,7 @@ export interface Charts {
 	invoice: InvoiceStats;
 	price: InvoicePrices;
 	customer: number;
+	contracts_count: number;
 }
 
 export interface InvoiceStats {

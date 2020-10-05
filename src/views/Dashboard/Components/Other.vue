@@ -1,11 +1,20 @@
 <template>
 	<v-card v-if="charts.customers">
-		<v-card-title class="overline grey--text"> Clients </v-card-title>
+		<v-card-title class="overline grey--text"> Autres </v-card-title>
 
 		<v-card-text>
-			<span class="value"> {{ charts.customers }} </span>
-			<br />
-			<span class="overline desc">Clients</span>
+			<v-row>
+				<v-col>
+					<span class="value"> {{ charts.customers }} </span>
+					<br />
+					<span class="overline desc">Clients</span>
+				</v-col>
+				<v-col>
+					<span class="value"> {{ charts.contracts_count }} </span>
+					<br />
+					<span class="overline desc">Contrats</span>
+				</v-col>
+			</v-row>
 		</v-card-text>
 	</v-card>
 </template>
@@ -14,7 +23,7 @@
 import { mapState } from "vuex";
 
 export default {
-	name: "Customers",
+	name: "Other",
 	computed: {
 		...mapState("charts", ["charts"]),
 	},

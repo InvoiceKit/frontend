@@ -34,7 +34,7 @@
 
 				<br />
 
-				<Customers />
+				<Other />
 			</v-col>
 		</v-row>
 	</v-container>
@@ -45,14 +45,14 @@ import { mapState } from "vuex";
 import LineChart from "./Components/LineChart.vue";
 import Revenue from "./Components/Revenue.vue";
 import Invoices from "./Components/Invoices.vue";
-import Customers from "./Components/Customers.vue";
+import Other from "./Components/Other.vue";
 
 export default {
 	components: {
 		LineChart,
 		Revenue,
 		Invoices,
-		Customers,
+		Other,
 	},
 
 	async mounted() {
