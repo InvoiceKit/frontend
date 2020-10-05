@@ -7,7 +7,7 @@
 
 			<v-spacer/>
 
-			<v-col align="right">
+			<v-col align="right" cols="5">
 				<v-btn large text @click="searchByDate(true)">
 					<v-icon left> mdi-calendar-month</v-icon>
 
