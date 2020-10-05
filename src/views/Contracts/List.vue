@@ -28,7 +28,11 @@
 					solo-inverted
 					label="Chercher un contrat"
 					v-model="search"
-				/>
+				>
+					<v-icon slot="append" @click="search = ''">
+						mdi-close
+					</v-icon>
+				</v-text-field>
 			</v-col>
 		</v-row>
 
@@ -121,17 +125,13 @@ export default {
 		},
 
 		searchByDate(lastYear) {
-			if (this.search == "") {
-				let date = new Date();
+			let date = new Date();
 
-				if (lastYear) {
-					date.setFullYear(date.getFullYear() - 1);
-				}
-
-				this.search = this.getMMYYYY(date);
-			} else {
-				this.search = "";
+			if (lastYear) {
+				date.setFullYear(date.getFullYear() - 1);
 			}
+
+			this.search = this.getMMYYYY(date);
 		},
 	},
 };
