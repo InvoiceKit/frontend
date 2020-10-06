@@ -6,10 +6,11 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 		<link rel="icon" href="<%= BASE_URL %>favicon.ico" />
 		<title>InvoiceKit</title>
-		<link rel="stylesheet" href="<%= BASE_URL %>style/style.css" />
+		<link rel="prefetch" href="<%= BASE_URL %>style/style.css" as="style" onload="this.rel='stylesheet'" />
 		<link
-			rel="stylesheet"
+			rel="prefetch"
 			href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css"
+            as="style" onload="this.rel='stylesheet'"
 		/>
 	</head>
 
