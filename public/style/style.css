@@ -75,7 +75,7 @@ body {
 .v-application {
 	background: transparent !important;
 	font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
-		Roboto, Ubuntu !important;
+	Roboto, Ubuntu, sans-serif !important;
 }
 
 .v-card {

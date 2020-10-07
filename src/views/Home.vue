@@ -166,10 +166,6 @@
 }
 </style>
 
-<!--
-
--->
-
 <script lang="ts">
 import {mapState} from "vuex";
 import {Component, Vue} from "vue-property-decorator";
