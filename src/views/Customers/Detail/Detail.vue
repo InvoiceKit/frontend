@@ -7,7 +7,7 @@
 
 			<v-spacer/>
 
-			<v-col align="right">
+			<v-col class="text-right">
 				<v-btn exact icon large to="/customers">
 					<v-icon>mdi-arrow-left</v-icon>
 				</v-btn>
@@ -73,9 +73,6 @@ export default class CustomerDetail extends Vue {
 	// Address dialog
 	address = false;
 
-	// Edition dialog
-	edit = false;
-
 	/**
 	 * Delete a customer
 	 */
@@ -95,7 +92,7 @@ export default class CustomerDetail extends Vue {
 				},
 			});
 
-			this.$router.push("/customers");
+			await this.$router.push("/customers");
 		} catch {
 			alert("Impossible de supprimer le client.");
 		}

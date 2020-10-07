@@ -112,7 +112,7 @@ export default class AddField extends Vue {
 
 		this.$nextTick(async () => {
 			try {
-				this.$store.dispatch("invoices/update", {
+				await this.$store.dispatch("invoices/update", {
 					params: {
 						id: this.syncInvoice.id,
 					},

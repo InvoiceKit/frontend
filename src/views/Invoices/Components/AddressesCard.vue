@@ -26,7 +26,7 @@
 			/>
 		</template>
 		<template v-else>
-			<v-card-text align="center">
+			<v-card-text class="text-center">
 				Aucun client sélectionné.
 			</v-card-text>
 		</template>
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import {Invoice} from "@/types";
+import {Customer, Invoice} from "@/types";
 import {Component, PropSync, Vue, Watch} from "vue-property-decorator";
 import {mapState} from "vuex";
 
@@ -45,6 +45,8 @@ import {mapState} from "vuex";
 })
 export default class InformationCard extends Vue {
 	@PropSync("payload", {type: Object}) syncedPayload!: Invoice;
+
+	customer!: Customer
 
 	search = "";
 

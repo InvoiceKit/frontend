@@ -8,14 +8,14 @@
 					<br/>
 					<span class="overline">
 						Dernière modification le
-						{{ getString(new Date(invoice.updatedAt)) }}
+						{{ lastEdit }}
 					</span>
 				</p>
 			</v-col>
 
 			<v-spacer/>
 
-			<v-col align="right">
+			<v-col class="text-right">
 				<v-btn exact icon large to="/invoices">
 					<v-icon>mdi-arrow-left</v-icon>
 				</v-btn>
@@ -68,12 +68,12 @@ import DetailCard from "./Components/DetailCard.vue";
 import Table from "./Table.vue";
 import EditionDialog from "./Dialogs/EditionDialog.vue";
 
-import {Component, Vue} from "vue-property-decorator";
+import {Component, Mixins} from "vue-property-decorator";
 import store from "@/store/index";
 import {mapState} from "vuex";
 import {InvoiceOutput} from "@/types";
 import api from "@/store/api";
-import date from "@/mixins/date";
+import DateMixin from "@/mixins/date";
 
 @Component({
 	components: {
@@ -82,8 +82,6 @@ import date from "@/mixins/date";
 		Table,
 		EditionDialog,
 	},
-
-	mixins: [date],
 
 	computed: {
 		...mapState("invoices", ["invoice"]),
@@ -107,9 +105,13 @@ import date from "@/mixins/date";
 		}
 	},
 })
-export default class Detail extends Vue {
+export default class Detail extends Mixins(DateMixin) {
 	invoice!: InvoiceOutput;
 	editionDialog = false;
+
+	get lastEdit() {
+		return this.getString(new Date(this.invoice.updatedAt))
+	}
 
 	async remove() {
 		if (
@@ -127,7 +129,7 @@ export default class Detail extends Vue {
 				},
 			});
 
-			this.$router.push("/invoices");
+			await this.$router.push("/invoices");
 		} catch {
 			alert("Une erreur est survenue!");
 		}

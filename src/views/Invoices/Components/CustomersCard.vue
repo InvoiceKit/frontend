@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import {Invoice} from "@/types";
+import {Customer, Invoice, Pagination} from "@/types";
 import {Component, PropSync, Vue} from "vue-property-decorator";
 import {mapState} from "vuex";
 
@@ -47,6 +47,7 @@ import {mapState} from "vuex";
 export default class InformationCard extends Vue {
 	@PropSync("payload", {type: Object}) syncedPayload!: Invoice;
 
+	customers!: Pagination<Customer>
 	search = "";
 
 	headers = [

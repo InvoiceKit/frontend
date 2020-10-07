@@ -7,7 +7,7 @@
 
 			<v-spacer/>
 
-			<v-col align="right" cols="4">
+			<v-col class="text-right" cols="4">
 				<v-text-field
 					v-model="search"
 					hide-details

@@ -2,7 +2,7 @@
 	<v-app>
 		<div class="header-section">
 			<v-row align="center" class="fill-height" justify="center">
-				<v-col align="center">
+				<v-col class="text-center">
 					<h1 class="display-2" style="font-weight: 600">
 						InvoiceKit
 					</h1>
@@ -37,7 +37,7 @@
 				<br/>
 
 				<v-row align="center" justify="center">
-					<v-col align="center">
+					<v-col class="text-center">
 						<v-icon class="primary--text" x-large>
 							mdi-database-sync
 						</v-icon>
@@ -55,7 +55,7 @@
 							assure également un accès sur tous vos appareils.
 						</p>
 					</v-col>
-					<v-col align="center">
+					<v-col class="text-center">
 						<v-icon class="primary--text" x-large>
 							mdi-chart-bell-curve-cumulative
 						</v-icon>
@@ -73,7 +73,7 @@
 							la santé de vos projets.
 						</p>
 					</v-col>
-					<v-col align="center">
+					<v-col class="text-center">
 						<v-icon class="primary--text" x-large>
 							mdi-cellphone-link
 						</v-icon>
@@ -103,7 +103,7 @@
 				<br/>
 
 				<v-row align="center" justify="center">
-					<v-col align="center">
+					<v-col class="text-center">
 						<p class="body-1 description-dev">
 							La suite InvoiceKit est développée par Victor
 							Lourme. La version actuelle est la v1.0-rc. Les

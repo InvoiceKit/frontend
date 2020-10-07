@@ -1,9 +1,9 @@
 export interface Charts {
     daily: object;
     contracts: object;
-    invoice: InvoiceStats;
-    price: InvoicePrices;
-    customer: number;
+    invoices: InvoiceStats;
+    prices: InvoicePrices;
+    customers: number;
     contracts_count: number;
 }
 

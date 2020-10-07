@@ -7,7 +7,7 @@
 
 			<v-spacer/>
 
-			<v-col align="right" cols="4">
+			<v-col class="text-right" cols="4">
 				<v-btn exact icon large to="/contracts">
 					<v-icon>mdi-arrow-left</v-icon>
 				</v-btn>

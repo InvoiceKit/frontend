@@ -33,15 +33,21 @@
 	</v-card>
 </template>
 
-<script>
+<script lang="ts">
 import {mapState} from "vuex";
+import {Component, Vue} from "vue-property-decorator";
+import {Charts} from "@/types";
 
-export default {
-	name: "Invoices",
+@Component({
 	computed: {
-		...mapState("charts", ["charts"]),
-	},
-};
+		...mapState("charts", [
+			"charts"
+		])
+	}
+})
+export default class InvoicesChart extends Vue {
+	charts!: Charts
+}
 </script>
 
 <style scoped>

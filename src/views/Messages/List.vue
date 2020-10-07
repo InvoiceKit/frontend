@@ -13,7 +13,7 @@
 
 			<v-spacer/>
 
-			<v-col align="right" cols="4">
+			<v-col class="text-center" cols="4">
 				<v-text-field
 					v-model="search"
 					hide-details

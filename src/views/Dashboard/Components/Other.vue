@@ -19,15 +19,21 @@
 	</v-card>
 </template>
 
-<script>
+<script lang="ts">
 import {mapState} from "vuex";
+import {Component, Vue} from "vue-property-decorator";
+import {Charts} from "@/types";
 
-export default {
-	name: "Other",
+@Component({
 	computed: {
-		...mapState("charts", ["charts"]),
-	},
-};
+		...mapState("charts", [
+			"charts"
+		])
+	}
+})
+export default class OtherCharts extends Vue {
+	charts!: Charts
+}
 </script>
 
 <style scoped>

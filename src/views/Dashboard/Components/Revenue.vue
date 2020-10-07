@@ -32,21 +32,27 @@
 	</v-card>
 </template>
 
-<script>
+<script lang="ts">
 import {mapState} from "vuex";
+import {Component, Vue} from "vue-property-decorator";
+import {Charts} from "@/types";
 
-export default {
-	name: "Revenue",
+@Component({
 	computed: {
-		...mapState("charts", ["charts"]),
+		...mapState("charts", [
+			"charts"
+		])
+	}
+})
+export default class InvoicesChart extends Vue {
+	charts!: Charts
 
-		total() {
-			return (
-				this.charts.prices.paid.value + this.charts.prices.waiting.value
-			);
-		},
-	},
-};
+	get total() {
+		return (
+			this.charts.prices.paid.value + this.charts.prices.waiting.value
+		);
+	}
+}
 </script>
 
 <style scoped>

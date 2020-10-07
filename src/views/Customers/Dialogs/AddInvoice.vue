@@ -128,7 +128,7 @@ export default class AddInvoice extends Vue {
 				};
 
 				// Fix old invoice format
-				if (field.vat == null || field.vat == undefined) {
+				if (field.vat == null) {
 					field.vat = (result.tva !== null ? result.tva : 10) * 1;
 				}
 
@@ -160,7 +160,7 @@ export default class AddInvoice extends Vue {
 			});
 
 			// Redirect
-			this.$router.push(`/invoices/${this.invoice.id}`);
+			await this.$router.push(`/invoices/${this.invoice.id}`);
 		} catch {
 			this.error = true;
 		}

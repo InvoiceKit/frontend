@@ -19,7 +19,7 @@
 
 			<v-spacer/>
 
-			<v-col align="right">
+			<v-col class="text-right">
 				<v-btn icon large @click="addDialog = true">
 					<v-icon>mdi-plus</v-icon>
 				</v-btn>

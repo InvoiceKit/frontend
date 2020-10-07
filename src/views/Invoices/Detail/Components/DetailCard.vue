@@ -21,7 +21,7 @@
 						</span>
 				</td>
 			</tr>
-			<tr height="75px">
+			<tr style="height: 75px">
 				<td>Adresse</td>
 				<td>
 					{{ invoice.address.line }},
@@ -41,13 +41,17 @@
 	</v-card>
 </template>
 
-<script>
+<script lang="ts">
 import {mapState} from "vuex";
+import {Component, Vue} from "vue-property-decorator";
+import {Invoice} from "@/types";
 
-export default {
-	name: "PriceTable",
+@Component({
 	computed: {
 		...mapState("invoices", ["invoice"]),
-	},
-};
+	}
+})
+export default class PriceTable extends Vue {
+	invoice!: Invoice
+}
 </script>

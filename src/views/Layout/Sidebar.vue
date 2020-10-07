@@ -8,7 +8,7 @@
 					width="60"
 				>
 					<v-row align="center" justify="center">
-						<v-col align="center">
+						<v-col class="text-center">
 							<v-icon large> mdi-cube-outline</v-icon>
 						</v-col>
 					</v-row>

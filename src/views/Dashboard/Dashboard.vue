@@ -9,7 +9,7 @@
 				</p>
 			</v-col>
 
-			<v-col align="right" cols="2">
+			<v-col class="text-right" cols="2">
 				<v-btn color="orange darken-1" icon large to="/settings">
 					<v-icon>mdi-cog</v-icon>
 				</v-btn>

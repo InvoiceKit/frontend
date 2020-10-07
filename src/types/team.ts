@@ -7,6 +7,7 @@ export interface Team {
     website?: string;
     image?: string;
     address?: string;
+    zip: string;
     city?: string;
     fields?: string[];
 }

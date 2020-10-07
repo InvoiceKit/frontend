@@ -104,7 +104,7 @@ export default class AddContract extends Vue {
 			});
 
 			// Redirect
-			this.$router.push(`/contracts/${this.contract.id}`);
+			await this.$router.push(`/contracts/${this.contract.id}`);
 		} catch {
 			this.error = true;
 		}

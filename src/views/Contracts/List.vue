@@ -7,7 +7,7 @@
 
 			<v-spacer/>
 
-			<v-col align="right" cols="5">
+			<v-col class="text-right" cols="5">
 				<v-btn large text @click="searchByDate(true)">
 					<v-icon left> mdi-calendar-month</v-icon>
 
@@ -21,7 +21,7 @@
 				</v-btn>
 			</v-col>
 
-			<v-col align="right" cols="4">
+			<v-col class="text-right" cols="4">
 				<v-text-field
 					v-model="search"
 					hide-details

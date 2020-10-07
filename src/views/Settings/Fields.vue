@@ -6,7 +6,7 @@
 			<thead>
 			<tr>
 				<th>Champ</th>
-				<th width="50px">Actions</th>
+				<th style="width:50px">Actions</th>
 			</tr>
 			</thead>
 			<tbody>
