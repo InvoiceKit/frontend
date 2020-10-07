@@ -79,7 +79,7 @@ body {
 }
 
 .v-card {
-	background: radial-gradient(95%, #ffffff, #d7d7dc);
+	background: linear-gradient(to bottom left, #f8f9fa, #e9ecef);
 	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.075) !important;
 	border: none !important;
 }
