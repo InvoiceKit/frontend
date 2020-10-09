@@ -7,7 +7,7 @@
 		<v-card-text>
 			<v-row>
 				<v-col>
-					<span class="value"> {{ total }} € </span>
+					<span class="value"> {{ round(total) }} € </span>
 					<br/>
 					<span class="overline desc">Validé et en attente</span>
 
@@ -15,14 +15,14 @@
 					<br/>
 
 					<span class="value">
-						{{ charts.prices.canceled.value }} €
+						{{ round(charts.prices.canceled.value) }} €
 					</span>
 					<br/>
 					<span class="overline desc">Factures annulées</span>
 				</v-col>
 				<v-col>
 					<span class="value">
-						{{ charts.prices.waiting.value }} €
+						{{ round(charts.prices.waiting.value) }} €
 					</span>
 					<br/>
 					<span class="overline desc">En attente de paiement</span>
@@ -34,8 +34,9 @@
 
 <script lang="ts">
 import {mapState} from "vuex";
-import {Component, Vue} from "vue-property-decorator";
+import {Component, Mixins} from "vue-property-decorator";
 import {Charts} from "@/types";
+import NumberMixin from "@/mixins/number";
 
 @Component({
 	computed: {
@@ -44,7 +45,7 @@ import {Charts} from "@/types";
 		])
 	}
 })
-export default class InvoicesChart extends Vue {
+export default class InvoicesChart extends Mixins(NumberMixin) {
 	charts!: Charts
 
 	get total() {
