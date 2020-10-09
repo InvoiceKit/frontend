@@ -149,21 +149,19 @@
 <script lang="ts">
 import AddChange from "../Dialogs/AddChange.vue";
 import EditionDialog from "../Dialogs/EditionDialog.vue";
-import {Component, Vue} from "vue-property-decorator";
+import {Component, Mixins} from "vue-property-decorator";
 import store from "@/store";
 import {mapState} from "vuex";
 import {Change, Contract} from "@/types";
 import {DataTableHeader} from "vuetify";
 import date from "@/mixins/date";
+import DateMixin from "@/mixins/date";
 
 @Component({
 	components: {
 		EditionDialog,
 		AddChange,
 	},
-
-	// TODO: Check this mixin
-	mixins: [date],
 
 	computed: {
 		...mapState("contracts", ["contract"]),
@@ -189,7 +187,7 @@ import date from "@/mixins/date";
 		}
 	},
 })
-export default class ContractView extends Vue {
+export default class ContractView extends Mixins(DateMixin) {
 	contract!: Contract;
 	editedItem?: Change = {
 		description: "",
