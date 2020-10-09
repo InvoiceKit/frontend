@@ -21,11 +21,11 @@
 		</v-row>
 
 		<v-row>
-			<v-col cols="12" lg="8" md="8" sm="12">
+			<v-col cols="12" xl="8" lg="7" md="6" sm="12">
 				<LineChart/>
 			</v-col>
 
-			<v-col cols="12" lg="4" md="4" sm="12">
+			<v-col cols="12" xl="4" lg="5" md="6" sm="12">
 				<Revenue/>
 
 				<br/>
