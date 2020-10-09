@@ -1,6 +1,10 @@
 import Vapi from "vuex-rest-api";
 import API from "./api";
 
+function setToken(state: any, payload: any) {
+    localStorage.setItem("token", payload.data.token)
+}
+
 export default new Vapi({
     baseURL: API.host,
     state: {
@@ -13,18 +17,12 @@ export default new Vapi({
     .put({
         action: "register",
         path: "/teams",
-        onSuccess: (state: any, payload: any) => {
-            // Store token
-            localStorage.setItem("token", payload.data.token);
-        },
+        onSuccess: setToken,
     })
     .post({
         action: "login",
         path: "/teams/login",
-        onSuccess: (state: any, payload: any) => {
-            // Store the token
-            localStorage.setItem("token", payload.data.token);
-        },
+        onSuccess: setToken,
     })
     .get({
         action: "get",
