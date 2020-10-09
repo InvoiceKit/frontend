@@ -119,8 +119,12 @@ export default class ContractsList extends Mixins(DateMixin) {
 					...contract,
 				});
 			}
-		} catch (ex) {
-			console.log(ex);
+		} catch {
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de charger les contrats",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 

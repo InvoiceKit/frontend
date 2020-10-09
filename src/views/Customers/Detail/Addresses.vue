@@ -77,9 +77,11 @@ export default class Addresses extends Vue {
 				},
 			});
 		} catch {
-			alert(
-				"Une erreur est survenue pendant la suppression de l'adresse"
-			);
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de supprimer cette adresse",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

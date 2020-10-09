@@ -98,8 +98,12 @@ export default class InvoiceList extends Mixins(DateMixin) {
 					...invoice,
 				});
 			}
-		} catch (ex) {
-			console.log(ex);
+		} catch {
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de récuperer les factures",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 

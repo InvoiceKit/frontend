@@ -65,6 +65,12 @@ import {mapState} from "vuex";
 				},
 			});
 		} catch {
+			await this.$store.dispatch("snackbar/push", {
+				message: "Ce client n'existe pas",
+				icon: "alert",
+				color: "error"
+			})
+
 			this.$router.push("/customers");
 		}
 	},
@@ -94,7 +100,11 @@ export default class CustomerDetail extends Vue {
 
 			await this.$router.push("/customers");
 		} catch {
-			alert("Impossible de supprimer le client.");
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de supprimer le client",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

@@ -101,6 +101,12 @@ import DateMixin from "@/mixins/date";
 
 			next();
 		} catch {
+			await this.$store.dispatch("snackbar/push", {
+				message: "Cette facture n'existe pas",
+				icon: "alert",
+				color: "error"
+			})
+
 			next({path: "/invoices"});
 		}
 	},
@@ -129,9 +135,19 @@ export default class Detail extends Mixins(DateMixin) {
 				},
 			});
 
+			await this.$store.dispatch("snackbar/push", {
+				message: "La facture a bien été supprimée",
+				icon: "check",
+				color: "success"
+			})
+
 			await this.$router.push("/invoices");
 		} catch {
-			alert("Une erreur est survenue!");
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de supprimer la facture",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

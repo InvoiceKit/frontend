@@ -7,16 +7,6 @@
 			</v-card-title
 			>
 
-			<v-alert
-				v-model="error"
-				class="ma-4"
-				dense
-				transition="slide-y-transition"
-				type="error"
-			>
-				Impossible d'ajouter le client.
-			</v-alert>
-
 			<v-card-text>
 				<v-row>
 					<v-col>
@@ -96,8 +86,6 @@ export default class AddCustomer extends Vue {
 
 	payload: Customer = defaultPayload;
 
-	error = false;
-
 	@Watch("editedItem")
 	change() {
 		if (this.editedItem) {
@@ -121,19 +109,34 @@ export default class AddCustomer extends Vue {
 					},
 					data: this.payload,
 				});
+
+				await this.$store.dispatch("snackbar/push", {
+					message: "Le client a bien été mis à jour",
+					icon: "check",
+					color: "success"
+				})
 			} else {
 				await this.$store.dispatch("customers/add", {
 					data: this.payload,
 				});
-			}
 
+				await this.$store.dispatch("snackbar/push", {
+					message: "Le client a bien été ajouté",
+					icon: "check",
+					color: "success"
+				})
+			}
 			this.show = false;
 
 			this.$nextTick(async () => {
 				await this.$store.dispatch("customers/fetch");
 			});
 		} catch {
-			this.error = true;
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible d'ajouter le client",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

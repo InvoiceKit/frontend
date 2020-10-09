@@ -7,6 +7,7 @@ import invoices from "./invoices";
 import charts from "./charts";
 import contracts from "./contracts";
 import messages from "./messages";
+import snackbar from "@/store/snackbar";
 
 Vue.use(Vuex);
 
@@ -18,5 +19,6 @@ export default new Vuex.Store({
         invoices,
         contracts,
         messages,
+        snackbar
     },
 });

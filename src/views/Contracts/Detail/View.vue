@@ -162,6 +162,7 @@ import date from "@/mixins/date";
 		AddChange,
 	},
 
+	// TODO: Check this mixin
 	mixins: [date],
 
 	computed: {
@@ -178,6 +179,12 @@ import date from "@/mixins/date";
 
 			next();
 		} catch {
+			await this.$store.dispatch("snackbar/push", {
+				message: "Le contrat n'existe pas",
+				icon: "alert",
+				color: "error"
+			})
+
 			next({path: "/contracts"});
 		}
 	},
@@ -212,6 +219,7 @@ export default class ContractView extends Vue {
 		// Delete from fields
 		let index = this.contract.changes.indexOf(item);
 
+		// TODO: Change condition
 		if (index !== null || index > -1) {
 			this.contract.changes.splice(index, 1);
 		}
@@ -247,9 +255,19 @@ export default class ContractView extends Vue {
 				},
 			});
 
-			this.$router.push("/contracts");
-		} catch (ex) {
-			console.log(ex);
+			await this.$store.dispatch("snackbar/push", {
+				message: "Le contrat a été supprimé",
+				icon: "check",
+				color: "success"
+			})
+
+			await this.$router.push("/contracts");
+		} catch {
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de supprimer ce contrat",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

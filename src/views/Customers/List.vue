@@ -79,6 +79,7 @@ export default class CustomerList extends Vue {
 
 	async mounted() {
 		try {
+			// TODO: Need change
 			let data = (await this.$store.dispatch("customers/fetch")).data;
 
 			data.items.forEach((customer: Customer) => {
@@ -87,8 +88,12 @@ export default class CustomerList extends Vue {
 					...customer,
 				});
 			});
-		} catch (ex) {
-			console.log(ex);
+		} catch {
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de récuperer les clients",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 

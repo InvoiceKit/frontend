@@ -51,16 +51,6 @@
 
 			<v-btn color="green" text @click="save">Sauvegarder</v-btn>
 		</v-card-actions>
-
-		<v-snackbar v-model="success" color="success" text timeout="3000"
-		>Les paramètres ont bien étés enregistrés.
-		</v-snackbar
-		>
-
-		<v-snackbar v-model="error" color="danger" text timeout="3000">
-			Impossible de sauvegarder, vérifiez que les champs sont bien
-			remplis.
-		</v-snackbar>
 	</v-card>
 </template>
 
@@ -76,8 +66,6 @@ import {Team} from "@/types";
 })
 export default class Profile extends Vue {
 	payload?: Team;
-	success = false;
-	error = false;
 
 	/**
 	 * Load team details
@@ -103,9 +91,17 @@ export default class Profile extends Vue {
 				data: this.payload,
 			});
 
-			this.success = true;
+			await this.$store.dispatch("snackbar/push", {
+				message: "Les paramètres ont bien étés sauvegardés",
+				icon: "check",
+				color: "success"
+			})
 		} catch {
-			this.error = true;
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de mettre à jour les paramètres",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

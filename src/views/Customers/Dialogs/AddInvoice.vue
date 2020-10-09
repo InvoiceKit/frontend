@@ -88,8 +88,6 @@ export default class AddInvoice extends Vue {
 		},
 	];
 
-	error = false;
-
 	@Watch("display")
 	reset() {
 		// Reset payload
@@ -159,10 +157,20 @@ export default class AddInvoice extends Vue {
 				data: this.payload,
 			});
 
+			await this.$store.dispatch("snackbar/push", {
+				message: "La facture a été créée",
+				icon: "check",
+				color: "success"
+			})
+
 			// Redirect
 			await this.$router.push(`/invoices/${this.invoice.id}`);
 		} catch {
-			this.error = true;
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de créer la facture",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

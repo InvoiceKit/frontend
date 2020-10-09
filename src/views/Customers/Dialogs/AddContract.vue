@@ -74,8 +74,6 @@ export default class AddContract extends Vue {
 		},
 	];
 
-	error = false;
-
 	@Watch("display")
 	reset() {
 		// Reset payload
@@ -103,10 +101,20 @@ export default class AddContract extends Vue {
 				data: this.payload,
 			});
 
+			await this.$store.dispatch("snackbar/push", {
+				message: "Le contrat a bien été ajouté",
+				icon: "check",
+				color: "success"
+			})
+
 			// Redirect
 			await this.$router.push(`/contracts/${this.contract.id}`);
 		} catch {
-			this.error = true;
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de créer le contract",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

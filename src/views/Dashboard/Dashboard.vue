@@ -57,8 +57,12 @@ export default {
 	async mounted() {
 		try {
 			await this.$store.dispatch("charts/get");
-		} catch (ex) {
-			console.log(ex);
+		} catch {
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de charger les statistiques",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	},
 

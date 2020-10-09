@@ -7,15 +7,19 @@
 				<router-view/>
 			</v-container>
 		</v-main>
+
+		<Snackbar />
 	</v-app>
 </template>
 
 <script lang="ts">
 import Sidebar from "@/views/Layout/Sidebar.vue";
 import {Component, Vue} from "vue-property-decorator";
+import Snackbar from "@/components/Snackbar.vue";
 
 @Component({
 	components: {
+		Snackbar,
 		Sidebar,
 	},
 

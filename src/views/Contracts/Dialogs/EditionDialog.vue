@@ -3,16 +3,6 @@
 		<v-card>
 			<v-card-title>Mettre à jour</v-card-title>
 
-			<v-alert
-				v-model="error"
-				class="ma-4"
-				dense
-				transition="slide-y-transition"
-				type="error"
-			>Impossible de mettre à jour le fichier.
-			</v-alert
-			>
-
 			<v-card-text>
 				<h4 class="overline">Type de fichier</h4>
 
@@ -61,8 +51,6 @@ export default class EditContract extends Vue {
 	@PropSync("display", {type: Boolean}) show!: boolean;
 	@PropSync("contract", {type: Object}) readonly item!: Contract;
 
-	error = false;
-
 	async save() {
 		try {
 			await this.$store.dispatch("contracts/update", {
@@ -72,9 +60,19 @@ export default class EditContract extends Vue {
 				data: this.item,
 			});
 
+			await this.$store.dispatch("snackbar/push", {
+				message: "Le contrat a bien été mis à jour",
+				icon: "check",
+				color: "success"
+			})
+
 			this.show = false;
 		} catch {
-			this.error = true;
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de mettre à jour le contrat",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

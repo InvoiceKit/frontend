@@ -61,6 +61,14 @@
 }
 
 /*
+ * Snackbar
+ */
+.v-sheet.v-snack__wrapper {
+	border-radius: 16px !important;
+	background: linear-gradient(to bottom left, #f8f9fa, #e9ecef) !important;
+}
+
+/*
  * Application
  */
 html,

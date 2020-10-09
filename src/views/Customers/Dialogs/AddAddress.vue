@@ -3,16 +3,6 @@
 		<v-card>
 			<v-card-title> Ajouter une adresse</v-card-title>
 
-			<v-alert
-				v-model="error"
-				class="ma-4"
-				dense
-				transition="slide-y-transition"
-				type="error"
-			>
-				Impossible d'ajouter l'adresse.
-			</v-alert>
-
 			<v-card-text>
 				<v-text-field
 					v-model.trim="payload.line"
@@ -66,13 +56,10 @@ export default class AddAddress extends Vue {
 
 	payload: Address = defaultPayload;
 
-	error = false;
-
 	@Watch("display")
 	reset() {
 		// Reset payload
 		this.payload = Object.assign({}, defaultPayload);
-		this.error = false;
 	}
 
 	/**
@@ -88,6 +75,12 @@ export default class AddAddress extends Vue {
 				data: this.payload,
 			});
 
+			await this.$store.dispatch("snackbar/push", {
+				message: "L'adresse a bien été sauvergardée",
+				icon: "check",
+				color: "success"
+			})
+
 			// Close
 			this.show = false;
 
@@ -100,7 +93,11 @@ export default class AddAddress extends Vue {
 				});
 			});
 		} catch {
-			this.error = true;
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible d'ajouter l'adresse",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

@@ -94,14 +94,24 @@ export default class AddChange extends Vue {
 
 		this.$nextTick(async () => {
 			try {
-				this.$store.dispatch("contracts/update", {
+				await this.$store.dispatch("contracts/update", {
 					params: {
 						id: this.syncContract.id,
 					},
 					data: this.syncContract,
 				});
-			} catch (ex) {
-				console.log(ex);
+
+				await this.$store.dispatch("snackbar/push", {
+					message: "Le contrat a bien été mis à jour",
+					icon: "check",
+					color: "success"
+				})
+			} catch {
+				await this.$store.dispatch("snackbar/push", {
+					message: "Impossible de mettre à jour ce contrat",
+					icon: "alert",
+					color: "error"
+				})
 			}
 		});
 	}

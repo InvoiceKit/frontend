@@ -100,7 +100,11 @@ export default class Fields extends Vue {
 
 			await this.$store.dispatch("auth/get");
 		} catch {
-			this.error = true;
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de mettre à jour les paramètres",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }

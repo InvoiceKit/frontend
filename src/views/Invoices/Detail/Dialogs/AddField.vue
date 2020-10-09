@@ -118,8 +118,18 @@ export default class AddField extends Vue {
 					},
 					data: this.syncInvoice,
 				});
-			} catch (ex) {
-				console.log(ex);
+
+				await this.$store.dispatch("snackbar/push", {
+					message: "La facture a été mise à jour",
+					icon: "check",
+					color: "success"
+				})
+			} catch {
+				await this.$store.dispatch("snackbar/push", {
+					message: "Impossible de mettre à jour la facture",
+					icon: "alert",
+					color: "error"
+				})
 			}
 		});
 	}

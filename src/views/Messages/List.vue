@@ -108,8 +108,12 @@ export default class Messages extends Vue {
 					...message,
 				});
 			}
-		} catch (ex) {
-			console.log(ex);
+		} catch {
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de récuperer les messages",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 
@@ -124,8 +128,12 @@ export default class Messages extends Vue {
 			const index = this.data.indexOf(item);
 
 			this.data.splice(index, 1);
-		} catch (ex) {
-			console.log(ex);
+		} catch {
+			await this.$store.dispatch("snackbar/push", {
+				message: "Impossible de supprimer le message",
+				icon: "alert",
+				color: "error"
+			})
 		}
 	}
 }
