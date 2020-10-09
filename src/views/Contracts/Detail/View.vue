@@ -217,8 +217,7 @@ export default class ContractView extends Mixins(DateMixin) {
 		// Delete from fields
 		let index = this.contract.changes.indexOf(item);
 
-		// TODO: Change condition
-		if (index !== null || index > -1) {
+		if (index > -1) {
 			this.contract.changes.splice(index, 1);
 		}
 
@@ -229,6 +228,12 @@ export default class ContractView extends Mixins(DateMixin) {
 			},
 			data: this.contract,
 		});
+
+		await this.$store.dispatch('snackbar/push', {
+			message: "Le contrat a été mis à jour",
+			color: "success",
+			icon: "check"
+		})
 	}
 
 	editItem(item: Contract) {
