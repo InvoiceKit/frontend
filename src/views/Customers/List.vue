@@ -47,12 +47,19 @@
 <script lang="ts">
 import AddCustomer from "./Dialogs/AddCustomer.vue";
 import {Component, Vue} from "vue-property-decorator";
-import {Customer} from "@/types";
+import {Customer, Pagination} from "@/types";
+import {mapState} from "vuex";
 
 @Component({
 	components: {
 		AddCustomer,
 	},
+
+	computed: {
+		...mapState('customers', [
+			'customers'
+		])
+	}
 })
 export default class CustomerList extends Vue {
 	addDialog = false;
@@ -77,17 +84,18 @@ export default class CustomerList extends Vue {
 		},
 	];
 
+	customers!: Pagination<Customer>
+
 	async mounted() {
 		try {
-			// TODO: Need change
-			let data = (await this.$store.dispatch("customers/fetch")).data;
+			await this.$store.dispatch('customers/fetch')
 
-			data.items.forEach((customer: Customer) => {
+			for (const customer of this.customers.items) {
 				this.customersList.push({
 					name: `${customer.firstName} ${customer.lastName} ${customer.company}`,
 					...customer,
 				});
-			});
+			}
 		} catch {
 			await this.$store.dispatch("snackbar/push", {
 				message: "Impossible de récuperer les clients",
