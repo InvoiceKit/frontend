@@ -63,9 +63,6 @@ export default class InvoicesChart extends Mixins(NumberMixin) {
 }
 
 .desc {
-	display: inline-block;
-	margin-top: 5px;
-	border-top: 2px solid #2ec4b6;
-	font-size: 9pt !important;
+	font-size: 8.5pt !important;
 }
 </style>

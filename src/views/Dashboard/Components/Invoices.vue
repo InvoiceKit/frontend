@@ -57,9 +57,6 @@ export default class InvoicesChart extends Vue {
 }
 
 .desc {
-	display: inline-block;
-	border-top: 2px solid #f94144;
-	margin-top: 5px;
-	font-size: 9pt !important;
+	font-size: 8.5pt !important;
 }
 </style>
