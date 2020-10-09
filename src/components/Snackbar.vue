@@ -28,7 +28,8 @@ export default class Snackbar extends Vue {
 	get show() {
 		return this.display
 	}
-	set show() {
+	
+	set show(value: boolean) {
 		this.$store.dispatch('snackbar/switch')
 	}
 }

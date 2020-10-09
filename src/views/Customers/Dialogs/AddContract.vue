@@ -78,7 +78,6 @@ export default class AddContract extends Vue {
 	reset() {
 		// Reset payload
 		this.payload = Object.assign({}, defaultPayload);
-		this.error = false;
 	}
 
 	handle(address: any) {
