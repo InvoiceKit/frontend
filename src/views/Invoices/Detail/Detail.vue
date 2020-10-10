@@ -39,7 +39,7 @@
 					<v-icon>mdi-pencil</v-icon>
 				</v-btn>
 
-				<v-btn color="red darken-1" icon large @click="remove">
+				<v-btn color="red darken-1" icon large @click="deleteDialog = true">
 					<v-icon>mdi-delete</v-icon>
 				</v-btn>
 			</v-col>
@@ -59,6 +59,14 @@
 		</v-row>
 
 		<EditionDialog :display.sync="editionDialog" :invoice.sync="invoice"/>
+		<Dialog
+			:show.sync="deleteDialog"
+			title="Confirmation"
+			text="Voulez-vous supprimer cette facture ? Cette action est irreversible."
+			button="Supprimer"
+			:destructive="true"
+			:method="remove"
+			/>
 	</v-container>
 </template>
 
@@ -74,9 +82,11 @@ import {mapState} from "vuex";
 import {InvoiceOutput} from "@/types";
 import api from "@/store/api";
 import DateMixin from "@/mixins/date";
+import Dialog from "@/components/Dialog.vue";
 
 @Component({
 	components: {
+		Dialog,
 		PriceTable,
 		DetailCard,
 		Table,
@@ -114,20 +124,13 @@ import DateMixin from "@/mixins/date";
 export default class Detail extends Mixins(DateMixin) {
 	invoice!: InvoiceOutput;
 	editionDialog = false;
+	deleteDialog = false;
 
 	get lastEdit() {
 		return this.getString(new Date(this.invoice.updatedAt))
 	}
 
 	async remove() {
-		if (
-			!confirm(
-				"Êtes-vous sur de vouloir supprimer ce fichier ? Cette action est irréversible."
-			)
-		) {
-			return;
-		}
-
 		try {
 			await this.$store.dispatch("invoices/delete", {
 				params: {

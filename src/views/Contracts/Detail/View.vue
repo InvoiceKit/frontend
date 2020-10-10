@@ -21,7 +21,7 @@
 					<v-icon>mdi-pencil</v-icon>
 				</v-btn>
 
-				<v-btn color="red darken-1" icon large @click="remove">
+				<v-btn color="red darken-1" icon large @click="deleteDialog = true">
 					<v-icon>mdi-delete</v-icon>
 				</v-btn>
 			</v-col>
@@ -143,6 +143,14 @@
 			:contract.sync="contract"
 			:display.sync="editionDialog"
 		/>
+		<Dialog
+			:show.sync="deleteDialog"
+			title="Confirmation"
+			text="Êtes-vous sur de vouloir supprimer ce contrat ?"
+			button="Supprimer"
+			:destructive="true"
+			:method="remove"
+			/>
 	</v-container>
 </template>
 
@@ -156,9 +164,11 @@ import {Change, Contract} from "@/types";
 import {DataTableHeader} from "vuetify";
 import date from "@/mixins/date";
 import DateMixin from "@/mixins/date";
+import Dialog from "@/components/Dialog.vue";
 
 @Component({
 	components: {
+		Dialog,
 		EditionDialog,
 		AddChange,
 	},
@@ -194,6 +204,7 @@ export default class ContractView extends Mixins(DateMixin) {
 		date: "",
 	};
 	editionDialog = false;
+	deleteDialog = false;
 	showEdit = false;
 
 	headers: Array<DataTableHeader> = [
@@ -247,10 +258,6 @@ export default class ContractView extends Mixins(DateMixin) {
 	}
 
 	async remove() {
-		if (!confirm("Êtes-vous sur de vouloir supprimer ce contrat ?")) {
-			return;
-		}
-
 		try {
 			await this.$store.dispatch("contracts/delete", {
 				params: {

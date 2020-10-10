@@ -12,7 +12,7 @@
 					<v-icon>mdi-arrow-left</v-icon>
 				</v-btn>
 
-				<v-btn color="red darken-1" icon large @click="deleteCustomer">
+				<v-btn color="red darken-1" icon large @click="deleteDialog = true">
 					<v-icon>mdi-delete</v-icon>
 				</v-btn>
 			</v-col>
@@ -30,6 +30,15 @@
 				<Contracts/>
 			</v-col>
 		</v-row>
+
+		<Dialog
+			:show.sync="deleteDialog"
+			title="Confirmation"
+			text="Êtes-vous sur de vouloir supprimer ce client ?"
+			button="Supprimer"
+			:destructive="true"
+			:method="deleteCustomer"
+		/>
 	</v-container>
 </template>
 
@@ -42,9 +51,11 @@ import AddAddress from "../Dialogs/AddAddress.vue";
 import AddCustomer from "../Dialogs/AddCustomer.vue";
 import {Component, Vue} from "vue-property-decorator";
 import {mapState} from "vuex";
+import Dialog from "@/components/Dialog.vue";
 
 @Component({
 	components: {
+		Dialog,
 		Profile,
 		Addresses,
 		Invoices,
@@ -76,21 +87,13 @@ import {mapState} from "vuex";
 	},
 })
 export default class CustomerDetail extends Vue {
-	// Address dialog
 	address = false;
+	deleteDialog = false
 
 	/**
 	 * Delete a customer
 	 */
 	async deleteCustomer() {
-		if (
-			!confirm(
-				"Êtes-vous sur de supprimer ce client? Les factures associées seront supprimées aussi."
-			)
-		) {
-			return;
-		}
-
 		try {
 			await this.$store.dispatch("customers/delete", {
 				params: {
