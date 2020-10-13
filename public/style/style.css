@@ -26,6 +26,14 @@
 	--secondary: #d22b48;
 }
 
+/*
+ * Homepage + Authentication
+ */
+.logo {
+	width: auto;
+	height: 180px;
+}
+
 /* 
  * Header 
  */

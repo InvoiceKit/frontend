@@ -3,7 +3,7 @@
 		<v-container fill-height fluid>
 			<v-row align="center" justify="center">
 				<v-col class="text-right" cols="5">
-					<img src="@/assets/logo.png" alt="InvoiceKit" />
+					<img class="logo" src="@/assets/logo.png" alt="InvoiceKit" />
 				</v-col>
 
 				<v-col cols="7">

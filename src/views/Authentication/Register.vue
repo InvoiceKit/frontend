@@ -2,8 +2,8 @@
 	<v-app>
 		<v-container fill-height fluid>
 			<v-row align="center" justify="center">
-				<v-col align="right" cols="5">
-					<img src="@/assets/logo.png"/>
+				<v-col class="text-right" cols="5">
+					<img class="logo" src="@/assets/logo.png" alt="InvoiceKit Logo"/>
 				</v-col>
 
 				<v-col cols="7">
