@@ -1,20 +1,9 @@
 <template>
 	<v-navigation-drawer app permanent>
 		<template v-slot:prepend>
-			<v-container class="mt-2 d-flex flex-row">
-				<v-sheet
-					class="ml-3 team_sheet secondary--bg"
-					height="60"
-					width="60"
-				>
-					<v-row align="center" justify="center">
-						<v-col class="text-center">
-							<v-icon large> mdi-cube-outline</v-icon>
-						</v-col>
-					</v-row>
-				</v-sheet>
+			<v-container class="mt-2">
 				<v-row align="center" justify="center">
-					<v-col class="ml-4">
+					<v-col align="center">
 						<span class="team_name">{{ team.name }}</span>
 					</v-col>
 				</v-row>
