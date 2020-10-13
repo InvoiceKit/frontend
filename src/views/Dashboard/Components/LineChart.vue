@@ -85,9 +85,7 @@ export default {
 			// Sort
 			Object.keys(object)
 				.sort((a, b) => {
-					return (
-						this.getDate(a).getTime() - this.getDate(b).getTime()
-					);
+					return this.getDate(a) - this.getDate(b)
 				})
 				.forEach((key) => {
 					this.data.labels.push(key);
