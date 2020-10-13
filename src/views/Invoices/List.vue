@@ -62,6 +62,10 @@ export default class InvoiceList extends Mixins(DateMixin) {
 	search = "";
 	headers = [
 		{
+			text: "Type",
+			value: "typeTranslated"
+		},
+		{
 			text: "Nom ou entreprise",
 			value: "name",
 		},
@@ -95,6 +99,7 @@ export default class InvoiceList extends Mixins(DateMixin) {
 				this.invoiceList.push({
 					name: `${fn} ${ln} ${company}`,
 					date: this.getString(new Date(invoice.updatedAt)),
+					typeTranslated: invoice.type === "invoice" ? "Facture" : "Devis",
 					...invoice,
 				});
 			}
